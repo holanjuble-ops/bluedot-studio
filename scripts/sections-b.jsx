@@ -58,6 +58,7 @@ const RESULT_CASES = [
 {
   code: 'CASE 01', client: '성수 노무사', vertical: '노무',
   slots: ['case-sungsu-b', 'case-sungsu-a1', 'case-sungsu-a2'],
+  images: ['images/case-sungsu-before.png', 'images/case-sungsu-after1.png', 'images/case-sungsu-after2.png'],
   before: ['평균 조회수', '5,000회'],
   after: ['평균 조회수', '7.5만회'],
   chips: ['팔로워 +1,300명', '문의 3배 증가']
@@ -65,6 +66,7 @@ const RESULT_CASES = [
 {
   code: 'CASE 02', client: '강남 다이어트 한의원', vertical: '한의원',
   slots: ['case-gangnam-b', 'case-gangnam-a1', 'case-gangnam-a2'],
+  images: ['images/case-gangnam-before.png', 'images/case-gangnam-after1.png', 'images/case-gangnam-after2.png'],
   before: ['평균 조회수', '6,000회'],
   after: ['영상 2개로', '85만+회'],
   chips: ['팔로워 +1,000명', '예약 문의 급증']
@@ -139,8 +141,8 @@ function CaseCard({ c, delay }) {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 5 }}>
             {c.slots.map((sid, i) => (
               <div key={sid} style={{ position: 'relative', aspectRatio: '9 / 14', borderRadius: 10, overflow: 'hidden', border: '1px solid var(--bd-line)', background: 'var(--bd-gray-50)' }}>
-                <image-slot id={sid} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}
-                  shape="rect" fit="cover" placeholder={i === 0 ? `${c.client} BEFORE` : `${c.client} AFTER ${i}`}></image-slot>
+                <img src={c.images[i]} alt={`${c.client} ${i === 0 ? 'BEFORE' : 'AFTER ' + i}`}
+                  style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
               </div>
             ))}
           </div>
@@ -250,8 +252,8 @@ function Results() {
               gap: isMobile ? 12 : 16
             }}>
               {[
-              { name: '박성찬 | 전문직 마케팅', handle: '@chanseong_park', slot: 'ch-chanseong', stats: [['8', '게시물'], ['1.2만', '팔로워'], ['40', '팔로잉']] },
-              { name: '매일 성장하는 남자 | 피트니스', handle: '@bluedot_bro', slot: 'ch-dongsaeng', stats: [['31', '게시물'], ['1.1만', '팔로워'], ['21', '팔로잉']] }].
+              { name: '박성찬 | 전문직 마케팅', handle: '@chanseong_park', slot: 'ch-chanseong', image: 'images/profile-chanseong.jpg', stats: [['8', '게시물'], ['1.2만', '팔로워'], ['40', '팔로잉']] },
+              { name: '매일 성장하는 남자 | 피트니스', handle: '@bluedot_bro', slot: 'ch-dongsaeng', image: 'images/profile-dongsaeng.jpg', stats: [['31', '게시물'], ['1.1만', '팔로워'], ['21', '팔로잉']] }].
               map((p) =>
               <div key={p.slot} style={{
                 flex: 1, minWidth: 0, background: '#fff', borderRadius: 'var(--r-md)',
@@ -262,8 +264,8 @@ function Results() {
                   flex: 'none', width: 64, height: 64, borderRadius: 'var(--r-pill)', overflow: 'hidden',
                   border: '1px solid var(--bd-gray-100)', background: 'var(--bd-gray-50)'
                 }}>
-                    <image-slot id={p.slot} shape="circle" fit="cover"
-                  style={{ width: '100%', height: '100%' }} placeholder={p.name}></image-slot>
+                    <img src={p.image} alt={p.name}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                   </div>
                   <div style={{ flex: 1, minWidth: 0 }}>
                     <div style={{ fontSize: 14.5, fontWeight: 700, color: 'var(--bd-ink)', letterSpacing: '-0.01em', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{p.name}</div>

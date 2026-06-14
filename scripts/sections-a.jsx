@@ -144,11 +144,11 @@ function Hero() {
                        With no file present the navy depth gradient below shows through. */}
       <video ref={videoRef} autoPlay muted loop playsInline preload="auto"
       style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0 }}>
-        <source src="hero-bg.mp4" type="video/mp4" />
+        <source src="https://res.cloudinary.com/dkvhm32nn/video/upload/v1781437857/0614_1_uqvmpm.mp4" type="video/mp4" />
       </video>
       {/* cinematic dark overlay keeps white copy legible over any clip */}
       <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none',
-        background: 'linear-gradient(180deg, rgba(3,6,15,0.58) 0%, rgba(4,8,22,0.5) 46%, rgba(2,4,11,0.9) 100%)' }}></div>
+        background: 'rgba(0,0,0,0.48)' }}></div>
       {/* diagonal navy panel anchors the left-aligned copy (reference look) */}
       <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none',
         background: 'linear-gradient(100deg, rgba(4,9,24,0.92) 0%, rgba(5,11,30,0.74) 40%, rgba(3,7,18,0.28) 74%, rgba(3,7,18,0.5) 100%)' }}></div>

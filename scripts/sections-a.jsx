@@ -35,20 +35,11 @@ function Header() {
           <window.BdLogo size={isMobile ? 21 : 24} />
         </a>
         <div style={{ display: 'flex', alignItems: 'center', gap: isMobile ? 0 : 4 }}>
-          {!isMobile && navItems.map((l, i) =>
-          <React.Fragment key={l}>
-              {i > 0 &&
-            <span style={{ color: '#C2C5CC', fontSize: 13, padding: '0 4px', userSelect: 'none', lineHeight: 1 }}>·</span>
-            }
-              <a href={`#${navIds[i]}`}
-            onClick={(e) => {e.preventDefault();window.scrollToId(navIds[i]);}}
-            style={{ fontSize: 13, fontWeight: 500, color: 'var(--fg-2)', letterSpacing: '0.005em',
-              padding: '0 6px', textDecoration: 'none', transition: 'color 0.14s' }}
-            onMouseEnter={(e) => {e.currentTarget.style.color = 'var(--bd-ink)';}}
-            onMouseLeave={(e) => {e.currentTarget.style.color = 'var(--fg-2)';}}>
-              {l}</a>
-            </React.Fragment>
-          )}
+          <a href="column/칼럼.html"
+          style={{ marginRight: isMobile ? 16 : 22, fontSize: 15, fontWeight: 600, color: 'var(--fg-2)', letterSpacing: '0.005em', padding: '0 6px', textDecoration: 'none', transition: 'color 0.14s' }}
+          onMouseEnter={(e) => {e.currentTarget.style.color = 'var(--bd-ink)';}}
+          onMouseLeave={(e) => {e.currentTarget.style.color = 'var(--fg-2)';}}>
+            칼럼</a>
           <button
             onClick={() => window.scrollToId('cta')}
             style={{
@@ -140,8 +131,8 @@ function Hero() {
       paddingTop: isMobile ? 100 : 116, paddingBottom: isMobile ? 92 : 108
     }}>
       {/* full-bleed background video — drop an mp4 named hero-bg.mp4 into the
-                       project root (optional hero-poster.jpg shows on the first frame / fallback).
-                       With no file present the navy depth gradient below shows through. */}
+                        project root (optional hero-poster.jpg shows on the first frame / fallback).
+                        With no file present the navy depth gradient below shows through. */}
       <video ref={videoRef} autoPlay muted loop playsInline preload="auto"
       style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0 }}>
         <source src="https://res.cloudinary.com/dkvhm32nn/video/upload/v1781437857/0614_1_uqvmpm.mp4" type="video/mp4" />
@@ -275,8 +266,8 @@ function Problem() {
             <h2 style={{
               marginTop: 14, fontWeight: 600,
               letterSpacing: '-0.025em', color: 'var(--bd-ink-soft)', lineHeight: 1.4, fontSize: "21px"
-            }}>
-              혹시 이런 고민이 있으신가요?
+            }}>혹시 이런 고민이 있으신가요?
+
             </h2>
           </Reveal>
 

@@ -169,8 +169,8 @@ function FinalCta() {
   const setPhone = (e) => {
     const digits = e.target.value.replace(/\D/g, '').slice(0, 11);
     let formatted = digits;
-    if (digits.length > 3 && digits.length <= 7) formatted = digits.slice(0,3) + '-' + digits.slice(3);
-    else if (digits.length > 7) formatted = digits.slice(0,3) + '-' + digits.slice(3,7) + '-' + digits.slice(7);
+    if (digits.length > 3 && digits.length <= 7) formatted = digits.slice(0, 3) + '-' + digits.slice(3);else
+    if (digits.length > 7) formatted = digits.slice(0, 3) + '-' + digits.slice(3, 7) + '-' + digits.slice(7);
     setForm((f) => ({ ...f, phone: formatted }));
   };
 
@@ -187,6 +187,9 @@ function FinalCta() {
     setSubmitErr('');
     try {
       const data = new FormData();
+      data.append('_replyto', form.phone);
+      data.append('_subject', `[블루닷스튜디오] 무료상담 신청 — ${form.name}`);
+      data.append('_gotcha', '');
       data.append('성함', form.name);
       data.append('연락처', form.phone);
       data.append('회사명', form.company);
@@ -202,10 +205,10 @@ function FinalCta() {
       if (res.ok) {
         setDone(true);
       } else {
-        const detail = (json.errors || []).map(e => e.message).join(' / ') || `오류 ${res.status}`;
+        const detail = (json.errors || []).map((e) => e.message).join(' / ') || `오류 ${res.status}`;
         setSubmitErr(`제출 실패: ${detail}`);
       }
-    } catch(err) {
+    } catch (err) {
       setSubmitErr('네트워크 오류입니다. 연결을 확인해주세요.');
     } finally {
       setSubmitting(false);
@@ -229,7 +232,7 @@ function FinalCta() {
               </h2>
             </Reveal>
             <Reveal delay={140}>
-              <p style={{ marginTop: 26, lineHeight: 1.8, maxWidth: 420, fontSize: "16px", fontWeight: "600", color: "rgba(255, 255, 255, 0.804)" }}>
+              <p style={{ marginTop: 26, lineHeight: 1.8, maxWidth: 420, fontSize: "16px", color: "rgba(255, 255, 255, 0.804)", fontWeight: "400" }}>
                 <span style={{ color: '#F4D35E', fontWeight: 700 }}>억지 영업은 하지 않습니다.</span><br />현재 상황을 함께 살펴보고,<br />가장 효과적인 방향을 제안해드립니다.
               </p>
             </Reveal>
@@ -263,8 +266,8 @@ function FinalCta() {
                   background: submitting ? 'var(--bd-gray-300)' : 'var(--bd-blue)', color: '#fff', fontSize: 15.5, fontWeight: 700, letterSpacing: '-0.01em',
                   transition: 'background 0.2s var(--ease-out)'
                 }}
-                onMouseEnter={(e) => { if (!submitting) e.currentTarget.style.background = 'var(--bd-blue-700)'; }}
-                onMouseLeave={(e) => { if (!submitting) e.currentTarget.style.background = 'var(--bd-blue)'; }}>
+                onMouseEnter={(e) => {if (!submitting) e.currentTarget.style.background = 'var(--bd-blue-700)';}}
+                onMouseLeave={(e) => {if (!submitting) e.currentTarget.style.background = 'var(--bd-blue)';}}>
                     {submitting ? '제운 중…' : '무료상담 신청하기'}
                   </button>
                   {submitErr && <p style={{ margin: 0, textAlign: 'center', fontSize: 13, color: 'var(--bd-danger)', fontWeight: 500 }}>{submitErr}</p>}
@@ -299,6 +302,8 @@ function FinalCta() {
 function SiteFooter() {
   const isMobile = window.useIsMobile();
   const { Container } = window;
+  const inCol = typeof location !== 'undefined' && /\/column\//.test(location.pathname);
+  const ctaHref = inCol ? '../index.html#cta' : '#cta';
   return (
     <footer style={{ background: '#1A1C22', borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: isMobile ? 56 : 80, paddingBottom: isMobile ? 96 : 80 }}>
       <Container>
@@ -308,20 +313,20 @@ function SiteFooter() {
           <p style={{ margin: 0, fontSize: 13.5, color: 'rgba(255,255,255,0.38)', fontWeight: 500, lineHeight: 1.6, letterSpacing: '-0.005em' }}>
             전문직 숏폼 마케팅 에이전시.
           </p>
-          <a href="http://pf.kakao.com/_IgEXX/chat" target="_blank" rel="noopener noreferrer"
-            style={{
-              display: 'inline-flex', alignItems: 'center', gap: 9,
-              width: 'fit-content',
-              padding: '11px 20px', borderRadius: 8,
-              background: '#FEE500', border: 'none',
-              fontSize: 14, fontWeight: 700, color: '#191919', textDecoration: 'none',
-              transition: 'opacity 0.14s',
-            }}
-            onMouseEnter={(e) => { e.currentTarget.style.opacity = '0.88'; }}
-            onMouseLeave={(e) => { e.currentTarget.style.opacity = '1'; }}
-          >
-            <window.Icon name="message-circle" size={16} color="currentColor" />
-            카카오톡 상담
+          <a href={ctaHref}
+          onClick={inCol ? undefined : (e) => { e.preventDefault(); window.scrollToId && window.scrollToId('cta'); }}
+          style={{
+            display: 'inline-flex', alignItems: 'center', gap: 8,
+            width: 'fit-content',
+            padding: '11px 20px', borderRadius: 8,
+            background: 'var(--bd-blue)', border: 'none',
+            fontSize: 14, fontWeight: 700, color: '#fff', textDecoration: 'none',
+            transition: 'background 0.14s'
+          }}
+          onMouseEnter={(e) => {e.currentTarget.style.background = 'var(--bd-blue-700)';}}
+          onMouseLeave={(e) => {e.currentTarget.style.background = 'var(--bd-blue)';}}>
+            무료상담 신청
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12,5 19,12 12,19" /></svg>
           </a>
         </div>
 

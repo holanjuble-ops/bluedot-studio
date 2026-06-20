@@ -61,15 +61,15 @@ const RESULT_CASES = [
   images: ['images/case-sungsu-before.png', 'images/case-sungsu-after1.png', 'images/case-sungsu-after2.png'],
   before: ['평균 조회수', '5,000회'],
   after: ['평균 조회수', '7.5만회'],
-  chips: ['팔로워 +1,300명', '문의 3배 증가']
+  chips: ['팔로워 +1,400명', '문의 3배 증가']
 },
 {
   code: 'CASE 02', client: '강남 다이어트 한의원', vertical: '한의원',
   slots: ['case-gangnam-b', 'case-gangnam-a1', 'case-gangnam-a2'],
   images: ['images/case-gangnam-before.png', 'images/case-gangnam-after1.png', 'images/case-gangnam-after2.png'],
   before: ['평균 조회수', '6,000회'],
-  after: ['영상 2개로', '85만+회'],
-  chips: ['팔로워 +1,000명', '예약 문의 급증']
+  after: ['영상 2개로', '95만+회'],
+  chips: ['팔로워 +3,000명', '예약 문의 급증']
 }];
 
 

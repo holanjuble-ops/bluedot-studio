@@ -47,8 +47,8 @@ function ColumnDetail() {
   const READ = 680;
 
   /* 본문 단락 — 브랜드 보이스(합쇼체·숫자 중심) */
-  const P = ({ children }) => <p style={{ margin: '0 0 36px', fontSize: isMobile ? 16.5 : 18, lineHeight: 1.78, color: 'var(--bd-gray-700)' }}>{children}</p>;
-  const H2 = ({ children, mt }) => <h2 style={{ margin: `${mt ?? (isMobile ? 100 : 148)}px 0 20px`, fontSize: isMobile ? 24 : 28, fontWeight: 700, letterSpacing: '-0.03em', lineHeight: 1.3, color: 'var(--bd-ink)' }}>{children}</h2>;
+  const P = ({ children }) => <p style={{ margin: '0 0 22px', fontSize: isMobile ? 16.5 : 18, lineHeight: 1.78, color: 'var(--bd-gray-700)' }}>{children}</p>;
+  const H2 = ({ children, mt }) => <h2 style={{ margin: `${mt ?? (isMobile ? 80 : 116)}px 0 18px`, fontSize: isMobile ? 24 : 28, fontWeight: 700, letterSpacing: '-0.03em', lineHeight: 1.3, color: 'var(--bd-ink)' }}>{children}</h2>;
   const Mark = ({ children }) => <span style={{ background: 'linear-gradient(transparent 56%, var(--bd-highlight) 56%)', padding: '0 0.04em', fontWeight: 700, color: 'var(--bd-ink)' }}>{children}</span>;
   const Blue = ({ children }) => <span style={{ color: 'var(--bd-blue)', fontWeight: 700 }}>{children}</span>;
   const B = ({ children }) => <strong style={{ fontWeight: 700, color: 'var(--bd-ink)' }}>{children}</strong>;
@@ -81,7 +81,7 @@ function ColumnDetail() {
         ? <svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="4" fill="#FF0000"></rect><path d="M10 8.6l5.2 3.4-5.2 3.4z" fill="#fff"></path></svg>
         : <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="2.6" y="2.6" width="18.8" height="18.8" rx="5.6" stroke="#E1306C" strokeWidth="1.8"></rect><circle cx="12" cy="12" r="4.1" stroke="#E1306C" strokeWidth="1.8"></circle><circle cx="17.2" cy="6.8" r="1.15" fill="#E1306C"></circle></svg>;
       return (
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12, margin: `${isMobile ? 52 : 64}px 0 14px` }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12, margin: `${isMobile ? 26 : 32}px 0 14px` }}>
           <span style={{ display: 'inline-flex', flexShrink: 0 }}>{logo}</span>
           <span style={{ fontSize: isMobile ? 18 : 20, fontWeight: 700, letterSpacing: '-0.03em', lineHeight: 1.35, color: 'var(--bd-ink)' }}>{b.text}</span>
         </div>

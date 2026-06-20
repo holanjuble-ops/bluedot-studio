@@ -7,7 +7,7 @@
    ============================================================ */
 
 const STARTER_PAGE = [
-  { no: '01', id: 1, tag: '시작 가이드', title: '나에게 숏폼이 필요할까?', desc: '제발, 이런 분들만 숏폼을 하세요.' },
+  { no: '01', id: 1, tag: '시작 가이드', title: '나도 숏폼이 필요할까?', desc: '제발, 이런 분들만 숏폼을 하세요.' },
   { no: '02', id: 2, tag: '대표 사례', title: '릴스 2개로 95만 조회수, 그 안에 숨은 공식', desc: '딱 3가지만 바꿨습니다.' },
   { no: '03', id: 3, tag: '시작 가이드', title: '‘문의로 이어지는 숏폼’은 이게 다릅니다', desc: '문의를 만드는 2가지 차이.' }
 ];
@@ -124,25 +124,20 @@ function ColumnPage() {
               <Reveal key={c.id} delay={Math.min(i, 4) * 60}>
                 {isMobile ? (
                   <a href={`칼럼 상세.html?id=${c.id}`} className="link-ul" style={{ display: 'block', padding: '26px 0', borderBottom: '1px solid var(--bd-line)', textDecoration: 'none', color: 'inherit' }}>
-                    <div style={{ position: 'relative' }}>
-                      <Slot id={`cp-list${i}`} placeholder="썸네일 (16:9)" radius={10} style={{ aspectRatio: '16 / 9', width: '100%' }} />
-                      <span style={{ position: 'absolute', top: 10, left: 10, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', height: 28, padding: '0 11px', borderRadius: 999, background: 'rgba(10,14,26,0.7)', color: '#fff', fontFamily: 'var(--font-mono)', fontSize: 13, fontWeight: 600 }}>{String(c.id).padStart(2, '0')}</span>
-                    </div>
-                    <div style={{ marginTop: 16 }}>
+                    <div>
                       <h3 style={{ margin: 0, fontSize: 21, fontWeight: 700, letterSpacing: '-0.025em', lineHeight: 1.34 }}>{c.title}</h3>
                       <p style={{ margin: '8px 0 0', fontSize: 14.5, lineHeight: 1.6, color: 'var(--fg-2)' }}>{c.excerpt}</p>
                       <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--bd-gray-400)', marginTop: 12 }}>{c.date} · 읽는데 {c.read}분</div>
                     </div>
                   </a>
                 ) : (
-                  <a href={`칼럼 상세.html?id=${c.id}`} className="link-ul" style={{ display: 'grid', gridTemplateColumns: '72px 1fr 200px', gap: 28, alignItems: 'center', padding: '30px 0', borderBottom: '1px solid var(--bd-line)', textDecoration: 'none', color: 'inherit' }}>
+                  <a href={`칼럼 상세.html?id=${c.id}`} className="link-ul" style={{ display: 'grid', gridTemplateColumns: '72px 1fr', gap: 28, alignItems: 'center', padding: '30px 0', borderBottom: '1px solid var(--bd-line)', textDecoration: 'none', color: 'inherit' }}>
                     <div style={{ fontFamily: 'var(--font-mono)', fontSize: 32, fontWeight: 500, color: 'var(--bd-gray-200)', lineHeight: 1, letterSpacing: '-0.03em' }}>{String(c.id).padStart(2, '0')}</div>
                     <div>
                       <h3 style={{ margin: 0, fontSize: 26, fontWeight: 700, letterSpacing: '-0.03em', lineHeight: 1.32 }}>{c.title}</h3>
                       <p style={{ margin: '10px 0 0', fontSize: 15.5, lineHeight: 1.6, color: 'var(--fg-2)', maxWidth: 560 }}>{c.excerpt}</p>
                       <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12.5, color: 'var(--bd-gray-400)', marginTop: 14 }}>{c.date} · 읽는데 {c.read}분</div>
                     </div>
-                    <Slot id={`cp-list${i}`} placeholder="썸네일" style={{ aspectRatio: '16 / 9', width: 200 }} />
                   </a>
                 )}
               </Reveal>

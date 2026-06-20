@@ -11,7 +11,7 @@
 const _urlId = Number(new URLSearchParams(location.search).get('id'));
 if (_urlId) localStorage.setItem('bd_col_last_id', _urlId);
 const CUR_ID = _urlId || Number(localStorage.getItem('bd_col_last_id')) || 1;
-const ARTICLE = (window.ARTICLES && (window.ARTICLES[CUR_ID] || window.ARTICLES[1])) || { title: '', deck: '', blocks: [] };
+const ARTICLE = window.ARTICLES && (window.ARTICLES[CUR_ID] || window.ARTICLES[1]) || { title: '', deck: '', blocks: [] };
 
 /* 본문 끝 추천 글 3편 (목록 데이터에서 — 현재 글 제외) */
 function relatedFrom(COLS) {
@@ -29,15 +29,15 @@ function ColDetailHeader() {
         <div style={{ display: 'flex', alignItems: 'center', gap: isMobile ? 0 : 4 }}>
           <a href="칼럼.html" style={{ marginRight: isMobile ? 16 : 22, fontSize: 15, fontWeight: 600, color: 'var(--bd-ink)', padding: '0 6px', textDecoration: 'none' }}>칼럼</a>
           <a href="../index.html#cta" style={{ marginLeft: isMobile ? 8 : 18, background: '#0F1F3D', color: '#fff', borderRadius: 6, padding: isMobile ? '8px 14px' : '9px 18px', fontSize: isMobile ? 13 : 13.5, fontWeight: 600, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 7, lineHeight: 1, transition: 'background 0.14s' }}
-            onMouseEnter={(e) => { e.currentTarget.style.background = '#1a3360'; }}
-            onMouseLeave={(e) => { e.currentTarget.style.background = '#0F1F3D'; }}>
+          onMouseEnter={(e) => {e.currentTarget.style.background = '#1a3360';}}
+          onMouseLeave={(e) => {e.currentTarget.style.background = '#0F1F3D';}}>
             빠른 상담
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12,5 19,12 12,19" /></svg>
           </a>
         </div>
       </div>
-    </header>
-  );
+    </header>);
+
 }
 
 function ColumnDetail() {
@@ -68,53 +68,53 @@ function ColumnDetail() {
     if (b.t === 'p') return <P>{renderInline(b.text)}</P>;
     if (b.t === 'list') return (
       <ul style={{ margin: '0 0 22px', padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 10 }}>
-        {b.items.map((it, i) => (
-          <li key={i} style={{ position: 'relative', paddingLeft: 22, fontSize: isMobile ? 16.5 : 18, lineHeight: 1.78, color: 'var(--bd-gray-700)' }}>
+        {b.items.map((it, i) =>
+        <li key={i} style={{ position: 'relative', paddingLeft: 22, fontSize: isMobile ? 16.5 : 18, lineHeight: 1.78, color: 'var(--bd-gray-700)' }}>
             <span style={{ position: 'absolute', left: 2, top: isMobile ? 11 : 13, width: 6, height: 6, borderRadius: 999, background: 'var(--bd-blue)' }}></span>
             {renderInline(it)}
           </li>
-        ))}
-      </ul>
-    );
+        )}
+      </ul>);
+
     if (b.t === 'platform') {
-      const logo = b.app === 'youtube'
-        ? <svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="4" fill="#FF0000"></rect><path d="M10 8.6l5.2 3.4-5.2 3.4z" fill="#fff"></path></svg>
-        : <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="2.6" y="2.6" width="18.8" height="18.8" rx="5.6" stroke="#E1306C" strokeWidth="1.8"></rect><circle cx="12" cy="12" r="4.1" stroke="#E1306C" strokeWidth="1.8"></circle><circle cx="17.2" cy="6.8" r="1.15" fill="#E1306C"></circle></svg>;
+      const logo = b.app === 'youtube' ?
+      <svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="4" fill="#FF0000"></rect><path d="M10 8.6l5.2 3.4-5.2 3.4z" fill="#fff"></path></svg> :
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="2.6" y="2.6" width="18.8" height="18.8" rx="5.6" stroke="#E1306C" strokeWidth="1.8"></rect><circle cx="12" cy="12" r="4.1" stroke="#E1306C" strokeWidth="1.8"></circle><circle cx="17.2" cy="6.8" r="1.15" fill="#E1306C"></circle></svg>;
       return (
         <div style={{ display: 'flex', alignItems: 'center', gap: 12, margin: `${isMobile ? 26 : 32}px 0 14px` }}>
           <span style={{ display: 'inline-flex', flexShrink: 0 }}>{logo}</span>
           <span style={{ fontSize: isMobile ? 18 : 20, fontWeight: 700, letterSpacing: '-0.03em', lineHeight: 1.35, color: 'var(--bd-ink)' }}>{b.text}</span>
-        </div>
-      );
+        </div>);
+
     }
     if (b.t === 'cards') return (
       <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : `repeat(${Math.min(b.items.length, 3)}, 1fr)`, gap: isMobile ? 12 : 16, margin: `${isMobile ? 18 : 22}px 0 28px` }}>
-        {b.items.map((it, i) => (
-          <div key={i} style={{ padding: isMobile ? '18px 18px' : '22px 20px', background: '#fff', border: '1px solid var(--bd-line)', borderRadius: 'var(--r-md)', display: 'flex', flexDirection: 'column', gap: 9 }}>
+        {b.items.map((it, i) =>
+        <div key={i} style={{ padding: isMobile ? '18px 18px' : '22px 20px', background: '#fff', border: '1px solid var(--bd-line)', borderRadius: 'var(--r-md)', display: 'flex', flexDirection: 'column', gap: 9 }}>
             <span style={{ fontFamily: 'var(--font-mono)', fontSize: 12, fontWeight: 700, letterSpacing: '0.04em', color: 'var(--bd-blue)' }}>{String(i + 1).padStart(2, '0')}</span>
             <h3 style={{ margin: 0, fontSize: isMobile ? 16.5 : 17, fontWeight: 700, letterSpacing: '-0.02em', lineHeight: 1.4, color: 'var(--bd-ink)' }}>{it.title}</h3>
             <div style={{ fontSize: 14, fontWeight: 600, letterSpacing: '-0.01em', lineHeight: 1.5, color: 'var(--bd-gray-700)' }}>{it.ex}</div>
             <p style={{ margin: '2px 0 0', fontSize: 14, lineHeight: 1.62, color: 'var(--bd-gray-500)' }}>{it.desc}</p>
           </div>
-        ))}
-      </div>
-    );
+        )}
+      </div>);
+
     if (b.t === 'pbox') return (
       <div style={{ margin: '0 0 22px', padding: isMobile ? '16px 18px' : '20px 26px', background: '#fff', border: '1px solid var(--bd-line)', borderRadius: 'var(--r-md)', display: 'flex', flexDirection: 'column', gap: 10 }}>
-        {b.items.map((text, i) => (
-          <p key={i} style={{ margin: 0, fontSize: isMobile ? 15.5 : 16.5, lineHeight: 1.72, color: 'var(--bd-gray-700)' }}>{renderInline(text)}</p>
-        ))}
-      </div>
-    );
+        {b.items.map((text, i) =>
+        <p key={i} style={{ margin: 0, fontSize: isMobile ? 15.5 : 16.5, lineHeight: 1.72, color: 'var(--bd-gray-700)' }}>{renderInline(text)}</p>
+        )}
+      </div>);
+
     if (b.t === 'pgrid') return (
       <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: isMobile ? 10 : 12, margin: '0 0 22px' }}>
-        {b.items.map((text, i) => (
-          <div key={i} style={{ padding: isMobile ? '14px 16px' : '16px 20px', background: '#fff', border: '1px solid var(--bd-line)', borderRadius: 'var(--r-md)', fontSize: isMobile ? 15.5 : 16.5, lineHeight: 1.72, color: 'var(--bd-gray-700)' }}>
+        {b.items.map((text, i) =>
+        <div key={i} style={{ padding: isMobile ? '14px 16px' : '16px 20px', background: '#fff', border: '1px solid var(--bd-line)', borderRadius: 'var(--r-md)', fontSize: isMobile ? 15.5 : 16.5, lineHeight: 1.72, color: 'var(--bd-gray-700)' }}>
             {renderInline(text)}
           </div>
-        ))}
-      </div>
-    );
+        )}
+      </div>);
+
     if (b.t === 'note') return (
       <div style={{ margin: `${isMobile ? 18 : 22}px 0 28px`, padding: isMobile ? '18px 18px' : '20px 24px', background: 'var(--bd-gray-100)', border: '1px solid var(--bd-line)', borderRadius: 'var(--r-md)' }}>
         <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, flexWrap: 'wrap' }}>
@@ -122,54 +122,54 @@ function ColumnDetail() {
           <span style={{ fontSize: 14, fontWeight: 600, color: 'var(--bd-gray-600)' }}>{b.ex}</span>
         </div>
         <p style={{ margin: '8px 0 0', fontSize: 14.5, lineHeight: 1.62, color: 'var(--bd-gray-600)' }}>{renderInline(b.desc)}</p>
-      </div>
-    );
+      </div>);
+
     if (b.t === 'quote') return (
       <blockquote style={{ margin: `${isMobile ? 32 : 44}px 0`, padding: `4px 0 4px ${isMobile ? 20 : 28}px`, borderLeft: '3px solid var(--bd-blue)' }}>
         <p style={{ margin: 0, fontSize: isMobile ? 20 : 24, fontWeight: 700, letterSpacing: '-0.03em', lineHeight: 1.45, color: 'var(--bd-ink)' }}>{b.text}</p>
-      </blockquote>
-    );
+      </blockquote>);
+
     if (b.t === 'stat') return (
-      <div style={{ margin: `${isMobile ? 32 : 40}px 0`, padding: isMobile ? '24px 22px' : '32px 36px', background: '#fff', border: '1px solid var(--bd-line)', borderRadius: 'var(--r-md)', boxShadow: 'var(--shadow-soft, 0 1px 2px rgba(10,14,26,0.05), 0 8px 28px rgba(10,19,48,0.07))', display: b.arrow ? 'flex' : 'grid', gridTemplateColumns: b.arrow ? undefined : `repeat(${b.items.length}, 1fr)`, alignItems: 'center', justifyContent: b.arrow ? 'space-between' : undefined, gap: b.arrow ? 0 : (isMobile ? 16 : 32) }}>
-        {b.items.map(([n, l], i) => (
-          <React.Fragment key={l}>
+      <div style={{ margin: `${isMobile ? 32 : 40}px 0`, padding: isMobile ? '24px 22px' : '32px 36px', background: '#fff', border: '1px solid var(--bd-line)', borderRadius: 'var(--r-md)', boxShadow: 'var(--shadow-soft, 0 1px 2px rgba(10,14,26,0.05), 0 8px 28px rgba(10,19,48,0.07))', display: b.arrow ? 'flex' : 'grid', gridTemplateColumns: b.arrow ? undefined : `repeat(${b.items.length}, 1fr)`, alignItems: 'center', justifyContent: b.arrow ? 'space-between' : undefined, gap: b.arrow ? 0 : isMobile ? 16 : 32 }}>
+        {b.items.map(([n, l], i) =>
+        <React.Fragment key={l}>
             {b.arrow && i > 0 && <span style={{ fontSize: isMobile ? 22 : 28, color: 'var(--bd-gray-300)', fontWeight: 300, flexShrink: 0 }}>→</span>}
             <div style={{ minWidth: 0 }}>
               <div style={{ fontFamily: 'var(--font-mono)', fontWeight: 700, fontSize: isMobile ? 22 : 32, letterSpacing: '-0.03em', color: 'var(--bd-blue)', lineHeight: 1 }}>{n}</div>
               <div style={{ marginTop: 8, fontSize: isMobile ? 12 : 13.5, color: 'var(--bd-gray-600)', fontWeight: 500, lineHeight: 1.4 }}>{l}</div>
             </div>
           </React.Fragment>
-        ))}
-      </div>
-    );
+        )}
+      </div>);
+
     if (b.t === 'reels') return (
       <figure style={{ margin: `${isMobile ? 8 : 16}px 0 28px` }}>
         <div style={{ display: 'flex', justifyContent: 'center', gap: isMobile ? 12 : 16 }}>
-          {b.images.map((src, i) => (
-            <div key={i} style={{ position: 'relative', width: isMobile ? '46%' : 232, aspectRatio: '9 / 16', borderRadius: 10, overflow: 'hidden', border: '1px solid var(--bd-line)', background: 'var(--bd-gray-100)' }}>
+          {b.images.map((src, i) =>
+          <div key={i} style={{ position: 'relative', width: isMobile ? '46%' : 232, aspectRatio: '9 / 16', borderRadius: 10, overflow: 'hidden', border: '1px solid var(--bd-line)', background: 'var(--bd-gray-100)' }}>
               <img src={src} alt={`릴스 ${i + 1}`} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
             </div>
-          ))}
+          )}
         </div>
         {b.caption && <figcaption style={{ marginTop: 14, textAlign: 'center', fontSize: 13, color: 'var(--bd-gray-500)', fontWeight: 500 }}>{b.caption}</figcaption>}
-      </figure>
-    );
+      </figure>);
+
     if (b.t === 'image') return (
       <figure style={{ margin: `${isMobile ? 16 : 24}px 0 28px` }}>
         <div style={{ position: 'relative', width: '100%', aspectRatio: '16 / 9', borderRadius: 12, overflow: 'hidden', border: '1px solid var(--bd-line)', background: 'var(--bd-gray-100)' }}>
           <img src={b.src} alt={b.caption || ''} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
         </div>
         {b.caption && <figcaption style={{ marginTop: 14, textAlign: 'center', fontSize: 15, color: '#1547ff', fontWeight: 600 }}>{b.caption}</figcaption>}
-      </figure>
-    );
+      </figure>);
+
     if (b.t === 'slot') return (
       <figure style={{ margin: `${isMobile ? 16 : 24}px 0 28px` }}>
         <Slot id={b.id} placeholder={b.placeholder || '이미지 (16:9)'} radius={isMobile ? 10 : 12} style={{ aspectRatio: '16 / 9', width: '100%', border: '1px solid var(--bd-line)' }} />
         {b.caption && <figcaption style={{ marginTop: 14, textAlign: 'center', fontSize: 13, color: 'var(--bd-gray-500)', fontWeight: 500 }}>{b.caption}</figcaption>}
-      </figure>
-    );
+      </figure>);
+
     if (b.t === 'next') {
-      const nx = (window.ARTICLES && window.ARTICLES[b.id]) || {};
+      const nx = window.ARTICLES && window.ARTICLES[b.id] || {};
       return (
         <a href={`칼럼 상세.html?id=${b.id}`} className="col-next-cta link-ul" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16, margin: `${isMobile ? 44 : 60}px 0 0`, padding: isMobile ? '18px 20px' : '22px 26px', background: '#fff', border: '1px solid var(--bd-line)', borderRadius: 'var(--r-md)', textDecoration: 'none', position: 'relative', overflow: 'hidden' }}>
           <div style={{ minWidth: 0, position: 'relative', zIndex: 1 }}>
@@ -179,8 +179,8 @@ function ColumnDetail() {
             <div style={{ marginTop: 7, fontSize: isMobile ? 16 : 18, fontWeight: 700, letterSpacing: '-0.02em', lineHeight: 1.36, color: 'var(--bd-ink)' }}>{nx.title}</div>
           </div>
           <span className="col-next-arrow" style={{ display: 'inline-flex', flexShrink: 0, position: 'relative', zIndex: 1 }}><window.Icon name="arrow-right" size={20} color="var(--bd-blue)" /></span>
-        </a>
-      );
+        </a>);
+
     }
     if (b.t === 'cta') return (
       <div style={{ margin: `${isMobile ? 36 : 44}px 0 0`, display: 'flex' }}>
@@ -188,13 +188,8 @@ function ColumnDetail() {
           무료 상담 신청
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12,5 19,12 12,19" /></svg>
         </a>
-      </div>
-    );
-    if (b.t === 'footnote') return (
-      <p style={{ margin: '-8px 0 28px', paddingLeft: isMobile ? 18 : 28, fontSize: isMobile ? 13.5 : 14, lineHeight: 1.65, color: '#C03434', fontWeight: 500 }}>
-        {String(b.text).split('\n').map((ln, i) => <React.Fragment key={i}>{i > 0 ? <br /> : null}{ln}</React.Fragment>)}
-      </p>
-    );
+      </div>);
+
     if (b.t === 'platform-grid') return <PlatformGrid />;
     return null;
   };
@@ -202,45 +197,49 @@ function ColumnDetail() {
   /* ── 칼럼 1편 전용: 마케팅 채널 그리드 ── */
   const PlatformGrid = () => {
     const PLATFORMS = [
-      {
-        name: '네이버 플레이스', cat: '검색 · 지도', color: '#03C75A',
-        logo: <svg width="16" height="16" viewBox="0 0 18 18" fill="white"><path d="M2 2h3v14H2V2z M13 2h3v14h-3V2z M5 2h3l5 14h-3L5 2z"/></svg>,
-      },
-      {
-        name: '블로그', cat: '검색', color: '#03C75A',
-        logo: <svg width="16" height="16" viewBox="0 0 18 18" fill="none"><rect x="3" y="4" width="12" height="2" rx="1" fill="white"/><rect x="3" y="8" width="9" height="2" rx="1" fill="white"/><rect x="3" y="12" width="10.5" height="2" rx="1" fill="white"/></svg>,
-      },
-      {
-        name: '네이버 카페', cat: '커뮤니티', color: '#03C75A',
-        logo: <svg width="16" height="16" viewBox="0 0 18 18" fill="none" stroke="white" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M9 2a4 4 0 1 1 0 8 4 4 0 0 1 0-8z"/><path d="M2 16c0-3 3-5 7-5s7 2 7 5"/></svg>,
-      },
-      {
-        name: '유튜브', cat: '롱폼 & 숏폼', color: '#FF0000',
-        logo: <svg width="16" height="16" viewBox="0 0 18 18" fill="white"><path d="M6.5 5l7 4-7 4V5z"/></svg>,
-      },
-      {
-        name: '인스타그램', cat: '소셜 · 숏폼', color: '#C13584',
-        logo: <svg width="16" height="16" viewBox="0 0 18 18" fill="none"><rect x="2" y="2" width="14" height="14" rx="4" stroke="white" strokeWidth="1.8"/><circle cx="9" cy="9" r="3" stroke="white" strokeWidth="1.8"/><circle cx="13.5" cy="4.5" r="1.1" fill="white"/></svg>,
-      },
-      {
-        name: '스레드', cat: '소셜 · 텍스트', color: '#1A1A1A',
-        logo: <svg width="16" height="16" viewBox="0 0 18 18" fill="none"><path d="M12 7.8C11.4 5.9 10.1 5 8.8 5 7 5 5.8 6.5 5.8 9s1.2 4 3 4c1 0 1.8-.5 2.2-1.4" stroke="white" strokeWidth="1.55" strokeLinecap="round"/><circle cx="8.9" cy="9" r="1.4" fill="white"/><line x1="12" y1="7.3" x2="12" y2="12" stroke="white" strokeWidth="1.55" strokeLinecap="round"/></svg>,
-      },
-      {
-        name: '전문직 플랫폼', cat: '로톡 · 강남언니', color: '#1A4DB8',
-        logo: <svg width="16" height="16" viewBox="0 0 18 18" fill="none" stroke="white" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><line x1="9" y1="2" x2="9" y2="16"/><line x1="3" y1="5" x2="15" y2="5"/><path d="M3 5v4a3 3 0 0 0 6 0V5"/><path d="M9 5v4a3 3 0 0 0 6 0V5"/><line x1="6" y1="16" x2="12" y2="16"/></svg>,
-      },
-      {
-        name: '옥외 · 간판', cat: '오프라인', color: '#6B7280',
-        logo: <svg width="16" height="16" viewBox="0 0 18 18" fill="none" stroke="white" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="3" width="14" height="8" rx="2"/><line x1="9" y1="11" x2="9" y2="15"/><line x1="6" y1="15" x2="12" y2="15"/></svg>,
-      },
-    ];
+    {
+      name: '네이버 플레이스', cat: '검색 · 지도', color: '#03C75A',
+      logo: <svg width="16" height="16" viewBox="0 0 18 18" fill="white"><path d="M2 2h3v14H2V2z M13 2h3v14h-3V2z M5 2h3l5 14h-3L5 2z" /></svg>
+    },
+    {
+      name: '블로그', cat: '검색 · 콘텐츠', color: '#03C75A',
+      logo: <svg width="16" height="16" viewBox="0 0 18 18" fill="none"><rect x="3" y="4" width="12" height="2" rx="1" fill="white" /><rect x="3" y="8" width="9" height="2" rx="1" fill="white" /><rect x="3" y="12" width="10.5" height="2" rx="1" fill="white" /></svg>
+    },
+    {
+      name: '네이버 카페', cat: '커뮤니티', color: '#03C75A',
+      logo: <svg width="16" height="16" viewBox="0 0 18 18" fill="none" stroke="white" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M9 2a4 4 0 1 1 0 8 4 4 0 0 1 0-8z" /><path d="M2 16c0-3 3-5 7-5s7 2 7 5" /></svg>
+    },
+    {
+      name: '유튜브', cat: '롱폼 & 숏폼', color: '#FF0000',
+      logo: <svg width="16" height="16" viewBox="0 0 18 18" fill="white"><path d="M6.5 5l7 4-7 4V5z" /></svg>
+    },
+    {
+      name: '인스타그램', cat: '소셜 · 숏폼', color: '#C13584',
+      logo: <svg width="16" height="16" viewBox="0 0 18 18" fill="none"><rect x="2" y="2" width="14" height="14" rx="4" stroke="white" strokeWidth="1.8" /><circle cx="9" cy="9" r="3" stroke="white" strokeWidth="1.8" /><circle cx="13.5" cy="4.5" r="1.1" fill="white" /></svg>
+    },
+    {
+      name: '스레드', cat: '소셜', color: '#1A1A1A',
+      logo: <svg width="16" height="16" viewBox="0 0 18 18" fill="white"><path d="M12.5 8.2c-.1-.05-.25-.1-.4-.14-.04-.9-.46-1.6-1.1-2.02-.87-.56-2.04-.54-2.95-.02-.56.32-.97.8-1.18 1.38-.04.12.02.25.14.3.12.04.25-.03.29-.15.18-.49.53-.9 1-.18.74-.43 1.68-.44 2.4.02.53.34.84.9.88 1.66-.27-.04-.56-.06-.86-.05-1.5.06-2.46.85-2.4 1.97.04.6.36 1.11.88 1.42.45.27 1.03.36 1.62.26.75-.13 1.34-.54 1.66-1.15.26-.48.38-1.1.37-1.89.28.17.5.4.64.7.25.54.27 1.43-.24 2.13-.55.77-1.6 1.15-2.95 1.18-1.53.03-2.67-.5-3.38-1.56-.65-.97-.98-2.38-.98-4.15 0-1.77.33-3.18.98-4.15.71-1.06 1.85-1.59 3.38-1.56 1.35.03 2.4.41 2.95 1.18l.07.1.58-.4-.07-.1C11.14 2.67 9.9 2.24 8.36 2.2c-1.77-.04-3.15.57-3.99 1.78-.74 1.1-1.1 2.7-1.1 4.72 0 2.02.36 3.62 1.1 4.72.84 1.21 2.22 1.82 3.99 1.78 1.55-.04 2.78-.5 3.56-1.55.66-.89.64-2.07.27-2.8-.22-.45-.6-.8-1.07-1.03-.01-.3-.04-.57-.08-.83.18.04.35.09.5.16.1.05.22 0 .27-.1.05-.1 0-.22-.1-.27l-.22-.18z" /></svg>
+    },
+    {
+      name: '전문직 플랫폼', cat: '로톡 · 강남언니', color: '#1A4DB8',
+      logo: <svg width="16" height="16" viewBox="0 0 18 18" fill="none" stroke="white" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><line x1="9" y1="2" x2="9" y2="16" /><line x1="3" y1="5" x2="15" y2="5" /><path d="M3 5v4a3 3 0 0 0 6 0V5" /><path d="M9 5v4a3 3 0 0 0 6 0V5" /><line x1="6" y1="16" x2="12" y2="16" /></svg>
+    },
+    {
+      name: '옥외 · 간판', cat: '오프라인', color: '#6B7280',
+      logo: <svg width="16" height="16" viewBox="0 0 18 18" fill="none" stroke="white" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="3" width="14" height="8" rx="2" /><line x1="9" y1="11" x2="9" y2="15" /><line x1="6" y1="15" x2="12" y2="15" /></svg>
+    },
+    {
+      name: '입소문', cat: '구전 · 추천', color: '#D97706',
+      logo: <svg width="16" height="16" viewBox="0 0 18 18" fill="none" stroke="white" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M15 5H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h3l3 3 3-3h3a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1z" /></svg>
+    }];
+
     return (
       <div style={{ width: '100%', background: '#fff', border: '1px solid var(--bd-line)', borderRadius: isMobile ? 10 : 16, padding: isMobile ? '20px 18px 22px' : '26px 28px 28px' }}>
         <div style={{ marginBottom: isMobile ? 14 : 16, fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--bd-gray-400)', fontWeight: 600 }}>마케팅 채널</div>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: isMobile ? 8 : 10 }}>
-          {PLATFORMS.map(p => (
-            <div key={p.name} style={{ display: 'flex', alignItems: 'center', gap: 9, padding: isMobile ? '9px 12px' : '10px 14px', border: '1px solid var(--bd-line)', borderRadius: 10, background: 'var(--bd-paper)' }}>
+          {PLATFORMS.map((p) =>
+          <div key={p.name} style={{ display: 'flex', alignItems: 'center', gap: 9, padding: isMobile ? '9px 12px' : '10px 14px', border: '1px solid var(--bd-line)', borderRadius: 10, background: 'var(--bd-paper)' }}>
               <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 28, height: 28, borderRadius: 7, background: p.color, flexShrink: 0 }}>
                 {p.logo}
               </span>
@@ -249,11 +248,11 @@ function ColumnDetail() {
                 <div style={{ fontSize: 11, color: 'var(--bd-gray-400)', fontWeight: 500, lineHeight: 1.3, marginTop: 2 }}>{p.cat}</div>
               </div>
             </div>
-          ))}
+          )}
         </div>
-        <p style={{ margin: `${isMobile ? 14 : 18}px 0 0`, paddingTop: isMobile ? 14 : 16, borderTop: '1px solid var(--bd-line)', fontSize: 15, color: '#1547ff', lineHeight: 1.6, fontWeight: 500 }}>채널마다 역할이 다릅니다. 나에게 맞는 곳부터 시작해야 합니다.</p>
-      </div>
-    );
+        <p style={{ margin: `${isMobile ? 14 : 18}px 0 0`, paddingTop: isMobile ? 14 : 16, borderTop: '1px solid var(--bd-line)', fontSize: '15px', lineHeight: 1.6, fontWeight: 500, color: 'rgb(21, 71, 255)' }}>채널마다 역할이 다릅니다. 나에게 맞는 곳부터 시작해야 합니다.</p>
+      </div>);
+
   };
 
   return (
@@ -313,8 +312,8 @@ function ColumnDetail() {
       </article>
 
       {window.SiteFooter ? <window.SiteFooter /> : null}
-    </React.Fragment>
-  );
+    </React.Fragment>);
+
 }
 
 window.ColumnDetail = ColumnDetail;

@@ -9,7 +9,7 @@ function ColumnTeaser() {
   const { Container, Reveal, Kicker } = window;
 
   const items = [
-    { tag: '시작 가이드', title: '나에게 숏폼이 필요할까?', href: 'column/칼럼 상세.html?id=1' },
+    { tag: '시작 가이드', title: '나도 숏폼이 필요할까?', href: 'column/칼럼 상세.html?id=1' },
     { tag: '대표 사례', title: '릴스 2개로 95만 조회수, 그 안에 숨은 공식', href: 'column/칼럼 상세.html?id=2' },
     { tag: '시작 가이드', title: '‘문의로 이어지는 숏폼’은 이게 다릅니다', href: 'column/칼럼 상세.html?id=3' }
   ];

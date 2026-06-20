@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>BlueDot Studio · 전문직 숏폼 마케팅</title>
+
+<link rel="stylesheet" href="_ds/bluedot-studio-design-system-9f5b7cf1-ebeb-4a5e-8875-3aea1c7e4b44/colors_and_type.css" />
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    font-family: var(--font-sans);
+    background: #FFFFFF;
+    color: var(--bd-ink);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  ::selection { background: var(--bd-blue); color: #fff; }
+  h1, h2, h3, h4, p { margin: 0; word-break: keep-all; text-wrap: pretty; }
+  a { color: inherit; }
+  button { font-family: inherit; }
+
+  /* ---- Scroll reveal ----
+     Opacity stays 1 at all times so content is NEVER blank (print,
+     reduced-motion, throttled/frozen iframes). The entrance animates a
+     subtle upward slide; if the animation clock is frozen the element is
+     at most offset a few px but fully visible. */
+  @keyframes bd-rise {
+    from { transform: translateY(20px); }
+    to   { transform: translateY(0); }
+  }
+  .reveal { transform: none; }
+  .reveal--in { animation: bd-rise 0.7s var(--ease-out) both; }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal--in { animation: none; }
+  }
+
+  /* ---- Typing caret ---- */
+  @keyframes bd-caret { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+  .bd-caret { display: inline-block; animation: bd-caret 1s steps(1) infinite; }
+
+  /* ---- Pulse CTA ---- */
+  @keyframes bd-pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(21,71,255,0.40); }
+    70%  { box-shadow: 0 0 0 16px rgba(21,71,255,0); }
+    100% { box-shadow: 0 0 0 0 rgba(21,71,255,0); }
+  }
+  .pulse-cta { animation: bd-pulse 2.2s var(--ease-in-out) infinite; }
+
+  /* ---- Hero reel sheen (implies live video) ---- */
+  @keyframes bd-sheen {
+    0%   { transform: translateY(-60%) rotate(8deg); opacity: 0; }
+    40%  { opacity: 0.28; }
+    100% { transform: translateY(160%) rotate(8deg); opacity: 0; }
+  }
+  .reel-sheen {
+    position: absolute; inset: -40% -20%;
+    background: linear-gradient(180deg, transparent, rgba(110,139,255,0.22), transparent);
+    animation: bd-sheen 6s var(--ease-in-out) infinite;
+    pointer-events: none;
+  }
+  @keyframes bd-blink { 0%, 60% { opacity: 1; } 80%, 100% { opacity: 0.25; } }
+  .rec-dot { animation: bd-blink 1.4s steps(1) infinite; }
+
+  /* ---- Equalizer bars ---- */
+  @keyframes bd-eq { 0%,100% { height: 18%; } 50% { height: 92%; } }
+  .eq span { display:block; width: 3px; background: rgba(255,255,255,0.85); border-radius: 999px; animation: bd-eq 0.9s var(--ease-in-out) infinite; }
+
+  /* ---- Inputs ---- */
+  .bd-field {
+    width: 100%;
+    height: 52px;
+    padding: 0 16px;
+    font-family: var(--font-sans);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--bd-ink);
+    background: #fff;
+    border: 1px solid var(--bd-line);
+    border-radius: var(--r-sm);
+    outline: none;
+    transition: border-color 0.2s var(--ease-out), box-shadow 0.2s var(--ease-out);
+  }
+  textarea.bd-field { height: auto; min-height: 104px; padding: 14px 16px; line-height: 1.55; resize: vertical; }
+  .bd-field::placeholder { color: var(--bd-gray-400); font-weight: 400; }
+  .bd-field:focus { border-color: var(--bd-blue); box-shadow: 0 0 0 4px var(--bd-blue-50); }
+  .bd-field.bd-field--err { border-color: var(--bd-danger); }
+
+  /* ---- FAQ accordion ---- */
+  .faq-item { border-bottom: 1px solid var(--bd-line); }
+  .faq-q {
+    width: 100%; background: none; border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: space-between; gap: 20px;
+    padding: 28px 4px; text-align: left;
+  }
+  .faq-a-wrap { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.32s var(--ease-out); }
+  .faq-a-wrap.open { grid-template-rows: 1fr; }
+  .faq-a-inner { overflow: hidden; }
+  .faq-icon { transition: transform 0.3s var(--ease-out); flex: none; }
+  .faq-icon.open { transform: rotate(45deg); }
+
+  /* ---- Process connector ---- */
+  .proc-arrow { color: var(--bd-line-strong); flex: none; }
+
+  /* ---- Generic link underline hover ---- */
+  .link-ul { text-decoration: none; transition: opacity 0.2s var(--ease-out); }
+  .link-ul:hover { opacity: 0.7; }
+
+  /* hide native scrollbar on horizontal rails */
+  .no-bar::-webkit-scrollbar { display: none; }
+  .no-bar { -ms-overflow-style: none; scrollbar-width: none; }
+
+  #root-loading {
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    color: var(--bd-gray-400); font-size: 14px; letter-spacing: 0.04em;
+  }
+</style>
+</head>
+<body>
+<div id="root"><div id="root-loading">bluedot studio · 로딩 중</div></div>
+
+<!-- React + Babel (pinned) -->
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<!-- Lucide icons -->
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+<!-- Image slots (user-fillable 9:16 frames) -->
+<script src="image-slot.js"></script>
+
+<!-- Design system bundle (exposes Button, Tag, Stat, Logo, Eyebrow, Dot, Nav, Hero, …) -->
+<script src="_ds/bluedot-studio-design-system-9f5b7cf1-ebeb-4a5e-8875-3aea1c7e4b44/_ds_bundle.js"></script>
+
+<!-- App -->
+<script type="text/babel" src="scripts/shared.jsx"></script>
+<script type="text/babel" src="scripts/sections-a.jsx"></script>
+<script type="text/babel" src="scripts/sections-b.jsx"></script>
+<script type="text/babel" src="scripts/sections-c.jsx"></script>
+<script type="text/babel" src="scripts/app.jsx"></script>
+<script>
+(async () => {
+  // Prepend so page-supplied @page / break rules (deck-stage's margin:0,
+  // author CSS) keep source-order precedence over the baseline.
+  const baseCss = document.createElement('style');
+  baseCss.textContent = "@media print {\n  @page { margin: 0.5cm; }\n  html, body { print-color-adjust: exact; -webkit-print-color-adjust: exact; }\n  section, article, figure, table { break-inside: avoid; }\n  *, *::before, *::after {\n    animation-delay: -99s !important; animation-duration: .001s !important;\n    animation-iteration-count: 1 !important; animation-fill-mode: both !important;\n    animation-play-state: running !important; transition-duration: 0s !important;\n  }\n}";
+  document.head.prepend(baseCss);
+  if (document.readyState === 'loading') {
+    await new Promise((r) => document.addEventListener('DOMContentLoaded', r, { once: true }));
+  }
+  let ds = document.querySelector('deck-stage');
+  // whenDefined never resolves when nothing registers the element, so only
+  // await it when a <deck-stage> tag exists (and race a timeout regardless).
+  if (ds && !customElements.get('deck-stage')) {
+    try {
+      await Promise.race([
+        customElements.whenDefined('deck-stage'),
+        new Promise((r) => setTimeout(r, 3000)),
+      ]);
+    } catch (e) {}
+    ds = document.querySelector('deck-stage');
+  }
+  // dc-runtime assigns window.DCLogic at init and mounts into #dc-root on
+  // DOMContentLoaded; settle on that subtree so React has rendered before
+  // print(). Non-DC pages fall through to weighing body.
+  const isDc = !ds && 'DCLogic' in window;
+  const settleRoot = ds || (isDc ? document.getElementById('dc-root') : null) || document.body;
+  if (settleRoot) {
+    // Weigh only content children — skip script/style/template so inline
+    // Babel/CSS doesn't register as stable "content" before the framework
+    // has mounted anything.
+    const MEDIA = 'img,svg,canvas,video,picture,iframe,embed,object';
+    const weigh = () => {
+      let text = 0, media = 0;
+      for (const c of settleRoot.children) {
+        const t = c.tagName;
+        if (t === 'SCRIPT' || t === 'STYLE' || t === 'TEMPLATE') continue;
+        text += (c.textContent || '').trim().length;
+        media += c.querySelectorAll(MEDIA).length + (c.matches(MEDIA) ? 1 : 0);
+      }
+      return text + media * 100;
+    };
+    // "Non-zero and stable" alone is not sufficient to mean rendered: generic
+    // body can carry a static shell while async main content is pending, and
+    // #dc-root can carry the root DC's static text while child refs are still
+    // .sc-placeholder boxes. Gate generic on readyState 'complete', and never
+    // accept stability while a dc-runtime placeholder is present.
+    const isGeneric = settleRoot === document.body;
+    const deadline = Date.now() + 15000;
+    let last = -1, stable = 0;
+    while (Date.now() < deadline) {
+      const n = weigh();
+      const ready =
+        (!isGeneric || document.readyState === 'complete') &&
+        !settleRoot.querySelector('.sc-placeholder');
+      if (n > 0 && n === last && ready) { if (++stable >= 2) break; } else { stable = 0; }
+      last = n;
+      await new Promise((r) => setTimeout(r, 250));
+    }
+  }
+  try { await document.fonts.ready; } catch (e) {}
+  // Jump every animation to its end state so print() never captures a slide
+  // mid-entrance. Ordering matters: the 0s-transition style must be live
+  // BEFORE data-deck-active is set so attribute-keyed transitions don't
+  // start a (now-0s) run from the pre-active base.
+  const st = document.createElement('style');
+  st.textContent = '*,*::before,*::after{animation-delay:-99s !important;animation-duration:.001s !important;animation-iteration-count:1 !important;animation-fill-mode:both !important;animation-play-state:running !important;transition-duration:0s !important}';
+  document.head.appendChild(st);
+  for (const d of document.querySelectorAll('deck-stage')) {
+    for (const c of d.children) {
+      const t = c.tagName;
+      if (t === 'SCRIPT' || t === 'STYLE' || t === 'TEMPLATE') continue;
+      c.setAttribute('data-deck-active', '');
+    }
+  }
+  try {
+    const sweep = () => {
+      for (const a of document.getAnimations()) {
+        try { a.finish(); } catch (e) {
+          try { a.currentTime = (a.effect && a.effect.getComputedTiming().duration) || 0; a.pause(); } catch (e2) {}
+        }
+      }
+    };
+    sweep();
+    await new Promise((r) => requestAnimationFrame(r));
+    sweep();
+    await new Promise((r) => requestAnimationFrame(r));
+  } catch (e) {}
+  setTimeout(() => { try { window.print(); } catch (e) {} }, 200);
+})();
+</script>
+</body>
+</html>

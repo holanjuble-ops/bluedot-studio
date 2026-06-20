@@ -27,7 +27,7 @@ function ColDetailHeader() {
       <div style={{ maxWidth: 1020, margin: '0 auto', padding: `0 ${isMobile ? 20 : 32}px`, height: isMobile ? 56 : 64, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <a href="../index.html" className="link-ul"><window.BdLogo size={isMobile ? 21 : 24} /></a>
         <div style={{ display: 'flex', alignItems: 'center', gap: isMobile ? 0 : 4 }}>
-          <a href="칼럼.html" style={{ marginRight: isMobile ? 16 : 22, fontSize: 15, fontWeight: 600, color: 'var(--bd-ink)', padding: '0 6px', textDecoration: 'none' }}>칼럼</a>
+          <a href="column.html" style={{ marginRight: isMobile ? 16 : 22, fontSize: 15, fontWeight: 600, color: 'var(--bd-ink)', padding: '0 6px', textDecoration: 'none' }}>칼럼</a>
           <a href="../index.html#cta" style={{ marginLeft: isMobile ? 8 : 18, background: '#0F1F3D', color: '#fff', borderRadius: 6, padding: isMobile ? '8px 14px' : '9px 18px', fontSize: isMobile ? 13 : 13.5, fontWeight: 600, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 7, lineHeight: 1, transition: 'background 0.14s' }}
             onMouseEnter={(e) => { e.currentTarget.style.background = '#1a3360'; }}
             onMouseLeave={(e) => { e.currentTarget.style.background = '#0F1F3D'; }}>
@@ -171,7 +171,7 @@ function ColumnDetail() {
     if (b.t === 'next') {
       const nx = (window.ARTICLES && window.ARTICLES[b.id]) || {};
       return (
-        <a href={`칼럼 상세.html?id=${b.id}`} className="col-next-cta link-ul" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16, margin: `${isMobile ? 44 : 60}px 0 0`, padding: isMobile ? '18px 20px' : '22px 26px', background: '#fff', border: '1px solid var(--bd-line)', borderRadius: 'var(--r-md)', textDecoration: 'none', position: 'relative', overflow: 'hidden' }}>
+        <a href={`column-detail.html?id=${b.id}`} className="col-next-cta link-ul" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16, margin: `${isMobile ? 44 : 60}px 0 0`, padding: isMobile ? '18px 20px' : '22px 26px', background: '#fff', border: '1px solid var(--bd-line)', borderRadius: 'var(--r-md)', textDecoration: 'none', position: 'relative', overflow: 'hidden' }}>
           <div style={{ minWidth: 0, position: 'relative', zIndex: 1 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 7, fontFamily: 'var(--font-mono)', fontSize: 11.5, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'var(--bd-blue)', fontWeight: 600 }}>
               <span className="col-next-dot"></span>다음 편
@@ -215,7 +215,7 @@ function ColumnDetail() {
         <div style={{ background: 'var(--bd-paper)', padding: `${isMobile ? 36 : 56}px 0 ${isMobile ? 28 : 36}px` }}>
           <Container>
             <div style={{ maxWidth: READ }}>
-              <a href="칼럼.html" className="link-ul" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13.5, fontWeight: 600, color: 'var(--bd-gray-500)', textDecoration: 'none' }}>
+              <a href="column.html" className="link-ul" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13.5, fontWeight: 600, color: 'var(--bd-gray-500)', textDecoration: 'none' }}>
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="19" y1="12" x2="5" y2="12" /><polyline points="12,19 5,12 12,5" /></svg>
                 칼럼 목록
               </a>
@@ -250,7 +250,7 @@ function ColumnDetail() {
             <div style={{ maxWidth: READ }}>
               {ARTICLE.blocks.map((b, i) => <Block key={i} b={b} />)}
               <div style={{ marginTop: isMobile ? 48 : 64, paddingTop: isMobile ? 28 : 36, borderTop: '1px solid var(--bd-line)', display: 'flex', justifyContent: 'center' }}>
-                <a href="칼럼.html" className="link-ul" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, height: 46, padding: '0 22px', borderRadius: 999, border: '1px solid var(--bd-line)', background: '#fff', color: 'var(--bd-ink)', fontSize: 14.5, fontWeight: 600, textDecoration: 'none' }}>
+                <a href="column.html" className="link-ul" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, height: 46, padding: '0 22px', borderRadius: 999, border: '1px solid var(--bd-line)', background: '#fff', color: 'var(--bd-ink)', fontSize: 14.5, fontWeight: 600, textDecoration: 'none' }}>
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="19" y1="12" x2="5" y2="12" /><polyline points="12,19 5,12 12,5" /></svg>
                   칼럼 목록으로
                 </a>

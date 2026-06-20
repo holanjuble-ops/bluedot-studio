@@ -92,7 +92,7 @@ function ColumnPage() {
           { display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24 }}>
             {STARTER_PAGE.map((s, i) =>
             <Reveal key={s.no} delay={i * 90} style={isMobile ? { flex: 'none', width: '80%', scrollSnapAlign: 'start' } : undefined}>
-                <a href="칼럼 상세.html" className="link-ul" style={{ background: '#fff', border: '1px solid #DDE3FF', borderRadius: 'var(--r-md)', overflow: 'hidden', display: 'flex', flexDirection: 'column', height: '100%', boxShadow: '0 1px 2px rgba(10,14,26,0.04), 0 10px 30px rgba(21,71,255,0.06)', textDecoration: 'none', color: 'inherit' }}>
+                <a href="column-detail.html" className="link-ul" style={{ background: '#fff', border: '1px solid #DDE3FF', borderRadius: 'var(--r-md)', overflow: 'hidden', display: 'flex', flexDirection: 'column', height: '100%', boxShadow: '0 1px 2px rgba(10,14,26,0.04), 0 10px 30px rgba(21,71,255,0.06)', textDecoration: 'none', color: 'inherit' }}>
                   <div style={{ position: 'relative' }}>
                     <Slot id={`cp-hs-${i}`} placeholder="카드 이미지 (16:9)" style={{ aspectRatio: '16 / 9', width: '100%' }} />
                     <span style={{ position: 'absolute', top: 12, left: 12, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 34, height: 34, borderRadius: 999, background: 'var(--bd-blue)', color: '#fff', fontFamily: 'var(--font-mono)', fontSize: 14, fontWeight: 600 }}>{s.no}</span>
@@ -133,7 +133,7 @@ function ColumnPage() {
             {COLS.map((c, i) =>
             <Reveal key={c.id} delay={Math.min(i, 4) * 60}>
                 {isMobile ?
-              <a href="칼럼 상세.html" className="link-ul" style={{ display: 'block', padding: '26px 0', borderBottom: '1px solid var(--bd-line)', textDecoration: 'none', color: 'inherit' }}>
+              <a href="column-detail.html" className="link-ul" style={{ display: 'block', padding: '26px 0', borderBottom: '1px solid var(--bd-line)', textDecoration: 'none', color: 'inherit' }}>
                     <div style={{ position: 'relative' }}>
                       <Slot id={`cp-list${i}`} placeholder="썸네일 (16:9)" radius={10} style={{ aspectRatio: '16 / 9', width: '100%' }} />
                       <span style={{ position: 'absolute', top: 10, left: 10, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', height: 28, padding: '0 11px', borderRadius: 999, background: 'rgba(10,14,26,0.7)', color: '#fff', fontFamily: 'var(--font-mono)', fontSize: 13, fontWeight: 600 }}>{String(COLS.length - i).padStart(2, '0')}</span>
@@ -146,7 +146,7 @@ function ColumnPage() {
                     </div>
                   </a> :
 
-              <a href="칼럼 상세.html" className="link-ul" style={{ display: 'grid', gridTemplateColumns: '72px 1fr 200px', gap: 28, alignItems: 'center', padding: '30px 0', borderBottom: '1px solid var(--bd-line)', textDecoration: 'none', color: 'inherit' }}>
+              <a href="column-detail.html" className="link-ul" style={{ display: 'grid', gridTemplateColumns: '72px 1fr 200px', gap: 28, alignItems: 'center', padding: '30px 0', borderBottom: '1px solid var(--bd-line)', textDecoration: 'none', color: 'inherit' }}>
                     <div style={{ fontFamily: 'var(--font-mono)', fontSize: 32, fontWeight: 500, color: 'var(--bd-gray-200)', lineHeight: 1, letterSpacing: '-0.03em' }}>{String(COLS.length - i).padStart(2, '0')}</div>
                     <div>
                       <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11.5, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--bd-gray-500)', fontWeight: 600 }}>{c.cat} · {c.type}</div>

@@ -35,7 +35,7 @@ function Header() {
           <window.BdLogo size={isMobile ? 21 : 24} />
         </a>
         <div style={{ display: 'flex', alignItems: 'center', gap: isMobile ? 0 : 4 }}>
-          <a href="column/칼럼.html"
+          <a href="column/column.html"
           style={{ marginRight: isMobile ? 16 : 22, fontSize: 15, fontWeight: 600, color: 'var(--fg-2)', letterSpacing: '0.005em', padding: '0 6px', textDecoration: 'none', transition: 'color 0.14s' }}
           onMouseEnter={(e) => {e.currentTarget.style.color = 'var(--bd-ink)';}}
           onMouseLeave={(e) => {e.currentTarget.style.color = 'var(--fg-2)';}}>

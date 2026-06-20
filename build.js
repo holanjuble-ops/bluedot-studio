@@ -22,8 +22,8 @@ const JSX_FILES = [
 
 const HTML_FILES = [
   'index.html',
-  'column/칼럼.html',
-  'column/칼럼 상세.html',
+  'column/column.html',
+  'column/column-detail.html',
 ];
 
 console.log('\n[1/2] JSX 컴파일 중...');

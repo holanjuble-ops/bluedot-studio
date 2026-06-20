@@ -87,7 +87,7 @@ function ColumnPage() {
           <Reveal delay={120}>
             <div style={{ borderTop: '1px solid #DDE3FF' }}>
               {STARTER_PAGE.map((s, i) => (
-                <a key={s.no} href={`칼럼 상세.html?id=${s.id}`} className="link-ul" style={{ display: 'flex', alignItems: 'center', gap: isMobile ? 14 : 24, padding: `${isMobile ? 20 : 26}px 4px`, borderBottom: '1px solid #DDE3FF', textDecoration: 'none' }}>
+                <a key={s.no} href={`column-detail.html?id=${s.id}`} className="link-ul" style={{ display: 'flex', alignItems: 'center', gap: isMobile ? 14 : 24, padding: `${isMobile ? 20 : 26}px 4px`, borderBottom: '1px solid #DDE3FF', textDecoration: 'none' }}>
                   <div style={{ flex: 'none', fontFamily: 'var(--font-mono)', fontWeight: 400, color: 'var(--bd-blue)', opacity: 0.38, letterSpacing: '-0.02em', lineHeight: 1, fontSize: isMobile ? 17 : 22, width: isMobile ? 26 : 38, fontVariantNumeric: 'tabular-nums' }}>{s.no}</div>
                   <div style={{ flex: 1, minWidth: 0 }}>
                     <h3 style={{ margin: 0, fontSize: isMobile ? 16.5 : 20, fontWeight: 700, letterSpacing: '-0.02em', lineHeight: 1.38, color: 'var(--bd-ink)' }}>{s.title}</h3>
@@ -123,7 +123,7 @@ function ColumnPage() {
             {filteredCols.map((c, i) => (
               <Reveal key={c.id} delay={Math.min(i, 4) * 60}>
                 {isMobile ? (
-                  <a href={`칼럼 상세.html?id=${c.id}`} className="link-ul" style={{ display: 'block', padding: '26px 0', borderBottom: '1px solid var(--bd-line)', textDecoration: 'none', color: 'inherit' }}>
+                  <a href={`column-detail.html?id=${c.id}`} className="link-ul" style={{ display: 'block', padding: '26px 0', borderBottom: '1px solid var(--bd-line)', textDecoration: 'none', color: 'inherit' }}>
                     <div>
                       <h3 style={{ margin: 0, fontSize: 21, fontWeight: 700, letterSpacing: '-0.025em', lineHeight: 1.34 }}>{c.title}</h3>
                       <p style={{ margin: '8px 0 0', fontSize: 14.5, lineHeight: 1.6, color: 'var(--fg-2)' }}>{c.excerpt}</p>
@@ -131,7 +131,7 @@ function ColumnPage() {
                     </div>
                   </a>
                 ) : (
-                  <a href={`칼럼 상세.html?id=${c.id}`} className="link-ul" style={{ display: 'grid', gridTemplateColumns: '72px 1fr', gap: 28, alignItems: 'center', padding: '30px 0', borderBottom: '1px solid var(--bd-line)', textDecoration: 'none', color: 'inherit' }}>
+                  <a href={`column-detail.html?id=${c.id}`} className="link-ul" style={{ display: 'grid', gridTemplateColumns: '72px 1fr', gap: 28, alignItems: 'center', padding: '30px 0', borderBottom: '1px solid var(--bd-line)', textDecoration: 'none', color: 'inherit' }}>
                     <div style={{ fontFamily: 'var(--font-mono)', fontSize: 32, fontWeight: 500, color: 'var(--bd-gray-200)', lineHeight: 1, letterSpacing: '-0.03em' }}>{String(c.id).padStart(2, '0')}</div>
                     <div>
                       <h3 style={{ margin: 0, fontSize: 26, fontWeight: 700, letterSpacing: '-0.03em', lineHeight: 1.32 }}>{c.title}</h3>

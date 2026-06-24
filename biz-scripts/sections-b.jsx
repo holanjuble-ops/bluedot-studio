@@ -30,16 +30,28 @@ function Bridge() {
           </h2>
         </Reveal>
 
+        <Reveal delay={100}>
+          <div style={{
+            position: 'relative',
+            marginTop: isMobile ? 28 : 40, width: '100%', maxWidth: 520,
+            aspectRatio: '16 / 9', borderRadius: 16, overflow: 'hidden',
+            border: '1px solid rgba(255,255,255,0.12)'
+          }}>
+            <video src="uploads/0624(2).mp4" autoPlay muted loop playsInline preload="auto"
+            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+          </div>
+        </Reveal>
+
         <div style={{
           marginTop: isMobile ? 36 : 52, maxWidth: 620,
           fontSize: 'clamp(16px, 1.6vw, 19px)', lineHeight: 1.7, fontWeight: 500
         }}>
           <Reveal delay={120}>
-            <p style={{ color: 'rgba(255,255,255,0.62)' }}>그래서 사업이 얼마나 어렵고,</p>
+            <p style={{ color: 'rgba(255,255,255,0.62)' }}>고객이 오지 않는 답답함부터,</p>
           </Reveal>
           <Reveal delay={400}>
             <p style={{ marginTop: 6, color: '#fff', fontWeight: 700 }}>
-              고객 한 명이 얼마나 소중한지 압니다.
+              매출이 오르는 과정까지 직접 겪었습니다.
             </p>
           </Reveal>
         </div>

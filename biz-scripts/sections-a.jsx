@@ -128,10 +128,8 @@ function Hero() {
       {/* full-bleed background video — drop an mp4 named hero-bg.mp4 into the
                         project root (optional hero-poster.jpg shows on the first frame / fallback).
                         With no file present the navy depth gradient below shows through. */}
-      <video ref={videoRef} autoPlay muted loop playsInline preload="auto"
-      style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0 }}>
-        <source src="https://res.cloudinary.com/dkvhm32nn/video/upload/v1781437857/0614_1_uqvmpm.mp4" type="video/mp4" />
-      </video>
+      <img src="uploads/_.jpeg" alt=""
+      style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0 }} />
       {/* cinematic dark overlay keeps white copy legible over any clip */}
       <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none',
         background: 'rgba(0,0,0,0.48)' }}></div>

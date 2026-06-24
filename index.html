@@ -130,6 +130,7 @@
   .sub {
     font-size: clamp(16px, 1.5vw, 17px); line-height: 1.55; font-weight: 500;
     color: rgba(255,255,255,0.66); max-width: 30ch;
+    white-space: nowrap;
   }
   .cta {
     margin-top: clamp(4px, 1vh, 10px);
@@ -158,7 +159,11 @@
   }
   /* mobile: question sits on the seam, so panels don't need the desktop top-pad */
   @media (max-width: 719px) {
-    .panel-inner { padding-top: clamp(28px, 5vw, 76px); }
+    .panel-inner { padding-top: clamp(28px, 5vw, 76px); gap: clamp(10px, 1.6vh, 16px); }
+    .title { font-size: clamp(38px, 11vw, 50px); }
+    .eyebrow { font-size: 10.5px; letter-spacing: 0.22em; }
+    .sub { font-size: 13.5px; line-height: 1.5; }
+    .cta { font-size: 13.5px; }
   }
 </style>
 </head>

@@ -19,13 +19,13 @@ function Bridge() {
           <h2 style={{
             marginTop: 26, fontWeight: 800, letterSpacing: '-0.046em', lineHeight: 1.32,
             color: '#fff', maxWidth: 900,
-            fontSize: isMobile ? 'clamp(30px, 8.8vw, 48px)' : 'clamp(42px, 5.4vw, 60px)'
+            fontSize: isMobile ? 'clamp(26px, 7.6vw, 40px)' : 'clamp(34px, 4.4vw, 50px)'
           }}>
-            그 고민,<br />
+            사업을 해봤기에,<br />
             <span style={{
               background: 'linear-gradient(transparent 86%, rgba(255,228,92,0.85) 86%)',
               padding: '0 0.04em', color: '#fff'
-            }}>우리가 해결합니다</span>
+            }}>그 고민을 이해합니다</span>
             <span style={{ color: 'var(--bd-blue-300)' }}>.</span>
           </h2>
         </Reveal>
@@ -34,14 +34,12 @@ function Bridge() {
           marginTop: isMobile ? 36 : 52, maxWidth: 620,
           fontSize: 'clamp(16px, 1.6vw, 19px)', lineHeight: 1.7, fontWeight: 500
         }}>
-          <Reveal delay={260}>
-            <p style={{ marginTop: 6, color: 'rgba(255,255,255,0.62)' }}>원장님의 전문성을 제대로 담고,
-
-            </p>
+          <Reveal delay={120}>
+            <p style={{ color: 'rgba(255,255,255,0.62)' }}>그래서 사업이 얼마나 어렵고,</p>
           </Reveal>
           <Reveal delay={400}>
             <p style={{ marginTop: 6, color: '#fff', fontWeight: 700 }}>
-              그 결과가 매출로 이어지도록 만듭니다.
+              고객 한 명이 얼마나 소중한지 압니다.
             </p>
           </Reveal>
         </div>
@@ -53,20 +51,18 @@ function Bridge() {
 /* ---------------- Results ---------------- */
 const RESULT_CASES = [
 {
-  code: 'CASE 01', client: '성수 노무사', vertical: '노무',
-  slots: ['case-sungsu-b', 'case-sungsu-a1', 'case-sungsu-a2'],
-  images: ['images/case-sungsu-before.png', 'images/case-sungsu-after1.png', 'images/case-sungsu-after2.png'],
-  before: ['평균 조회수', '5,000회'],
-  after: ['평균 조회수', '7.5만'],
-  chips: ['팔로워 +1,400명', '문의 3배 증가']
+  code: 'CASE 01', client: '성수동 베이커리 카페', vertical: '카페',
+  slots: ['biz-case1-b', 'biz-case1-a1', 'biz-case1-a2'],
+  before: ['평균 조회수', '3,000회'],
+  after: ['평균 조회수', '12만회'],
+  chips: ['팔로워 +2,100명', '주말 웨이팅 발생']
 },
 {
-  code: 'CASE 02', client: '강남 다이어트 한의원', vertical: '한의원',
-  slots: ['case-gangnam-b', 'case-gangnam-a1', 'case-gangnam-a2'],
-  images: ['images/case-gangnam-before.png', 'images/case-gangnam-after1.png', 'images/case-gangnam-after2.png'],
-  before: ['평균 조회수', '6,000회'],
-  after: ['영상 2개로', '100만+'],
-  chips: ['팔로워 +3,000명', '예약 문의 급증']
+  code: 'CASE 02', client: '강남 한식당', vertical: '음식점',
+  slots: ['biz-case2-b', 'biz-case2-a1', 'biz-case2-a2'],
+  before: ['평균 조회수', '5,000회'],
+  after: ['영상 1개로', '58만+회'],
+  chips: ['팔로워 +4,500명', '예약 문의 급증']
 }];
 
 
@@ -138,8 +134,9 @@ function CaseCard({ c, delay }) {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 5 }}>
             {c.slots.map((sid, i) => (
               <div key={sid} style={{ position: 'relative', aspectRatio: '9 / 14', borderRadius: 10, overflow: 'hidden', border: '1px solid var(--bd-line)', background: 'var(--bd-gray-50)' }}>
-                <img src={c.images[i]} alt={`${c.client} ${i === 0 ? 'BEFORE' : 'AFTER ' + i}`}
-                  style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+                <image-slot id={sid} shape="rect" fit="cover"
+                  placeholder={i === 0 ? 'BEFORE' : 'AFTER'}
+                  style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}></image-slot>
               </div>
             ))}
           </div>
@@ -211,8 +208,15 @@ function Results() {
           </Reveal>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: isMobile ? 20 : 24 }}>
-          {RESULT_CASES.map((c, i) => <CaseCard key={c.code} c={c} delay={i * 110} />)}
+        <div style={{ display: 'grid', gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)', gap: isMobile ? 12 : 16 }}>
+          {['biz-reel-1', 'biz-reel-2', 'biz-reel-3', 'biz-reel-4', 'biz-reel-5', 'biz-reel-6', 'biz-reel-7', 'biz-reel-8'].map((sid, i) =>
+          <Reveal key={sid} delay={i * 60}>
+              <div style={{ position: 'relative', aspectRatio: '9 / 16', borderRadius: 'var(--r-md)', overflow: 'hidden', border: '1px solid var(--bd-line)', background: 'var(--bd-gray-50)', boxShadow: 'var(--shadow-soft-lg)' }}>
+                <img src={`images/${sid}.png`} alt="릴스 성과"
+                style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+              </div>
+            </Reveal>
+          )}
         </div>
 
         {/* self channel */}
@@ -313,8 +317,8 @@ function renderHL(text, blue) {
 }
 
 const FORMULA = [
-{ n: '01', icon: 'fingerprint', t: '**양산**하지 않습니다.', body: ['피부과와 변호사가 같은 콘텐츠를 만들 수 없습니다.', '업종과 타겟에 맞춰, **최적의 플랫폼과 전략**을 설계합니다.'] },
-{ n: '02', icon: 'target', t: '조회수가 **‘문의’**로 이어지게.', body: ['단순히 웃고 넘기는 영상은 의미가 없습니다.', '조회수가 **‘문의로 이어지는 5가지 공식’**을 활용합니다.'] },
+{ n: '01', icon: 'fingerprint', t: '**양산**하지 않습니다.', body: ['카페와 헬스장이 같은 콘텐츠를 만들 수 없습니다.', '업종과 상권에 맞춰, **최적의 플랫폼과 전략**을 설계합니다.'] },
+{ n: '02', icon: 'target', t: '조회수가 **‘매출’**로 이어지게.', body: ['단순히 웃고 넘기는 영상은 의미가 없습니다.', '조회수가 **‘매출로 이어지는 5가지 공식’**을 활용합니다.'] },
 { n: '03', icon: 'gauge', t: '**빠르게** 성과를 증명합니다.', body: ['오래 기다리실 필요 없습니다.', '**‘검증된 숏폼 프로세스’**를 통해 성과를 앞당깁니다.'] }];
 
 

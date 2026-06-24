@@ -25,10 +25,10 @@ function ColDetailHeader() {
   return (
     <header style={{ position: 'sticky', top: 0, zIndex: 50, background: 'rgba(250,250,250,0.95)', backdropFilter: 'saturate(180%) blur(14px)', WebkitBackdropFilter: 'saturate(180%) blur(14px)', borderBottom: '1px solid #E6E7EB' }}>
       <div style={{ maxWidth: 1020, margin: '0 auto', padding: `0 ${isMobile ? 20 : 32}px`, height: isMobile ? 56 : 64, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <a href="../index.html" className="link-ul"><window.BdLogo size={isMobile ? 21 : 24} /></a>
+        <a href="../pro.html" className="link-ul"><window.BdLogo size={isMobile ? 21 : 24} /></a>
         <div style={{ display: 'flex', alignItems: 'center', gap: isMobile ? 0 : 4 }}>
           <a href="column.html" style={{ marginRight: isMobile ? 16 : 22, fontSize: 15, fontWeight: 600, color: 'var(--bd-ink)', padding: '0 6px', textDecoration: 'none' }}>칼럼</a>
-          <a href="../index.html#cta" style={{ marginLeft: isMobile ? 8 : 18, background: '#0F1F3D', color: '#fff', borderRadius: 6, padding: isMobile ? '8px 14px' : '9px 18px', fontSize: isMobile ? 13 : 13.5, fontWeight: 600, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 7, lineHeight: 1, transition: 'background 0.14s' }}
+          <a href="../pro.html#cta" style={{ marginLeft: isMobile ? 8 : 18, background: '#0F1F3D', color: '#fff', borderRadius: 6, padding: isMobile ? '8px 14px' : '9px 18px', fontSize: isMobile ? 13 : 13.5, fontWeight: 600, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 7, lineHeight: 1, transition: 'background 0.14s' }}
             onMouseEnter={(e) => { e.currentTarget.style.background = '#1a3360'; }}
             onMouseLeave={(e) => { e.currentTarget.style.background = '#0F1F3D'; }}>
             빠른 상담
@@ -90,11 +90,11 @@ function ColumnDetail() {
     if (b.t === 'cards') return (
       <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : `repeat(${Math.min(b.items.length, 3)}, 1fr)`, gap: isMobile ? 12 : 16, margin: `${isMobile ? 18 : 22}px 0 28px` }}>
         {b.items.map((it, i) => (
-          <div key={i} style={{ padding: isMobile ? '18px 18px' : '22px 20px', background: '#fff', border: '1px solid var(--bd-line)', borderRadius: 'var(--r-md)', display: 'flex', flexDirection: 'column', gap: 9 }}>
-            <span style={{ fontFamily: 'var(--font-mono)', fontSize: 12, fontWeight: 700, letterSpacing: '0.04em', color: 'var(--bd-blue)' }}>{String(i + 1).padStart(2, '0')}</span>
-            <h3 style={{ margin: 0, fontSize: isMobile ? 16.5 : 17, fontWeight: 700, letterSpacing: '-0.02em', lineHeight: 1.4, color: 'var(--bd-ink)' }}>{it.title}</h3>
-            <div style={{ fontSize: 14, fontWeight: 600, letterSpacing: '-0.01em', lineHeight: 1.5, color: 'var(--bd-gray-700)' }}>{it.ex}</div>
-            <p style={{ margin: '2px 0 0', fontSize: 14, lineHeight: 1.62, color: 'var(--bd-gray-500)' }}>{it.desc}</p>
+          <div key={i} style={{ padding: isMobile ? '18px 18px' : '22px 20px', background: it.dark ? 'var(--bd-ink)' : '#fff', border: it.dark ? '1px solid var(--bd-ink)' : '1px solid var(--bd-line)', borderRadius: 'var(--r-md)', display: 'flex', flexDirection: 'column', gap: 9, opacity: it.dark ? 0.92 : 1 }}>
+            <span style={{ fontFamily: 'var(--font-mono)', fontSize: 12, fontWeight: 700, letterSpacing: '0.04em', color: it.dark ? 'rgba(255,255,255,0.4)' : 'var(--bd-blue)' }}>{it.dark ? '—' : String(i + 1).padStart(2, '0')}</span>
+            <h3 style={{ margin: 0, fontSize: isMobile ? 16.5 : 17, fontWeight: 700, letterSpacing: '-0.02em', lineHeight: 1.4, color: it.dark ? 'rgba(255,255,255,0.92)' : 'var(--bd-ink)' }}>{it.title}</h3>
+            <div style={{ fontSize: 14, fontWeight: 600, letterSpacing: '-0.01em', lineHeight: 1.5, color: it.dark ? 'rgba(255,255,255,0.66)' : 'var(--bd-gray-700)' }}>{renderInline(it.ex)}</div>
+            <p style={{ margin: '2px 0 0', fontSize: 14, lineHeight: 1.62, color: it.dark ? 'rgba(255,255,255,0.5)' : 'var(--bd-gray-500)' }}>{String(it.desc).split(/(__[^_]+__)/g).map((part, k) => part.startsWith('__') && part.endsWith('__') ? <strong key={k} style={{ fontWeight: 800, color: it.dark ? 'rgba(255,255,255,0.88)' : 'var(--bd-ink)' }}>{part.slice(2, -2)}</strong> : <React.Fragment key={k}>{part}</React.Fragment>)}</p>
           </div>
         ))}
       </div>
@@ -142,6 +142,30 @@ function ColumnDetail() {
         ))}
       </div>
     );
+    if (b.t === 'casecard') {
+      const afterParts = String(b.after[1]).includes('+')
+        ? [String(b.after[1]).split('+')[0], String(b.after[1]).split('+')[1]]
+        : null;
+      return (
+        <figure style={{ margin: `${isMobile ? 4 : 8}px 0 36px` }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: isMobile ? 8 : 12 }}>
+            {b.images.map((src, i) => (
+              <React.Fragment key={i}>
+                {i === 1 && (
+                  <span style={{ flexShrink: 0, display: 'inline-flex' }}>
+                    <window.Icon name="arrow-right" size={isMobile ? 20 : 26} color="var(--bd-gray-300)" />
+                  </span>
+                )}
+                <div style={{ position: 'relative', flex: 1, minWidth: 0, maxWidth: isMobile ? 150 : 200, aspectRatio: '9 / 14', borderRadius: 10, overflow: 'hidden', border: '1px solid var(--bd-line)', background: 'var(--bd-gray-50)' }}>
+                  <img src={src} alt={`${b.client} ${i === 0 ? 'BEFORE' : 'AFTER ' + i}`} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+                  <span style={{ position: 'absolute', top: 7, left: 7, fontSize: 9.5, fontWeight: 700, letterSpacing: '0.06em', padding: '2px 6px', borderRadius: 4, color: '#fff', background: i === 0 ? 'rgba(10,14,26,0.55)' : 'var(--bd-blue)' }}>{i === 0 ? 'BEFORE' : 'AFTER'}</span>
+                </div>
+              </React.Fragment>
+            ))}
+          </div>
+        </figure>
+      );
+    }
     if (b.t === 'reels') return (
       <figure style={{ margin: `${isMobile ? 8 : 16}px 0 28px` }}>
         <div style={{ display: 'flex', justifyContent: 'center', gap: isMobile ? 12 : 16 }}>
@@ -151,7 +175,7 @@ function ColumnDetail() {
             </div>
           ))}
         </div>
-        {b.caption && <figcaption style={{ marginTop: 14, textAlign: 'center', fontSize: 13, color: 'var(--bd-gray-500)', fontWeight: 500 }}>{b.caption}</figcaption>}
+        {b.caption && <figcaption style={{ marginTop: 14, textAlign: 'center', fontSize: 14, color: '#1547ff', fontWeight: 500 }}>{b.caption}</figcaption>}
       </figure>
     );
     if (b.t === 'image') return (
@@ -184,7 +208,7 @@ function ColumnDetail() {
     }
     if (b.t === 'cta') return (
       <div style={{ margin: `${isMobile ? 36 : 44}px 0 0`, display: 'flex' }}>
-        <a href="../index.html#cta" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, height: 46, padding: '0 22px', borderRadius: 999, background: 'var(--bd-blue)', color: '#fff', fontSize: 14.5, fontWeight: 600, letterSpacing: '-0.01em', textDecoration: 'none' }}>
+        <a href="../pro.html#cta" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, height: 46, padding: '0 22px', borderRadius: 999, background: 'var(--bd-blue)', color: '#fff', fontSize: 14.5, fontWeight: 600, letterSpacing: '-0.01em', textDecoration: 'none' }}>
           무료 상담 신청
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12,5 19,12 12,19" /></svg>
         </a>

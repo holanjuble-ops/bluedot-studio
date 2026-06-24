@@ -8,7 +8,7 @@
 
 const STARTER_PAGE = [
   { no: '01', id: 1, tag: '시작 가이드', title: '나도 숏폼이 필요할까?', desc: '제발, 이런 분들만 숏폼을 하세요.' },
-  { no: '02', id: 2, tag: '대표 사례', title: '릴스 2개로 95만 조회수, 그 안에 숨은 공식', desc: '딱 3가지만 바꿨습니다.' },
+  { no: '02', id: 2, tag: '대표 사례', title: '릴스 2개로 100만 조회수, 그 안에 숨은 공식', desc: '딱 3가지만 바꿨습니다.' },
   { no: '03', id: 3, tag: '시작 가이드', title: '‘문의로 이어지는 숏폼’은 이게 다릅니다', desc: '문의를 만드는 2가지 차이.' }
 ];
 
@@ -25,10 +25,10 @@ function ColPageHeader() {
       borderBottom: '1px solid #E6E7EB'
     }}>
       <div style={{ maxWidth: 1020, margin: '0 auto', padding: `0 ${isMobile ? 20 : 32}px`, height: isMobile ? 56 : 64, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <a href="../index.html" className="link-ul"><window.BdLogo size={isMobile ? 21 : 24} /></a>
+        <a href="../pro.html" className="link-ul"><window.BdLogo size={isMobile ? 21 : 24} /></a>
         <div style={{ display: 'flex', alignItems: 'center', gap: isMobile ? 0 : 4 }}>
           <span style={{ marginRight: isMobile ? 16 : 22, fontSize: 15, fontWeight: 600, color: 'var(--bd-ink)', padding: '0 6px' }}>칼럼</span>
-          <a href="../index.html#cta" style={{
+          <a href="../pro.html#cta" style={{
             marginLeft: isMobile ? 8 : 18, background: '#0F1F3D', color: '#fff', border: 'none', borderRadius: 6,
             padding: isMobile ? '8px 14px' : '9px 18px', fontSize: isMobile ? 13 : 13.5, fontWeight: 600,
             textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 7, lineHeight: 1, transition: 'background 0.14s'
@@ -56,16 +56,19 @@ function ColumnPage() {
     <React.Fragment>
       <ColPageHeader />
 
-      {/* ── 제목 섹션 ── */}
-      <section style={{ background: 'var(--bd-paper)', padding: `${isMobile ? 52 : 76}px 0 ${isMobile ? 44 : 56}px` }}>
-        <Container>
-          <Reveal><Kicker label="Column" /></Reveal>
+      {/* ── 제목 섹션 (배경 이미지 placeholder + 검정 배경) ── */}
+      <section style={{ position: 'relative', overflow: 'hidden', background: 'var(--bd-ink)', padding: `${isMobile ? 80 : 120}px 0 ${isMobile ? 72 : 100}px` }}>
+        <img src="../images/column-hero.jpeg" alt=""
+          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+        <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'linear-gradient(180deg, rgba(8,11,22,0.62) 0%, rgba(8,11,22,0.70) 100%)' }}></div>
+        <Container style={{ position: 'relative', zIndex: 1 }}>
+          <Reveal><Kicker label="Column" light /></Reveal>
           <Reveal delay={80}>
-            <h1 style={{ margin: '20px 0 0', fontSize: isMobile ? 32 : 46, fontWeight: 700, letterSpacing: '-0.04em', lineHeight: 1.16 }}>전문직 마케팅 인사이트</h1>
+            <h1 style={{ margin: '20px 0 0', fontSize: isMobile ? 32 : 46, fontWeight: 700, letterSpacing: '-0.04em', lineHeight: 1.16, color: '#fff' }}>전문직 마케팅 인사이트</h1>
           </Reveal>
           <Reveal delay={140}>
-            <p style={{ margin: '18px 0 0', fontSize: isMobile ? 16 : 18, lineHeight: 1.6, fontWeight: 500, color: 'var(--fg-2)', maxWidth: 560 }}>
-              조회수를 넘어 ‘문의’로 이어지는 숏폼 전략을 기록합니다.
+            <p style={{ margin: '18px 0 0', fontSize: isMobile ? 16 : 18, lineHeight: 1.6, fontWeight: 500, color: 'rgba(255,255,255,0.78)', maxWidth: 560 }}>
+              ‘문의’로 이어지는 숏폼 전략을 공유합니다.
             </p>
           </Reveal>
         </Container>
@@ -90,7 +93,7 @@ function ColumnPage() {
                 <a key={s.no} href={`column-detail.html?id=${s.id}`} className="link-ul" style={{ display: 'flex', alignItems: 'center', gap: isMobile ? 14 : 24, padding: `${isMobile ? 20 : 26}px 4px`, borderBottom: '1px solid #DDE3FF', textDecoration: 'none' }}>
                   <div style={{ flex: 'none', fontFamily: 'var(--font-mono)', fontWeight: 400, color: 'var(--bd-blue)', opacity: 0.38, letterSpacing: '-0.02em', lineHeight: 1, fontSize: isMobile ? 17 : 22, width: isMobile ? 26 : 38, fontVariantNumeric: 'tabular-nums' }}>{s.no}</div>
                   <div style={{ flex: 1, minWidth: 0 }}>
-                    <h3 style={{ margin: 0, fontSize: isMobile ? 16.5 : 20, fontWeight: 700, letterSpacing: '-0.02em', lineHeight: 1.38, color: 'var(--bd-ink)' }}>{s.title}</h3>
+                    <h3 style={{ margin: 0, fontSize: isMobile ? 18 : 23, fontWeight: 700, letterSpacing: '-0.02em', lineHeight: 1.34, color: 'var(--bd-ink)' }}>{s.title}</h3>
                     <p style={{ margin: '5px 0 0', fontSize: isMobile ? 13.5 : 14.5, color: 'var(--bd-gray-500)', fontWeight: 500, lineHeight: 1.5 }}>{s.desc}</p>
                   </div>
                   <window.Icon name="arrow-right" size={18} color="var(--bd-blue)" />

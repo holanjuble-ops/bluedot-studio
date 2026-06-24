@@ -35,11 +35,6 @@ function Header() {
           <window.BdLogo size={isMobile ? 21 : 24} />
         </a>
         <div style={{ display: 'flex', alignItems: 'center', gap: isMobile ? 0 : 4 }}>
-          <a href="column/column.html"
-          style={{ marginRight: isMobile ? 16 : 22, fontSize: 15, fontWeight: 600, color: 'var(--fg-2)', letterSpacing: '0.005em', padding: '0 6px', textDecoration: 'none', transition: 'color 0.14s' }}
-          onMouseEnter={(e) => {e.currentTarget.style.color = 'var(--bd-ink)';}}
-          onMouseLeave={(e) => {e.currentTarget.style.color = 'var(--fg-2)';}}>
-            칼럼</a>
           <button
             onClick={() => window.scrollToId('cta')}
             style={{
@@ -150,7 +145,7 @@ function Hero() {
       {/* content */}
       <div style={{ position: 'relative', zIndex: 2, width: '100%', maxWidth: 1020, margin: '0 auto', marginTop: isMobile ? -90 : -140, padding: `0 ${isMobile ? 20 : 32}px` }}>
         <window.Reveal>
-          <window.Kicker label="전문직 숏폼 마케팅" light mono={false} lineWidth={40} style={{ letterSpacing: '0.28em' }} />
+          <window.Kicker label="사업자 숏폼 마케팅" light mono={false} lineWidth={40} style={{ letterSpacing: '0.28em' }} />
         </window.Reveal>
 
         <window.Reveal delay={120}>
@@ -207,7 +202,7 @@ function Hero() {
 function StatStrip() {
   const isMobile = window.useIsMobile();
   const { Container, Reveal } = window;
-  const stats = [['1억+', '누적 조회수'], ['10만+', '누적 팔로워'], ['2.4x', '문의 전환율']];
+  const stats = [['1억+', '누적 조회수'], ['10만+', '누적 팔로워'], ['2.4x', '매출 전환율']];
   const renderN = (n) => {
     const m = n.match(/^(.*?)([+x])$/);
     if (!m) return n;
@@ -247,9 +242,9 @@ function Problem() {
   const isMobile = window.useIsMobile();
   const { Section, Container, Reveal } = window;
   const phrases = [
-  '춤은 추고 싶지 않아요..',
+  '우리 가게 매력을 못살리겠어요..',
   '조회수가 안나와요..',
-  '문의가 없어요..',
+  '손님이 안와요..',
   '뭘 올려야할지 모르겠어요..'];
 
   return (

@@ -187,7 +187,6 @@ function FinalCta() {
     setSubmitErr('');
     try {
       const data = new FormData();
-      data.append('_replyto', form.phone);
       data.append('_subject', `[블루닷스튜디오] 무료상담 신청 — ${form.name}`);
       data.append('_gotcha', '');
       data.append('성함', form.name);

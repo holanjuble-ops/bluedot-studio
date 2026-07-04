@@ -66,7 +66,7 @@ const RESULT_CASES = [
   images: ['images/case-gangnam-before.png', 'images/case-gangnam-after1.png', 'images/case-gangnam-after2.png'],
   before: ['평균 조회수', '6,000회'],
   after: ['영상 2개로', '100만+'],
-  chips: ['팔로워 +3,000명', '예약 문의 급증']
+  chips: ['팔로워 +1,000명', '예약 문의 급증']
 }];
 
 

@@ -58,7 +58,7 @@ const RESULT_CASES = [
   images: ['images/case-sungsu-before.png', 'images/case-sungsu-after1.png', 'images/case-sungsu-after2.png'],
   before: ['평균 조회수', '5,000회'],
   after: ['평균 조회수', '7.5만'],
-  chips: ['팔로워 +1,400명', '문의 3배 증가']
+  chips: ['팔로워 +1,800명', '문의 3배 증가']
 },
 {
   code: 'CASE 02', client: '강남 다이어트 한의원', vertical: '한의원',
@@ -244,42 +244,37 @@ function Results() {
               gap: isMobile ? 12 : 16
             }}>
               {[
-              { name: '박성찬 | 전문직 마케팅', handle: '@chanseong_park', slot: 'ch-chanseong', image: 'images/profile-chanseong.jpg', before: '128', after: '1.2만' },
-              { name: '매일 성장하는 남자 | 피트니스', handle: '@ryeong.__.e', slot: 'ch-dongsaeng', image: 'images/profile-dongsaeng.jpg', before: '58', after: '1.1만' }].
+              { name: 'chanseong_.park', sub: '박찬성', slot: 'ch-chanseong', image: 'images/profile-chanseong.jpg', posts: '8', followers: '1.2만', following: '41' },
+              { name: 'ryeong.__.e', sub: '매일 성장하는 남자', slot: 'ch-dongsaeng', image: 'images/profile-dongsaeng.jpg', posts: '12', followers: '1.1만', following: '33' }].
               map((p) =>
               <div key={p.slot} style={{
                 flex: 1, minWidth: 0, background: '#fff', borderRadius: 'var(--r-md)',
-                padding: isMobile ? '18px 18px' : '20px 22px', boxShadow: 'var(--shadow-2)',
-                display: 'flex', flexDirection: 'column', gap: 16
+                padding: isMobile ? '20px 18px' : '26px 26px', boxShadow: 'var(--shadow-2)',
+                display: 'flex', alignItems: 'center', gap: isMobile ? 16 : 20
               }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-                    <div style={{
-                    flex: 'none', width: 48, height: 48, borderRadius: 'var(--r-pill)', overflow: 'hidden',
-                    border: '1px solid var(--bd-gray-100)', background: 'var(--bd-gray-50)'
-                  }}>
-                      <img src={p.image} alt={p.name}
-                    style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                    </div>
-                    <div style={{ flex: 1, minWidth: 0 }}>
-                      <div style={{ fontSize: 14.5, fontWeight: 700, color: 'var(--bd-ink)', letterSpacing: '-0.01em', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{p.name}</div>
-                      <div style={{ fontSize: 12, color: 'var(--bd-gray-500)', marginTop: 2, fontFamily: 'var(--font-mono)' }}>{p.handle}</div>
-                    </div>
-                  </div>
                   <div style={{
-                  display: 'grid', gridTemplateColumns: '1fr auto 1fr', alignItems: 'center', gap: 10,
-                  borderRadius: 'var(--r-sm)', border: '1px solid var(--bd-line)',
-                  background: 'linear-gradient(to right, #F0F1F4 0%, #dce9fb 100%)', padding: '14px 16px'
+                  flex: 'none', width: isMobile ? 66 : 82, height: isMobile ? 66 : 82, borderRadius: 'var(--r-pill)', overflow: 'hidden',
+                  border: '1px solid var(--bd-gray-100)', background: 'var(--bd-gray-50)'
                 }}>
-                    <div>
-                      <div style={{ fontSize: 11, color: '#9AA1B2', fontWeight: 700, letterSpacing: '0.04em' }}>BEFORE</div>
-                      <div style={{ fontFamily: 'var(--font-mono)', fontWeight: 700, fontSize: 18, color: '#9AA1B2', letterSpacing: '-0.02em', marginTop: 4, lineHeight: 1.1 }}>{p.before}</div>
-                      <div style={{ fontSize: 10.5, color: '#9AA1B2', marginTop: 2, fontWeight: 500 }}>팔로워</div>
-                    </div>
-                    <window.Icon name="arrow-right" size={18} color="var(--bd-blue)" />
-                    <div>
-                      <div style={{ fontSize: 11, color: 'var(--bd-blue)', fontWeight: 700, letterSpacing: '0.04em' }}>NOW</div>
-                      <div style={{ fontFamily: 'var(--font-mono)', fontWeight: 800, fontSize: 18, color: 'var(--bd-blue)', letterSpacing: '-0.02em', marginTop: 4, lineHeight: 1.1 }}>{p.after}</div>
-                      <div style={{ fontSize: 10.5, color: 'var(--bd-blue)', marginTop: 2, fontWeight: 600 }}>팔로워</div>
+                    <img src={p.image} alt={p.name}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  </div>
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <div style={{ fontSize: isMobile ? 18 : 21, fontWeight: 800, color: 'var(--bd-ink)', letterSpacing: '-0.02em', lineHeight: 1.1, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{p.name}</div>
+                    <div style={{ fontSize: isMobile ? 13 : 14.5, color: 'var(--bd-gray-500)', marginTop: 4, fontWeight: 600 }}>{p.sub}</div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: isMobile ? 12 : 16, marginTop: 14 }}>
+                      <div style={{ display: 'flex', alignItems: 'baseline', gap: 5 }}>
+                        <span style={{ fontSize: isMobile ? 12.5 : 13.5, color: 'var(--bd-gray-500)', fontWeight: 600 }}>게시물</span>
+                        <span style={{ fontSize: isMobile ? 14 : 15.5, color: 'var(--bd-ink)', fontWeight: 800, fontFamily: 'var(--font-mono)' }}>{p.posts}</span>
+                      </div>
+                      <div style={{ display: 'flex', alignItems: 'baseline', gap: 5, border: '1.5px solid #F87171', borderRadius: 'var(--r-sm)', padding: isMobile ? '4px 8px' : '5px 10px' }}>
+                        <span style={{ fontSize: isMobile ? 12.5 : 13.5, color: 'var(--bd-ink)', fontWeight: 700 }}>팔로워</span>
+                        <span style={{ fontSize: isMobile ? 14 : 15.5, color: 'var(--bd-ink)', fontWeight: 800, fontFamily: 'var(--font-mono)' }}>{p.followers}</span>
+                      </div>
+                      <div style={{ display: 'flex', alignItems: 'baseline', gap: 5 }}>
+                        <span style={{ fontSize: isMobile ? 12.5 : 13.5, color: 'var(--bd-gray-500)', fontWeight: 600 }}>팔로우</span>
+                        <span style={{ fontSize: isMobile ? 14 : 15.5, color: 'var(--bd-ink)', fontWeight: 800, fontFamily: 'var(--font-mono)' }}>{p.following}</span>
+                      </div>
                     </div>
                   </div>
                 </div>

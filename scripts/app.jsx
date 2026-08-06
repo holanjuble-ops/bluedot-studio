@@ -30,7 +30,6 @@ function App() {
         <Problem />
         <Bridge />
         <Results />
-        <Formula />
         <Process />
         <ColumnTeaser />
         <FinalCta />

@@ -15,16 +15,16 @@ function Header() {
     return () => window.removeEventListener('scroll', onS);
   }, []);
 
-  const navItems = ['성과 사례', '3단계 공식', '프로세스', 'FAQ'];
-  const navIds = ['results', 'formula', 'process', 'faq'];
+  const navItems = ['성과 사례', '프로세스', 'FAQ'];
+  const navIds = ['results', 'process', 'faq'];
 
   return (
     <header style={{
       position: 'sticky', top: 0, zIndex: 50,
-      background: 'rgba(250,250,250,0.95)',
+      background: 'rgba(250,251,253,0.92)',
       backdropFilter: 'saturate(180%) blur(14px)',
       WebkitBackdropFilter: 'saturate(180%) blur(14px)',
-      borderBottom: '1px solid #E6E7EB',
+      borderBottom: '1px solid var(--border)',
       transition: 'border-color 0.2s var(--ease-out)'
     }}>
       <div style={{
@@ -36,15 +36,15 @@ function Header() {
         </a>
         <div style={{ display: 'flex', alignItems: 'center', gap: isMobile ? 0 : 4 }}>
           <a href="column/column.html"
-          style={{ marginRight: isMobile ? 16 : 22, fontSize: 15, fontWeight: 600, color: 'var(--fg-2)', letterSpacing: '0.005em', padding: '0 6px', textDecoration: 'none', transition: 'color 0.14s' }}
-          onMouseEnter={(e) => {e.currentTarget.style.color = 'var(--bd-ink)';}}
-          onMouseLeave={(e) => {e.currentTarget.style.color = 'var(--fg-2)';}}>
+          style={{ marginRight: isMobile ? 16 : 22, fontSize: 15, fontWeight: 600, color: 'var(--text-2)', letterSpacing: '0.005em', padding: '0 6px', textDecoration: 'none', transition: 'color 0.14s' }}
+          onMouseEnter={(e) => {e.currentTarget.style.color = 'var(--text-1)';}}
+          onMouseLeave={(e) => {e.currentTarget.style.color = 'var(--text-2)';}}>
             칼럼</a>
           <button
             onClick={() => window.scrollToId('cta')}
             style={{
               marginLeft: isMobile ? 0 : 18,
-              background: '#0F1F3D', color: '#fff',
+              background: 'var(--blue-500)', color: '#fff',
               border: 'none', borderRadius: 6,
               padding: isMobile ? '8px 14px' : '9px 18px',
               fontSize: isMobile ? 13 : 13.5,
@@ -53,8 +53,8 @@ function Header() {
               display: 'inline-flex', alignItems: 'center', gap: 7,
               transition: 'background 0.14s', lineHeight: 1
             }}
-            onMouseEnter={(e) => {e.currentTarget.style.background = '#1a3360';}}
-            onMouseLeave={(e) => {e.currentTarget.style.background = '#0F1F3D';}}>
+            onMouseEnter={(e) => {e.currentTarget.style.background = 'var(--blue-700)';}}
+            onMouseLeave={(e) => {e.currentTarget.style.background = 'var(--blue-500)';}}>
             
             빠른 상담
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
@@ -75,7 +75,7 @@ function ReelFrame({ width, caption }) {
     <div style={{
       position: 'relative', width, aspectRatio: '9 / 16',
       borderRadius: 'var(--r-md)', overflow: 'hidden',
-      background: 'linear-gradient(180deg, #16224A 0%, #0A1330 100%)',
+      background: 'var(--surface-dark)',
       border: '1px solid rgba(255,255,255,0.10)',
       boxShadow: 'var(--shadow-soft-lg)'
     }}>
@@ -127,7 +127,7 @@ function Hero() {
       position: 'relative', overflow: 'hidden', color: '#fff',
       minHeight: isMobile ? '72vh' : '78vh',
       display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'stretch',
-      background: 'var(--grad-depth)',
+      background: 'var(--bg-dark)',
       paddingTop: isMobile ? 100 : 116, paddingBottom: isMobile ? 92 : 108
     }}>
       {/* full-bleed background video — drop an mp4 named hero-bg.mp4 into the
@@ -139,13 +139,13 @@ function Hero() {
       </video>
       {/* cinematic dark overlay keeps white copy legible over any clip */}
       <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none',
-        background: 'rgba(0,0,0,0.48)' }}></div>
+        background: 'rgba(10,15,30,0.55)' }}></div>
       {/* diagonal navy panel anchors the left-aligned copy (reference look) */}
       <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none',
         background: 'linear-gradient(100deg, rgba(4,9,24,0.92) 0%, rgba(5,11,30,0.74) 40%, rgba(3,7,18,0.28) 74%, rgba(3,7,18,0.5) 100%)' }}></div>
       {/* slow studio light sweep — rings removed for cleaner premium look */}
       <div className="hero-sweep"></div>
-      <window.GlowBg color="rgba(21,71,255,0.18)" cx="18%" cy="118%" size="60%" />
+      <window.GlowBg color="rgba(59,118,232,0.18)" cx="18%" cy="118%" size="60%" />
 
       {/* content */}
       <div style={{ position: 'relative', zIndex: 2, width: '100%', maxWidth: 1020, margin: '0 auto', marginTop: isMobile ? -90 : -140, padding: `0 ${isMobile ? 20 : 32}px` }}>
@@ -185,7 +185,6 @@ function Hero() {
           </p>
         </window.Reveal>
       </div>
-
       {/* sub-copy + scroll arrow — bob together */}
       <window.Reveal delay={340} style={{ position: 'absolute', left: '50%', bottom: isMobile ? 36 : 44, transform: 'translateX(-50%)', zIndex: 3 }}>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10, animation: 'bd-scrollbob 1.8s var(--ease-in-out) infinite' }}>
@@ -214,7 +213,7 @@ function StatStrip() {
     return <>{m[1]}<span style={{ fontSize: '0.52em', fontWeight: 600, verticalAlign: 'middle' }}>{m[2]}</span></>;
   };
   return (
-    <section id="stats" style={{ background: '#02040B', borderTop: '1px solid rgba(255,255,255,0.06)', padding: isMobile ? '32px 0' : '44px 0' }}>
+    <section id="stats" style={{ background: 'var(--bg-dark)', borderTop: '1px solid rgba(255,255,255,0.06)', padding: isMobile ? '32px 0' : '44px 0' }}>
       <Container>
         <Reveal>
           <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'stretch' }}>
@@ -265,7 +264,7 @@ function Problem() {
           <Reveal delay={80}>
             <h2 style={{
               marginTop: 14, fontWeight: 600,
-              letterSpacing: '-0.025em', color: 'var(--bd-ink-soft)', lineHeight: 1.4, fontSize: "21px"
+              letterSpacing: '-0.025em', color: 'var(--text-2)', lineHeight: 1.4, fontSize: "21px"
             }}>혹시 이런 고민이 있으신가요?
 
             </h2>
@@ -279,13 +278,13 @@ function Problem() {
             }}>
               <div style={{
                 display: 'flex', alignItems: 'flex-start', gap: isMobile ? 8 : 16,
-                fontWeight: 700, letterSpacing: '-0.04em', color: 'var(--bd-blue)',
+                fontWeight: 700, letterSpacing: '-0.04em', color: 'var(--blue-500)',
                 fontSize: 'clamp(24px, 3.6vw, 38px)', lineHeight: 1.22,
                 textAlign: 'left', wordBreak: 'keep-all'
               }}>
-                <span style={{ color: 'var(--bd-line-strong)', fontWeight: 600 }}>[</span>
+                <span style={{ color: 'var(--border)', fontWeight: 600 }}>[</span>
                 <span style={{ flex: 1, minWidth: 0 }}><window.Typewriter phrases={phrases} typeMs={58} deleteMs={30} holdMs={1600} gapMs={340} /></span>
-                <span style={{ color: 'var(--bd-line-strong)', fontWeight: 600 }}>]</span>
+                <span style={{ color: 'var(--border)', fontWeight: 600 }}>]</span>
               </div>
             </div>
           </Reveal>
@@ -293,7 +292,7 @@ function Problem() {
           <Reveal delay={220}>
             <p style={{
               marginTop: isMobile ? 32 : 44,
-              color: 'var(--fg-2)', fontWeight: 500, lineHeight: 1.55, fontSize: "16px"
+              color: 'var(--text-2)', fontWeight: 500, lineHeight: 1.55, fontSize: "16px"
             }}>
               이 중 하나라도 해당된다면,<br />잘 찾아오셨습니다.
             </p>

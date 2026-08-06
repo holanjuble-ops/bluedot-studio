@@ -79,9 +79,9 @@ function Reveal({ children, delay = 0, as = 'div', className = '', style, ...res
 function Section({ children, bg = 'paper', id, pad, style }) {
   const isMobile = useIsMobile();
   const palettes = {
-    white: { background: '#FFFFFF', color: 'var(--bd-ink)' },
-    paper: { background: 'var(--bd-paper)', color: 'var(--bd-ink)' },
-    ink: { background: 'var(--bd-navy)', color: '#FFFFFF' }
+    white: { background: 'var(--bg-base)', color: 'var(--text-1)' },
+    paper: { background: 'var(--bd-paper)', color: 'var(--text-1)' },
+    ink: { background: 'var(--bg-dark)', color: '#FFFFFF' }
   };
   const vpad = pad != null ? pad : isMobile ? 104 : 168;
   return (
@@ -151,7 +151,7 @@ function Typewriter({ phrases, typeMs = 75, deleteMs = 38, holdMs = 2000, gapMs 
       transformOrigin: 'left center'
     }}>
       {text}
-      <span className="bd-caret" style={{ fontWeight: 400, color: 'var(--bd-blue-300)' }}>|</span>
+      <span className="bd-caret" style={{ fontWeight: 400, color: 'var(--blue-500)' }}>|</span>
     </span>);
 
 }
@@ -212,7 +212,7 @@ function DotGridBg({ opacity = 0.5, color = 'rgba(124,151,255,0.5)', gap = 30, r
 
 /* GridBg: hairline grid — for light surfaces. Fades out via a radial mask
    so it never reads as a hard sheet. */
-function GridBg({ opacity = 1, color = 'var(--bd-line)', gap = 56, style, fade = 'closest-side' }) {
+function GridBg({ opacity = 1, color = 'var(--border)', gap = 56, style, fade = 'closest-side' }) {
   const pid = useRef(nextPatId('gl')).current;
   const mid = useRef(nextPatId('gm')).current;
   return (
@@ -235,7 +235,7 @@ function GridBg({ opacity = 1, color = 'var(--bd-line)', gap = 56, style, fade =
 }
 
 /* DiagBg: fine diagonal hairlines — for a paper section break. */
-function DiagBg({ opacity = 1, color = 'var(--bd-line)', gap = 18, style }) {
+function DiagBg({ opacity = 1, color = 'var(--border)', gap = 18, style }) {
   const id = useRef(nextPatId('dl')).current;
   return (
     <svg aria-hidden="true" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', opacity, pointerEvents: 'none', ...style }}>
@@ -250,7 +250,7 @@ function DiagBg({ opacity = 1, color = 'var(--bd-line)', gap = 18, style }) {
 }
 
 /* GlowBg: a single soft radial bloom — adds depth to dark fields without lines. */
-function GlowBg({ color = 'rgba(21,71,255,0.30)', cx = '20%', cy = '110%', size = '70%', style }) {
+function GlowBg({ color = 'rgba(59,118,232,0.30)', cx = '20%', cy = '110%', size = '70%', style }) {
   return (
     <div aria-hidden="true" style={{
       position: 'absolute', inset: 0, pointerEvents: 'none',
@@ -264,7 +264,7 @@ function GlowBg({ color = 'rgba(21,71,255,0.30)', cx = '20%', cy = '110%', size 
    Mark and wordmark are height-matched so the lockup reads as one unit:
    the "B" cap-height ≈ the Korean wordmark glyph height. */
 function BdLogo({ size = 30, light = false, withWordmark = true, style }) {
-  const ink = light ? '#fff' : 'var(--bd-ink)';
+  const ink = light ? '#fff' : 'var(--text-1)';
   const markFs = size * 1.0;
   const dotD = size * 0.27;   // 1.5× previous (was 0.18)
   const wordFs = size * 0.68;
@@ -277,7 +277,7 @@ function BdLogo({ size = 30, light = false, withWordmark = true, style }) {
         }}>B</span>
         <span style={{
           width: dotD, height: dotD, borderRadius: 999,
-          background: 'var(--bd-blue)', marginLeft: size * 0.04, marginBottom: size * 0.06, flex: 'none'
+          background: 'var(--blue-500)', marginLeft: size * 0.04, marginBottom: size * 0.06, flex: 'none'
         }}></span>
       </span>
       {withWordmark &&
@@ -302,8 +302,8 @@ function scrollToId(id) {
    Replaces the dot-eyebrow. Mono for latin labels reads as quiet,
    precise, high-end; sans for Korean labels. */
 function Kicker({ label, light = false, mono = true, lineWidth = 22, style }) {
-  const txt = light ? 'rgba(255,255,255,0.52)' : 'var(--bd-gray-500)';
-  const rule = light ? 'rgba(255,255,255,0.26)' : 'var(--bd-line-strong)';
+  const txt = light ? 'rgba(255,255,255,0.52)' : 'var(--text-2)';
+  const rule = light ? 'rgba(255,255,255,0.26)' : 'var(--border)';
   return (
     <span style={{ display: 'inline-flex', alignItems: 'center', gap: 12, ...style }}>
       <span style={{ width: lineWidth, height: 1, background: rule, flex: 'none' }} />
@@ -317,7 +317,37 @@ function Kicker({ label, light = false, mono = true, lineWidth = 22, style }) {
 
 }
 
+/* ---- Overline (kept, unused) ---- */
+function Overline({ label, light = false, style }) {
+  return (
+    <p style={{
+      margin: 0, fontFamily: 'var(--font-sans)', fontSize: 12, fontWeight: 700,
+      letterSpacing: '0.18em', textTransform: 'uppercase', lineHeight: 1.2,
+      color: light ? 'rgba(255,255,255,0.55)' : 'var(--text-3)', ...style
+    }}>{label}</p>);
+
+}
+
+/* ---- CtaButton: the single repeated conversion action ---- */
+function CtaButton({ light = false, size = 'md', style }) {
+  const h = size === 'lg' ? 56 : 50;
+  return (
+    <button onClick={() => scrollToId('cta')} style={{
+      height: h, padding: `0 ${size === 'lg' ? 30 : 24}px`, border: 'none', borderRadius: 999,
+      background: 'var(--blue-500)', color: '#fff', cursor: 'pointer',
+      fontFamily: 'var(--font-sans)', fontSize: size === 'lg' ? 16 : 15, fontWeight: 700,
+      letterSpacing: '-0.01em', display: 'inline-flex', alignItems: 'center', gap: 10,
+      transition: 'background 0.2s var(--ease-out)', ...style
+    }}
+    onMouseEnter={(e) => {e.currentTarget.style.background = 'var(--blue-700)';}}
+    onMouseLeave={(e) => {e.currentTarget.style.background = 'var(--blue-500)';}}>
+      무료 상담 신청
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12,5 19,12 12,19" /></svg>
+    </button>);
+
+}
+
 Object.assign(window, {
-  useIsMobile, Icon, Reveal, Section, Container, Typewriter, Kicker, scrollToId,
+  useIsMobile, Icon, Reveal, Section, Container, Typewriter, Kicker, Overline, CtaButton, scrollToId,
   MeshBg, RingsBg, DotGridBg, GridBg, DiagBg, GlowBg, BdLogo
 });

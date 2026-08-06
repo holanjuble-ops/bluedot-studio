@@ -4,30 +4,30 @@
 
 /* ---------------- Process ---------------- */
 const PROCESS = [
-{ n: 'STEP 01', t: '설계&기획', d: ['조회수와 문의를 만드는 콘텐츠를 기획해요.'], note: '* 광고 심의기준을 준수합니다.' },
-{ n: 'STEP 02', t: '방문 촬영', d: ['사무실·병원으로 직접 방문해 촬영해요.', '(1시간 소요)'] },
-{ n: 'STEP 03', t: '편집', d: ['알고리즘에 최적화된 영상을 완성해요.'] },
-{ n: 'STEP 04', t: '업로드', d: ['업로드까지, 저희가 다 해드려요.'] }];
+{ n: 'STEP 01', t: '설계&기획', d: ['조회수와 문의를 만드는 콘텐츠를 기획합니다.'], note: '* 광고 심의기준 준수' },
+{ n: 'STEP 02', t: '방문 촬영', d: ['사무실·병원으로 직접 방문해 촬영합니다.', '(1시간 소요)'] },
+{ n: 'STEP 03', t: '편집', d: ['알고리즘에 최적화된 영상을 완성합니다.'] },
+{ n: 'STEP 04', t: '업로드', d: ['업로드까지, 저희가 모두 진행합니다.'] }];
 
 
 function Process() {
   const isMobile = window.useIsMobile();
   const { Container, Reveal } = window;
   return (
-    <section id="process" style={{ position: 'relative', overflow: 'hidden', background: '#F7F8FA', borderTop: '1px solid var(--border)', padding: `${isMobile ? 104 : 168}px 0` }}>
+    <section id="process" style={{ position: 'relative', overflow: 'hidden', background: '#F7F8FA', borderTop: '1px solid var(--border)', padding: `${isMobile ? 88 : 128}px 0` }}>
       <Container style={{ position: 'relative', zIndex: 1 }}>
-        <div style={{ maxWidth: 760, marginBottom: isMobile ? 40 : 56 }}>
+        <div style={{ maxWidth: 760, marginBottom: isMobile ? 28 : 40 }}>
           <Reveal>
             <window.Kicker label="Process" />
           </Reveal>
           <Reveal delay={80}>
-            <h2 style={{ marginTop: 16, fontWeight: 700, letterSpacing: '-0.04em', lineHeight: 1.18, color: 'var(--text-1)', fontSize: isMobile ? '34px' : 'clamp(40px, 3.4vw, 52px)' }}>
+            <h2 style={{ marginTop: 16, fontWeight: 700, letterSpacing: '-0.035em', lineHeight: 1.22, color: 'var(--text-1)', fontSize: isMobile ? '28px' : '36px' }}>
               이렇게 진행됩니다.
             </h2>
           </Reveal>
           <Reveal delay={140}>
-            <p style={{ marginTop: 18, lineHeight: 1.6, color: 'var(--text-2)', fontWeight: 500, fontSize: isMobile ? '17px' : 'clamp(17px, 1.4vw, 19px)' }}>
-              기획부터 촬영, 편집, 업로드까지 저희가 진행해요.
+            <p style={{ marginTop: 16, lineHeight: 1.7, color: 'var(--text-2)', fontWeight: 500, fontSize: isMobile ? '15.5px' : '17px' }}>
+              기획부터 촬영, 편집, 업로드까지 저희가 진행합니다.
             </p>
           </Reveal>
         </div>
@@ -40,20 +40,20 @@ function Process() {
           <Reveal key={s.n} delay={i * 90}>
             <div style={{
               background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 'var(--r-md)',
-              padding: isMobile ? '24px 22px' : '32px 30px', height: '100%',
+              padding: isMobile ? '20px 18px' : '26px 26px', height: '100%',
               transition: 'transform 0.2s var(--ease-out), box-shadow 0.2s var(--ease-out)'
             }}
             onMouseEnter={(e) => {e.currentTarget.style.transform = 'translateY(-2px)';e.currentTarget.style.boxShadow = 'var(--shadow-soft)';}}
             onMouseLeave={(e) => {e.currentTarget.style.transform = 'none';e.currentTarget.style.boxShadow = 'none';}}>
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: 13, fontWeight: 600, letterSpacing: '0.08em', color: 'var(--blue-500)' }}>{s.n}</div>
-              <h3 style={{ marginTop: 16, fontWeight: 700, letterSpacing: '-0.02em', color: 'var(--text-1)', fontSize: isMobile ? '18px' : '20px' }}>{s.t}</h3>
-              <p style={{ marginTop: 12, lineHeight: 1.7, color: 'var(--text-2)', fontSize: isMobile ? '14.5px' : '15.5px' }}>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, fontWeight: 600, letterSpacing: '0.08em', color: 'var(--blue-500)' }}>{s.n}</div>
+              <h3 style={{ marginTop: 14, fontWeight: 700, letterSpacing: '-0.025em', color: 'var(--text-1)', fontSize: isMobile ? '17px' : '18px' }}>{s.t}</h3>
+              <p style={{ marginTop: 10, lineHeight: 1.7, color: 'var(--text-2)', fontSize: isMobile ? '14.5px' : '15.5px' }}>
                 {s.d.map((line, j) => <React.Fragment key={j}>{j > 0 && <br />}{line}</React.Fragment>)}
               </p>
               {s.note &&
               <p style={{
                 marginTop: 10, lineHeight: 1.5, fontWeight: 600, wordBreak: 'keep-all',
-                letterSpacing: '-0.01em', color: 'rgb(189, 34, 34)', fontSize: isMobile ? '13px' : '13.5px'
+                letterSpacing: '-0.01em', color: 'rgb(189, 34, 34)', fontSize: '13px'
               }}>{s.note}</p>}
             </div>
           </Reveal>
@@ -75,16 +75,16 @@ function FaqItem({ item, open, onToggle }) {
   return (
     <div className="faq-item">
       <button className="faq-q" onClick={onToggle} aria-expanded={open}>
-        <span style={{ fontWeight: 600, letterSpacing: '-0.01em', color: open ? 'var(--blue-500)' : 'var(--text-1)', transition: 'color 0.2s var(--ease-out)', fontSize: "18px" }}>
+        <span style={{ fontWeight: 600, letterSpacing: '-0.01em', color: open ? 'var(--blue-500)' : 'var(--text-1)', transition: 'color 0.2s var(--ease-out)', fontSize: "17px" }}>
           {item.q}
         </span>
         <span className={`faq-icon ${open ? 'open' : ''}`}>
-          <window.Icon name="plus" size={24} color={open ? 'var(--blue-500)' : 'var(--text-2)'} />
+          <window.Icon name="plus" size={20} color={open ? 'var(--blue-500)' : 'var(--text-2)'} />
         </span>
       </button>
       <div className={`faq-a-wrap ${open ? 'open' : ''}`}>
         <div className="faq-a-inner">
-          <p style={{ padding: '0 4px 28px', lineHeight: 1.75, color: 'var(--text-2)', maxWidth: 720, fontWeight: 400, fontSize: "15px" }}>
+          <p style={{ padding: '0 4px 24px', lineHeight: 1.75, color: 'var(--text-2)', maxWidth: 720, fontWeight: 400, fontSize: "15.5px" }}>
             {item.a.map((line, k) => <React.Fragment key={k}>{k > 0 && <br />}{line}</React.Fragment>)}
           </p>
         </div>
@@ -106,12 +106,12 @@ function Faq() {
               <window.Kicker label="FAQ" />
             </Reveal>
             <Reveal delay={80}>
-              <h2 style={{ marginTop: 16, fontWeight: 700, letterSpacing: '-0.04em', lineHeight: 1.18, color: 'var(--text-1)', fontSize: isMobile ? '32px' : 'clamp(40px, 3.4vw, 52px)' }}>
+              <h2 style={{ marginTop: 16, fontWeight: 700, letterSpacing: '-0.035em', lineHeight: 1.22, color: 'var(--text-1)', fontSize: isMobile ? '28px' : '36px' }}>
                 자주 묻는 질문
               </h2>
             </Reveal>
           </div>
-          <Reveal delay={120} style={{ marginTop: isMobile ? 0 : 37 }}>
+          <Reveal style={{ marginTop: isMobile ? 0 : 8 }}>
             <div style={{ borderTop: '1px solid var(--border)' }}>
               {FAQS.map((f, i) =>
               <FaqItem key={i} item={f} open={open === i} onToggle={() => setOpen(open === i ? -1 : i)} />
@@ -200,7 +200,7 @@ function FinalCta() {
   };
 
   return (
-    <section id="cta" style={{ position: 'relative', overflow: 'hidden', background: 'var(--bg-dark)', color: '#fff', padding: `${isMobile ? 104 : 168}px 0` }}>
+    <section id="cta" style={{ position: 'relative', overflow: 'hidden', background: 'var(--bg-dark)', color: '#fff', padding: `${isMobile ? 88 : 128}px 0` }}>
       <window.GridBg opacity={1} color="rgba(255,255,255,0.10)" gap={64} />
       <window.GlowBg color="rgba(21,71,255,0.26)" cx="80%" cy="115%" size="62%" />
       <Container style={{ position: 'relative', zIndex: 1 }}>
@@ -211,12 +211,12 @@ function FinalCta() {
               <window.Kicker label="무료 상담" light mono={false} />
             </Reveal>
             <Reveal delay={80}>
-              <h2 style={{ marginTop: 24, fontWeight: 700, letterSpacing: '-0.04em', lineHeight: 1.22, color: '#fff', fontSize: isMobile ? '32px' : 'clamp(40px, 3.4vw, 52px)' }}>
+              <h2 style={{ marginTop: 16, fontWeight: 700, letterSpacing: '-0.035em', lineHeight: 1.22, color: '#fff', fontSize: isMobile ? '28px' : '36px' }}>
                 지금 바로<br />무료상담 받아보세요
               </h2>
             </Reveal>
             <Reveal delay={140}>
-              <p style={{ marginTop: 26, lineHeight: 1.8, maxWidth: 420, fontSize: "16px", color: "rgba(255, 255, 255, 0.804)", fontWeight: "400" }}>
+              <p style={{ marginTop: 18, lineHeight: 1.75, maxWidth: 420, fontSize: isMobile ? "15.5px" : "16.5px", color: "rgba(255, 255, 255, 0.804)", fontWeight: "400" }}>
                 <span style={{ color: '#F4D35E', fontWeight: 700 }}>억지 영업은 하지 않습니다.</span><br />현재 상황을 함께 살펴보고,<br />가장 효과적인 방향을 제안해드립니다.
               </p>
             </Reveal>
@@ -289,7 +289,7 @@ function SiteFooter() {
   const inCol = typeof location !== 'undefined' && /\/column\//.test(location.pathname);
   const ctaHref = inCol ? '../pro.html#cta' : '#cta';
   return (
-    <footer style={{ background: '#1A1C22', borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: isMobile ? 56 : 80, paddingBottom: isMobile ? 96 : 80 }}>
+    <footer style={{ background: '#1A1C22', borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: isMobile ? 56 : 80, paddingBottom: isMobile ? 56 : 80 }}>
       <Container>
         {/* 상단: 3단 (브랜드 | 서비스 소개 | 사업자 정보) */}
         <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr 1fr', gap: isMobile ? 36 : 40, paddingBottom: isMobile ? 36 : 48, alignItems: 'start' }}>

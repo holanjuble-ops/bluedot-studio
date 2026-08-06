@@ -11,10 +11,10 @@ const BD_PLATFORMS = [
 { icon: 'db', label: 'DB 마케팅', sub: '문의', color: '#7C97FF', tint: 'rgba(59,118,232,0.18)' }];
 
 const BD_STEPS = [
-{ tag: '1개월차', title: '노출 확보', desc: '숏폼을 통해 대표님을\n더 많은 사람들에게 알립니다.', gain: '(고객사 평균) 첫 달부터 100만 조회수를 달성했습니다.' },
-{ tag: '2~3개월차', title: '잠재고객 확보', desc: '관심 있는 잠재고객을 모읍니다.\n어뷰징은 절대 쓰지 않습니다.', gain: '(고객사 평균) 팔로워 5,000명을 확보했습니다.' },
-{ tag: '4~6개월차', title: '문의 만들기', desc: '콘텐츠와 광고로\n실제 문의를 늘립니다.', gain: '(고객사 평균) 문의량이 2.4배 증가했습니다.' },
-{ tag: '6개월차~', title: '콘텐츠 자산화', desc: '콘텐츠가 계속 문의를 만드는\n구조를 만듭니다.', gain: '문의가 계속 이어지는 구조가 완성됩니다.' }];
+{ tag: '1개월차', title: '노출 확보', desc: '숏폼을 통해 대표님을\n더 많은 사람들에게 알립니다.', gain: '(고객사 평균)\n첫 달부터 100만 조회수 달성' },
+{ tag: '2~3개월차', title: '잠재고객 확보', desc: '잠재고객을 모읍니다.\n어뷰징은 절대 쓰지 않습니다.', gain: '(고객사 평균)\n팔로워 5,000명 확보' },
+{ tag: '4~6개월차', title: '문의 만들기', desc: '콘텐츠와 광고로\n실제 문의를 늘립니다.', gain: '(고객사 평균)\n문의량 2.4배 증가' },
+{ tag: '6개월차~', title: '콘텐츠 자산화', desc: '콘텐츠가 계속 문의를 만드는\n구조를 만듭니다.', gain: '문의가 계속 이어지는 구조 완성' }];
 
 function Proof({ gain }) {
   return (
@@ -60,7 +60,7 @@ function injectBridgeCss() {
     .bd-node.is-lit::after { content:''; position:absolute; inset:5.5px; border-radius:999px; background:#6E93DE; }
     .bd-tl-body { padding:14px 0 clamp(44px,6vw,72px); }
     .bd-tlh-body { padding-top:26px; }
-    .bd-body-anim { transform:translateY(10px); opacity:1; transition: transform .6s var(--ease-out); }
+    .bd-body-anim { transform:none; }
     .bd-body-anim.is-lit { transform:none; }
     @media (prefers-reduced-motion: reduce) { .bd-pf { animation: none; } .bd-body-anim { transform:none; } }
   `;
@@ -171,19 +171,18 @@ function StepBody({ s, i, isMobile }) {
 }
 
 /* 성과 문장의 핵심 구절만 브랜드 옐로로 강조 (면적 5% 이하) */
-const BD_HL_PHRASES = ['100만 조회수', '팔로워 5,000명', '문의량이 2.4배', '문의가 계속 이어지는 구조'];
+const BD_HL_PHRASES = ['100만 조회수', '팔로워 5,000명', '문의량 2.4배', '문의가 계속 이어지는 구조'];
+function brk(t, key) {
+  return String(t).split('\n').map((l, k) =>
+  <React.Fragment key={key + '-' + k}>{k > 0 && <br />}{l}</React.Fragment>);
+}
 function hlNums(text) {
-  const t = String(text);
-  const hit = BD_HL_PHRASES.find((ph) => t.includes(ph));
-  if (!hit) return t;
-  const i = t.indexOf(hit);
-  return (
-    <React.Fragment>
-      {t.slice(0, i)}
-      <span style={{ color: '#FFE45C' }}>{hit}</span>
-      {t.slice(i + hit.length)}
-    </React.Fragment>);
-
+  const lines = String(text).split('\n');
+  return lines.map((l, k) =>
+  <React.Fragment key={k}>
+    {k > 0 && <br />}
+    {lines.length > 1 && k === 0 ? l : <span style={{ color: '#FFE45C' }}>{l}</span>}
+  </React.Fragment>);
 }
 
 function TimelineStep({ s, isMobile, grid, lit, nodeRef }) {
@@ -195,7 +194,7 @@ function TimelineStep({ s, isMobile, grid, lit, nodeRef }) {
       <div className={`${isMobile ? 'bd-tl-body' : 'bd-tlh-body'} bd-body-anim${lit ? ' is-lit' : ''}`} style={{ position: 'relative' }}>
         {grid &&
         <span aria-hidden="true" style={{
-          position: 'absolute', top: isMobile ? 0 : 14, left: -12, right: -12, bottom: isMobile ? 24 : 0,
+          position: 'absolute', top: isMobile ? 0 : 14, left: 0, right: 0, bottom: isMobile ? 24 : 0,
           pointerEvents: 'none', borderRadius: 12,
           backgroundImage: 'linear-gradient(rgba(255,255,255,0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.045) 1px, transparent 1px)',
           backgroundSize: '28px 28px',
@@ -203,18 +202,18 @@ function TimelineStep({ s, isMobile, grid, lit, nodeRef }) {
           WebkitMaskImage: 'radial-gradient(closest-side, #fff, transparent)'
         }} />}
         <span style={{ position: 'relative', display: 'block' }}>
-        <p style={{ margin: 0, fontSize: 12.5, fontWeight: 700, letterSpacing: '0.06em', color: '#7C93B8' }}>{s.tag}</p>
+        <p style={{ margin: 0, fontSize: 12, fontWeight: 700, letterSpacing: '0.06em', color: '#7C93B8' }}>{s.tag}</p>
         <h3 style={{
-          margin: 0, marginTop: 12, fontWeight: 800, letterSpacing: '-0.025em', lineHeight: 1.3,
-          fontSize: isMobile ? '22px' : 'clamp(19px, 1.7vw, 23px)', color: '#FFFFFF', wordBreak: 'keep-all'
+          margin: 0, marginTop: 10, fontWeight: 800, letterSpacing: '-0.025em', lineHeight: 1.3,
+          fontSize: isMobile ? '19px' : '20px', color: '#FFFFFF', wordBreak: 'keep-all'
         }}>{s.title}</h3>
         <p style={{
-          margin: 0, marginTop: 14, fontSize: isMobile ? 14.5 : 'clamp(14px, 1.1vw, 15.5px)',
-          lineHeight: 1.75, color: '#7C879B', wordBreak: 'keep-all', maxWidth: 520
+          margin: 0, marginTop: 12, fontSize: isMobile ? 14.5 : 15.5,
+          lineHeight: 1.7, color: '#7C879B', wordBreak: 'keep-all', maxWidth: 460
         }}>{lines(s.desc)}</p>
         <p style={{
-          margin: 0, marginTop: 12, fontSize: isMobile ? 14 : 'clamp(13.5px, 1.05vw, 15px)', fontWeight: 700,
-          lineHeight: 1.75, color: '#FFFFFF', wordBreak: 'keep-all', maxWidth: 520
+          margin: 0, marginTop: 14, fontSize: isMobile ? 14 : 14.5, fontWeight: 700,
+          lineHeight: 1.7, color: '#FFFFFF', wordBreak: 'keep-all', maxWidth: 460
         }}><span style={{ color: '#5B84D8' }}>→</span> {hlNums(s.gain)}</p>
         </span>
       </div>
@@ -264,7 +263,7 @@ function Timeline({ isMobile }) {
       <span aria-hidden="true" className="bd-track" />
       <span aria-hidden="true" className="bd-fill" style={fillStyle} />
       {BD_STEPS.map((s, i) =>
-      <TimelineStep key={s.tag} s={s} isMobile={isMobile} grid={i === 0} lit={!!lit[i]}
+      <TimelineStep key={s.tag} s={s} isMobile={isMobile} grid={true} lit={!!lit[i]}
       nodeRef={(el) => {nodes.current[i] = el;}} />
       )}
     </div>);
@@ -292,9 +291,9 @@ function ServiceIntro({ isMobile }) {
 
       <Reveal delay={80}>
         <h2 style={{
-          marginTop: 24, fontWeight: 800, letterSpacing: '-0.02em', lineHeight: 1.25,
-          color: '#FFFFFF', maxWidth: 900,
-          fontSize: isMobile ? '34px' : 'clamp(48px, 4.2vw, 64px)'
+          marginTop: 16, fontWeight: 700, letterSpacing: '-0.035em', lineHeight: 1.22,
+          color: '#FFFFFF', maxWidth: 760,
+          fontSize: isMobile ? '28px' : '36px'
         }}>
           그 고민,<br />
           <span className="bd-ul">이렇게 해결합니다</span>
@@ -302,23 +301,14 @@ function ServiceIntro({ isMobile }) {
         </h2>
       </Reveal>
 
-      <Reveal delay={220} style={{ marginTop: 44 }}>
-        <div style={{
-          display: 'grid', gap: 'clamp(8px, 1.4vw, 12px)',
-          gridTemplateColumns: 'repeat(3, max-content)', justifyContent: 'start'
-        }}>
-          {BD_PLATFORMS.map((p, i) => <PlatformChip key={p.label} p={p} i={i} />)}
-        </div>
-      </Reveal>
-
       <div style={{
-        marginTop: 44, maxWidth: 660,
-        fontSize: isMobile ? 15.5 : 'clamp(15px, 1.35vw, 17px)', lineHeight: 1.7, fontWeight: 500
+        marginTop: 28, maxWidth: 620,
+        fontSize: isMobile ? 15.5 : 17, lineHeight: 1.7, fontWeight: 500
       }}>
-        <Reveal delay={340}>
+        <Reveal>
           <p style={{ margin: 0, color: 'var(--text-2)' }}>인스타그램부터 유튜브, 틱톡, 메타 광고, DB마케팅까지</p>
         </Reveal>
-        <Reveal delay={440}>
+        <Reveal>
           <p style={{ margin: 0, marginTop: 6, color: '#FFFFFF', fontWeight: 700 }}>
             업종과 상황에 맞게 가장 효과적인 방법만 제안합니다.
           </p>
@@ -335,7 +325,7 @@ function Bridge() {
   const n = BD_STEPS.length;
 
   return (
-    <section style={{ position: 'relative', background: '#080B14', color: '#FFFFFF', padding: '120px 0' }}>
+    <section style={{ position: 'relative', background: '#080B14', color: '#FFFFFF', padding: isMobile ? '88px 0' : '128px 0' }}>
       <div aria-hidden="true" style={{
         position: 'absolute', top: 0, left: 0, right: 0, height: 520, opacity: 0.15, pointerEvents: 'none',
         background: 'linear-gradient(180deg, #16224A 0%, rgba(8,11,20,0) 100%)'
@@ -343,7 +333,7 @@ function Bridge() {
       <Container style={{ position: 'relative', zIndex: 1 }}>
         <ServiceIntro isMobile={isMobile} />
 
-        <Reveal delay={120} style={{ marginTop: isMobile ? 72 : 96 }}>
+        <Reveal style={{ marginTop: isMobile ? 44 : 60 }}>
           <Timeline isMobile={isMobile} />
         </Reveal>
       </Container>
@@ -353,190 +343,72 @@ function Bridge() {
 
 
 /* ---------------- Results ---------------- */
-const RESULT_CASES = [
-{
-  code: 'CASE 01', client: '성수 노무사', vertical: '노무',
-  slots: ['case-sungsu-b', 'case-sungsu-a1', 'case-sungsu-a2'],
-  images: ['images/case-sungsu-before.png', 'images/case-sungsu-after1.png', 'images/case-sungsu-after2.png'],
-  before: ['평균 조회수', '5,000회'],
-  after: ['평균 조회수', '7.5만'],
-  chips: ['팔로워 +1,800명', '문의 3배 증가']
-},
-{
-  code: 'CASE 02', client: '강남 다이어트 한의원', vertical: '한의원',
-  slots: ['case-gangnam-b', 'case-gangnam-a1', 'case-gangnam-a2'],
-  images: ['images/case-gangnam-before.png', 'images/case-gangnam-after1.png', 'images/case-gangnam-after2.png'],
-  before: ['평균 조회수', '6,000회'],
-  after: ['영상 2개로', '100만+'],
-  chips: ['팔로워 +1,000명', '예약 문의 급증']
-}];
-
-
-// inject keyframe once
-let _afterPopInjected = false;
-function injectAfterPop() {
-  if (_afterPopInjected) return;
-  const s = document.createElement('style');
-  s.textContent = `
-    @keyframes afterPop {
-      from { opacity: 0.15; transform: scale(0.82) translateY(8px); }
-      to   { opacity: 1;    transform: scale(1)    translateY(0); }
-    }
-    @keyframes afterDotPulse {
-      0%, 100% { box-shadow: 0 0 0 0   rgba(59,118,232,0.45); }
-      60%       { box-shadow: 0 0 0 5px rgba(59,118,232,0); }
-    }
-    @keyframes chipRing {
-      0%   { transform: translateX(0)    scale(1);    box-shadow: 0 0 0 0   rgba(27,139,79,0.22); }
-      2%   { transform: translateX(-2px) scale(1.02); }
-      4%   { transform: translateX(2px)  scale(1.02); box-shadow: 0 0 0 5px rgba(27,139,79,0.10); }
-      6%   { transform: translateX(-1px) scale(1.01); }
-      8%   { transform: translateX(1px)  scale(1.01); box-shadow: 0 0 0 9px rgba(27,139,79,0.03); }
-      10%  { transform: translateX(0)    scale(1);    box-shadow: 0 0 0 0   rgba(27,139,79,0); }
-      100% { transform: translateX(0)    scale(1);    box-shadow: 0 0 0 0   rgba(27,139,79,0); }
-    }
-  `;
-  document.head.appendChild(s);
-  _afterPopInjected = true;
-}
-
-function CaseCard({ c, delay }) {
-  const { Tag, Reveal } = window;
-  const afterRef = React.useRef(null);
-  const [popped, setPopped] = React.useState(false);
-
-  React.useEffect(() => {
-    injectAfterPop();
-    const el = afterRef.current;
-    if (!el) return;
-    const obs = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) { setPopped(true); obs.disconnect(); }
-    }, { threshold: 0.5 });
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, []);
-  return (
-    <Reveal delay={delay}>
-      <article style={{
-        background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 'var(--r-lg)',
-        overflow: 'hidden', height: '100%', display: 'flex', flexDirection: 'column',
-        boxShadow: 'var(--shadow-soft-lg)',
-        transition: 'transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out)'
-      }}
-      onMouseEnter={(e) => {e.currentTarget.style.transform = 'translateY(-6px)';e.currentTarget.style.boxShadow = 'var(--shadow-xl)';}}
-      onMouseLeave={(e) => {e.currentTarget.style.transform = 'none';e.currentTarget.style.boxShadow = 'var(--shadow-soft-lg)';}}>
-        {/* ── thumbnail strip: BEFORE × 1 + AFTER × 2 ── */}
-        <div style={{ padding: '12px 12px 14px', background: 'var(--bg-alt)' }}>
-          {/* BEFORE / AFTER labels row */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 8, marginBottom: 8 }}>
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 11, fontWeight: 700, letterSpacing: '0.06em', color: 'var(--text-3)' }}>
-              <span style={{ width: 8, height: 8, borderRadius: 999, background: 'var(--text-3)', flexShrink: 0 }}></span>BEFORE
-            </div>
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 11, fontWeight: 700, letterSpacing: '0.06em', color: 'var(--blue-500)' }}>
-              <span style={{ width: 8, height: 8, borderRadius: 999, background: 'var(--blue-500)', flexShrink: 0, animation: 'afterDotPulse 2.2s ease-in-out infinite' }}></span>AFTER
-            </div>
-          </div>
-          {/* 3-col 9:14 thumbnails */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 5 }}>
-            {c.slots.map((sid, i) => (
-              <div key={sid} style={{ position: 'relative', aspectRatio: '9 / 14', borderRadius: 10, overflow: 'hidden', border: '1px solid var(--border)', background: 'var(--bg-alt)' }}>
-                <img src={c.images[i]} alt={`${c.client} ${i === 0 ? 'BEFORE' : 'AFTER ' + i}`}
-                  style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div style={{ padding: 24, display: 'flex', flexDirection: 'column', gap: 20, flex: 1 }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
-            <h3 style={{ fontWeight: 700, letterSpacing: '-0.02em', color: 'var(--text-1)', fontSize: "18px" }}>{c.client}</h3>
-            <Tag>{c.vertical}</Tag>
-          </div>
-
-          {/* before -> after: gradient block */}
-          <div style={{
-            display: 'grid', gridTemplateColumns: '1fr 40px 1fr', alignItems: 'center',
-            borderRadius: 'var(--r-sm)', overflow: 'hidden',
-            border: '1px solid var(--border)',
-            background: 'var(--bg-alt)'
-          }}>
-            <div style={{ padding: '16px 18px' }}>
-              <div style={{ fontSize: 12, color: 'var(--text-3)', fontWeight: 500 }}>{c.before[0]}</div>
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: 16, fontWeight: 600, color: 'var(--text-3)', marginTop: 6, letterSpacing: '-0.02em' }}>{c.before[1]}</div>
-            </div>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <window.Icon name="arrow-right" size={18} color="var(--blue-500)" />
-            </div>
-            <div ref={afterRef} style={{ padding: '16px 18px' }}>
-              <div style={{ fontSize: 12, color: 'var(--blue-500)', fontWeight: 700 }}>{c.after[0]}</div>
-              <div style={{
-                fontFamily: 'var(--font-mono)', fontSize: 18, fontWeight: 700, color: 'var(--blue-500)',
-                marginTop: 6, letterSpacing: '-0.02em',
-                animation: popped ? 'afterPop 0.55s cubic-bezier(0.2,0.8,0.2,1) both' : 'none'
-              }}>{c.after[1].includes('+') ? (
-                <>{c.after[1].split('+')[0]}<span style={{ fontSize: '0.6em', fontWeight: 600, verticalAlign: 'middle' }}>+</span>{c.after[1].split('+')[1]}</>
-              ) : c.after[1]}</div>
-            </div>
-          </div>
-
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 'auto' }}>
-            {c.chips.map((ch, ci) =>
-            <span key={ch} style={{
-              display: 'inline-flex', alignItems: 'center', gap: 6, height: 30, padding: '0 12px',
-              borderRadius: 999, background: 'var(--bg-card)', border: '1px solid var(--border)',
-              fontSize: 12.5, fontWeight: 600, color: 'var(--text-1)'
-            }}>
-                <span style={{ color: 'var(--bd-success)', fontFamily: 'var(--font-mono)' }}>▲</span>{ch}
-              </span>
-            )}
-          </div>
-        </div>
-      </article>
-    </Reveal>);
-
-}
+/* 릴스 추가/교체: images/reel-01.png … 순서대로 올리고 아래 배열에만 줄을 추가하면 됩니다. */
+const RESULT_REELS = [
+{ img: 'reel-01', code: 'CASE 01', client: '성수 노무사' },
+{ img: 'reel-02', code: 'CASE 01', client: '성수 노무사' },
+{ img: 'reel-03', code: 'CASE 02', client: '강남 다이어트 한의원' },
+{ img: 'reel-04', code: 'CASE 02', client: '강남 다이어트 한의원' }];
 
 function Results() {
   const isMobile = window.useIsMobile();
-  const { Section, Container, Reveal, Dot } = window;
+  const { Section, Container, Reveal } = window;
   return (
     <Section bg="white" id="results">
       <Container>
-        <div style={{ maxWidth: 720, marginBottom: isMobile ? 40 : 56 }}>
-          <Reveal>
-            <window.Kicker label="Results" />
-          </Reveal>
-          <Reveal delay={80}>
-            <h2 style={{ marginTop: 16, fontWeight: 700, letterSpacing: '-0.04em', lineHeight: 1.16, color: 'var(--text-1)', fontSize: isMobile ? '34px' : 'clamp(40px, 3.4vw, 52px)' }}>
-              우리는 결과로 말합니다.
-            </h2>
-          </Reveal>
-        </div>
+        <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '0.82fr 1.18fr', gap: isMobile ? 28 : 56, alignItems: 'start' }}>
+          <div style={{ maxWidth: 420 }}>
+            <Reveal>
+              <window.Kicker label="Results" />
+            </Reveal>
+            <Reveal>
+              <h2 style={{ marginTop: 16, fontWeight: 700, letterSpacing: '-0.035em', lineHeight: 1.22, color: 'var(--text-1)', fontSize: isMobile ? '28px' : '36px' }}>
+                우리는 결과로 말합니다.
+              </h2>
+            </Reveal>
+            <Reveal>
+              <p style={{ marginTop: 16, fontSize: isMobile ? '15.5px' : '17px', lineHeight: 1.7, color: 'var(--text-2)', fontWeight: 500 }}>
+                공개 가능한 사례만 담았습니다.<br />나머지는 상담에서 확인하실 수 있습니다.
+              </p>
+            </Reveal>
+          </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: isMobile ? 20 : 24 }}>
-          {RESULT_CASES.map((c, i) => <CaseCard key={c.code} c={c} delay={i * 110} />)}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: isMobile ? 12 : 18 }}>
+            {RESULT_REELS.map((r) =>
+            <Reveal key={r.img}>
+              <div style={{ position: 'relative', aspectRatio: '329 / 512', borderRadius: 10, overflow: 'hidden', border: '1px solid var(--border)', background: 'var(--bd-ink)', boxShadow: 'var(--shadow-soft-lg)' }}>
+                <img src={`images/${r.img}.png`} alt={`${r.client} 릴스`}
+                  style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+                <span aria-hidden="true" style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 74, background: 'linear-gradient(180deg, rgba(10,14,26,0.62), rgba(10,14,26,0))', pointerEvents: 'none' }}></span>
+                <div style={{ position: 'absolute', top: 10, left: 11, right: 11, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8, color: '#fff' }}>
+                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontFamily: 'var(--font-mono)', fontSize: 10, fontWeight: 600, letterSpacing: '0.06em', flex: 'none' }}>
+                    <span style={{ width: 5, height: 5, borderRadius: 999, background: 'var(--blue-500)', flex: 'none' }}></span>{r.code}
+                  </span>
+                  <span style={{ fontSize: 10.5, fontWeight: 700, letterSpacing: '-0.01em', opacity: 0.92, minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{r.client}</span>
+                </div>
+              </div>
+            </Reveal>
+            )}
+          </div>
         </div>
 
         {/* self channel */}
-        <Reveal delay={120}>
+        <Reveal>
           <div style={{
             marginTop: isMobile ? 20 : 28, position: 'relative', overflow: 'hidden',
             background: 'var(--grad-depth)', color: '#fff',
-            borderRadius: 'var(--r-lg)', padding: isMobile ? '32px 24px' : '52px 56px',
+            borderRadius: 'var(--r-lg)', padding: isMobile ? '28px 20px' : '44px 48px',
             boxShadow: 'var(--shadow-xl)',
             display: 'flex', flexDirection: 'column',
-            alignItems: 'stretch', gap: isMobile ? 28 : 38
+            alignItems: 'stretch', gap: isMobile ? 22 : 30
           }}>
             <window.DotGridBg opacity={0.6} gap={26} r={1.2} />
             <div style={{ maxWidth: 640, position: 'relative', zIndex: 1 }}>
-              <span style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.5)', display: 'none', alignItems: 'center', gap: 10 }}>
-                <window.Dot color="rgba(255,255,255,0.9)" /> Own channel
-              </span>
               <window.Overline label="Own channel" light />
-              <h3 style={{ marginTop: 18, fontWeight: 700, letterSpacing: '-0.025em', lineHeight: 1.3, fontSize: isMobile ? '24px' : 'clamp(27px, 2.5vw, 34px)', color: '#FFFFFF' }}>
+              <h3 style={{ marginTop: 16, fontWeight: 700, letterSpacing: '-0.03em', lineHeight: 1.3, fontSize: isMobile ? '21px' : '24px', color: '#FFFFFF' }}>
                 남의 채널만 키우지 않습니다.
               </h3>
-              <p style={{ marginTop: 16, fontSize: isMobile ? '15px' : 'clamp(16px, 1.4vw, 18px)', lineHeight: 1.75, color: 'rgba(255,255,255,0.6)', fontWeight: 500 }}>
+              <p style={{ marginTop: 14, fontSize: isMobile ? '14.5px' : '15.5px', lineHeight: 1.7, color: 'rgba(255,255,255,0.6)', fontWeight: 500 }}>
                 우리 채널도 직접 키우고 있습니다.<br />검증되지 않은 전략은 권하지 않습니다.
               </p>
             </div>
@@ -546,36 +418,36 @@ function Results() {
               gap: isMobile ? 12 : 16
             }}>
               {[
-              { name: 'chanseong_.park', sub: '박찬성', slot: 'ch-chanseong', image: 'images/profile-chanseong.jpg', posts: '8', followers: '1.2만', following: '41' },
-              { name: 'ryeong.__.e', sub: '매일 성장하는 남자', slot: 'ch-dongsaeng', image: 'images/profile-dongsaeng.jpg', posts: '12', followers: '1.1만', following: '33' }].
+              { name: 'chanseong_.park', sub: '박찬성', image: 'images/profile-chanseong.jpg', posts: '8', followers: '1.2만', following: '41' },
+              { name: 'ryeong.__.e', sub: '매일 성장하는 남자', image: 'images/profile-dongsaeng.jpg', posts: '12', followers: '1.1만', following: '33' }].
               map((p) =>
-              <div key={p.slot} style={{
+              <div key={p.name} style={{
                 flex: 1, minWidth: 0, background: 'var(--bg-card)', borderRadius: 'var(--r-md)',
-                padding: isMobile ? '20px 18px' : '26px 26px', boxShadow: 'var(--shadow-2)',
-                display: 'flex', alignItems: 'center', gap: isMobile ? 16 : 20
+                padding: isMobile ? '18px 16px' : '24px 24px', boxShadow: 'var(--shadow-2)',
+                display: 'flex', alignItems: 'center', gap: isMobile ? 13 : 16, overflow: 'hidden'
               }}>
                   <div style={{
-                  flex: 'none', width: isMobile ? 66 : 82, height: isMobile ? 66 : 82, borderRadius: 'var(--r-pill)', overflow: 'hidden',
+                  flex: 'none', width: isMobile ? 54 : 66, height: isMobile ? 54 : 66, borderRadius: 'var(--r-pill)', overflow: 'hidden',
                   border: '1px solid var(--border)', background: 'var(--bg-alt)'
                 }}>
                     <img src={p.image} alt={p.name}
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                   </div>
                   <div style={{ flex: 1, minWidth: 0 }}>
-                    <div style={{ fontSize: isMobile ? 18 : 21, fontWeight: 800, color: 'var(--text-1)', letterSpacing: '-0.02em', lineHeight: 1.1, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{p.name}</div>
-                    <div style={{ fontSize: isMobile ? 13 : 14.5, color: 'var(--text-2)', marginTop: 4, fontWeight: 600 }}>{p.sub}</div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: isMobile ? 12 : 16, marginTop: 14 }}>
-                      <div style={{ display: 'flex', alignItems: 'baseline', gap: 5 }}>
-                        <span style={{ fontSize: isMobile ? 12.5 : 13.5, color: 'var(--text-2)', fontWeight: 600 }}>게시물</span>
-                        <span style={{ fontSize: isMobile ? 14 : 15.5, color: 'var(--text-1)', fontWeight: 800, fontFamily: 'var(--font-mono)' }}>{p.posts}</span>
+                    <div style={{ fontSize: isMobile ? 16 : 18, fontWeight: 800, color: 'var(--text-1)', letterSpacing: '-0.02em', lineHeight: 1.1, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{p.name}</div>
+                    <div style={{ fontSize: isMobile ? 12.5 : 14, color: 'var(--text-2)', marginTop: 3, fontWeight: 600, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{p.sub}</div>
+                    <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', columnGap: isMobile ? 9 : 11, rowGap: 7, marginTop: isMobile ? 10 : 12 }}>
+                      <div style={{ display: 'flex', alignItems: 'baseline', gap: 4, whiteSpace: 'nowrap' }}>
+                        <span style={{ fontSize: isMobile ? 11.5 : 13.5, color: 'var(--text-2)', fontWeight: 600 }}>게시물</span>
+                        <span style={{ fontSize: isMobile ? 13 : 15.5, color: 'var(--text-1)', fontWeight: 800, fontFamily: 'var(--font-mono)' }}>{p.posts}</span>
                       </div>
-                      <div style={{ display: 'flex', alignItems: 'baseline', gap: 5, border: '1.5px solid var(--blue-500)', borderRadius: 'var(--r-sm)', padding: isMobile ? '4px 8px' : '5px 10px' }}>
-                        <span style={{ fontSize: isMobile ? 12.5 : 13.5, color: 'var(--text-1)', fontWeight: 700 }}>팔로워</span>
-                        <span style={{ fontSize: isMobile ? 14 : 15.5, color: 'var(--text-1)', fontWeight: 800, fontFamily: 'var(--font-mono)' }}>{p.followers}</span>
+                      <div style={{ display: 'flex', alignItems: 'baseline', gap: 4, whiteSpace: 'nowrap', border: '1.5px solid #D93A3A', borderRadius: 'var(--r-sm)', padding: isMobile ? '3px 7px' : '5px 10px' }}>
+                        <span style={{ fontSize: isMobile ? 11.5 : 13.5, color: 'var(--text-1)', fontWeight: 700 }}>팔로워</span>
+                        <span style={{ fontSize: isMobile ? 13 : 15.5, color: 'var(--text-1)', fontWeight: 800, fontFamily: 'var(--font-mono)' }}>{p.followers}</span>
                       </div>
-                      <div style={{ display: 'flex', alignItems: 'baseline', gap: 5 }}>
-                        <span style={{ fontSize: isMobile ? 12.5 : 13.5, color: 'var(--text-2)', fontWeight: 600 }}>팔로우</span>
-                        <span style={{ fontSize: isMobile ? 14 : 15.5, color: 'var(--text-1)', fontWeight: 800, fontFamily: 'var(--font-mono)' }}>{p.following}</span>
+                      <div style={{ display: 'flex', alignItems: 'baseline', gap: 4, whiteSpace: 'nowrap' }}>
+                        <span style={{ fontSize: isMobile ? 11.5 : 13.5, color: 'var(--text-2)', fontWeight: 600 }}>팔로우</span>
+                        <span style={{ fontSize: isMobile ? 13 : 15.5, color: 'var(--text-1)', fontWeight: 800, fontFamily: 'var(--font-mono)' }}>{p.following}</span>
                       </div>
                     </div>
                   </div>
@@ -627,7 +499,7 @@ function Formula() {
             <window.Kicker label="The Formula" />
           </Reveal>
           <Reveal delay={80}>
-            <h2 style={{ marginTop: 16, fontWeight: 700, letterSpacing: '-0.04em', lineHeight: 1.16, color: 'var(--text-1)', fontSize: isMobile ? '34px' : 'clamp(40px, 3.4vw, 52px)' }}>블루닷만의 3단계 공식
+            <h2 style={{ marginTop: 16, fontWeight: 700, letterSpacing: '-0.04em', lineHeight: 1.16, color: 'var(--text-1)', fontSize: isMobile ? '27px' : '36px' }}>블루닷만의 3단계 공식
 
             </h2>
           </Reveal>

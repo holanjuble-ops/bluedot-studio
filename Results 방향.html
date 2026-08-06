@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="design_doc_mode" content="canvas" />
+<title>Results 섹션 방향</title>
+<link rel="stylesheet" href="_ds/bluedot-studio-design-system-9f5b7cf1-ebeb-4a5e-8875-3aea1c7e4b44/colors_and_type.css" />
+<style>
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;font-family:var(--font-sans);color:var(--bd-ink)}
+h2,p{margin:0;word-break:keep-all;text-wrap:pretty}
+a{color:var(--bd-blue)}a:hover{opacity:.85}
+.frame{position:absolute;width:1100px;background:#fff;border:1px solid var(--bd-line);overflow:hidden}
+.lbl{position:absolute;left:0;top:-34px;font-family:var(--font-mono);font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#6B7280}
+.inner{max-width:1020px;margin:0 auto;padding:96px 32px}
+.kick{display:inline-flex;align-items:center;gap:12px}
+.kick i{width:22px;height:1px;background:var(--bd-line)}
+.kick span{font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:.26em;text-transform:uppercase;color:var(--fg-2)}
+.h2{margin-top:16px;font-size:36px;font-weight:700;letter-spacing:-.04em;line-height:1.16}
+.reel{position:relative;aspect-ratio:260/406;border-radius:10px;overflow:hidden;border:1px solid var(--bd-line);background:var(--bd-paper);box-shadow:0 2px 4px rgba(10,14,26,.06),0 20px 48px rgba(10,19,48,.12)}
+.reel img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.g2{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.split{display:grid;grid-template-columns:.82fr 1.18fr;gap:56px;align-items:start}
+</style>
+</head>
+<body>
+
+<!-- A · 현재: 좌측 제목 + 우측 2×2 -->
+<div class="frame" style="left:0;top:60px;height:900px">
+  <div class="lbl">A · 현재 · 좌측 제목 + 2×2</div>
+  <div class="inner">
+    <div class="split">
+      <div style="max-width:420px">
+        <span class="kick"><i></i><span>Results</span></span>
+        <h2 class="h2">우리는 결과로 말합니다.</h2>
+      </div>
+      <div class="g2">
+        <div class="reel"><img src="images/case-sungsu-after1.png" alt="릴스 성과" /></div>
+        <div class="reel"><img src="images/case-sungsu-after2.png" alt="릴스 성과" /></div>
+        <div class="reel"><img src="images/case-gangnam-after1.png" alt="릴스 성과" /></div>
+        <div class="reel"><img src="images/case-gangnam-after2.png" alt="릴스 성과" /></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- B · 중앙 2×2 (폭 제한) -->
+<div class="frame" style="left:1180px;top:60px;height:1080px">
+  <div class="lbl">B · 중앙 정렬 2×2</div>
+  <div class="inner" style="text-align:center">
+    <span class="kick"><i></i><span>Results</span></span>
+    <h2 class="h2">우리는 결과로 말합니다.</h2>
+    <div class="g2" style="max-width:600px;margin:44px auto 0;text-align:left">
+      <div class="reel"><img src="images/case-sungsu-after1.png" alt="릴스 성과" /></div>
+      <div class="reel"><img src="images/case-sungsu-after2.png" alt="릴스 성과" /></div>
+      <div class="reel"><img src="images/case-gangnam-after1.png" alt="릴스 성과" /></div>
+      <div class="reel"><img src="images/case-gangnam-after2.png" alt="릴스 성과" /></div>
+    </div>
+  </div>
+</div>
+
+<!-- C · 엇갈린 4열 -->
+<div class="frame" style="left:0;top:1020px;height:900px">
+  <div class="lbl">C · 엇갈린 4열 (스태거)</div>
+  <div class="inner">
+    <span class="kick"><i></i><span>Results</span></span>
+    <h2 class="h2">우리는 결과로 말합니다.</h2>
+    <div class="g4" style="margin-top:44px;align-items:start">
+      <div class="reel"><img src="images/case-sungsu-after1.png" alt="릴스 성과" /></div>
+      <div class="reel" style="margin-top:56px"><img src="images/case-sungsu-after2.png" alt="릴스 성과" /></div>
+      <div class="reel"><img src="images/case-gangnam-after1.png" alt="릴스 성과" /></div>
+      <div class="reel" style="margin-top:56px"><img src="images/case-gangnam-after2.png" alt="릴스 성과" /></div>
+    </div>
+  </div>
+</div>
+
+<!-- D · 대표 1개 + 3개 -->
+<div class="frame" style="left:1180px;top:1200px;height:900px">
+  <div class="lbl">D · 대표 릴스 1개 + 3개</div>
+  <div class="inner">
+    <span class="kick"><i></i><span>Results</span></span>
+    <h2 class="h2">우리는 결과로 말합니다.</h2>
+    <div style="display:grid;grid-template-columns:1.5fr 1fr;gap:18px;margin-top:44px;align-items:start">
+      <div class="reel"><img src="images/case-gangnam-after1.png" alt="릴스 성과" /></div>
+      <div style="display:grid;gap:18px">
+        <div class="reel" style="aspect-ratio:auto;height:284px"><img src="images/case-sungsu-after1.png" alt="릴스 성과" style="object-position:center 25%" /></div>
+        <div class="reel" style="aspect-ratio:auto;height:284px"><img src="images/case-sungsu-after2.png" alt="릴스 성과" style="object-position:center 25%" /></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<template id="__bundler_thumbnail" data-bg-color="#0A0F1E">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg"><rect width="1200" height="800" fill="#0A0F1E"/><rect x="470" y="250" width="120" height="300" rx="16" fill="none" stroke="#6E8BFF" stroke-width="6" opacity=".6"/><rect x="620" y="250" width="120" height="300" rx="16" fill="none" stroke="#6E8BFF" stroke-width="6" opacity=".6"/><text x="600" y="640" fill="#fff" font-family="system-ui" font-size="44" font-weight="700" text-anchor="middle">Results</text></svg>
+</template>
+</body>
+</html>

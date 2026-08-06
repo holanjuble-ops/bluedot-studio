@@ -67,11 +67,8 @@
      iframes, print, PDF, or html-to-image (where the CSS transition clock may not
      advance — an opacity fade starting at 0 would stick at 0 = invisible). The
      elegance comes from an unhurried, long-travel upward glide instead. */
-  .reveal { transform: translateY(34px); transition: transform 1s var(--ease-out); }
-  .reveal--in { transform: translateY(0); }
-  @media (prefers-reduced-motion: reduce) {
-    .reveal { transform: none; transition: none; }
-  }
+  .reveal { transform: none; }
+  .reveal--in { transform: none; }
 
   /* ---- Cinematic hero light sweep (implies a live studio video) ---- */
   @keyframes bd-lightsweep {
@@ -181,7 +178,7 @@
   .faq-q {
     width: 100%; background: none; border: none; cursor: pointer;
     display: flex; align-items: center; justify-content: space-between; gap: 20px;
-    padding: 28px 4px; text-align: left;
+    padding: 22px 4px; text-align: left;
   }
   .faq-a-wrap { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.32s var(--ease-out); }
   .faq-a-wrap.open { grid-template-rows: 1fr; }

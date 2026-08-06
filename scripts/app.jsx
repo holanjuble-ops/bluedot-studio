@@ -3,7 +3,7 @@
    ============================================================ */
 
 function App() {
-  const { Header, Hero, StatStrip, Problem, Bridge, Results, Formula, Process, ColumnTeaser, FinalCta, SiteFooter, MobileBar } = window;
+  const { Header, Hero, StatStrip, Problem, Bridge, Results, Process, Faq, ColumnTeaser, FinalCta, SiteFooter } = window;
 
   /* 다른 페이지에서 ../index.html#cta 로 들어오면, React 렌더 완료 후
      해당 섹션으로 스크롤. (로드 시점엔 섹션이 아직 없어 브라우저 기본 점프가 실패하므로
@@ -27,6 +27,7 @@ function App() {
       <Header />
       <main>
         <Hero />
+        <StatStrip />
         <Problem />
         <Bridge />
         <Results />
@@ -35,7 +36,6 @@ function App() {
         <FinalCta />
       </main>
       <SiteFooter />
-      <MobileBar />
     </React.Fragment>
   );
 }

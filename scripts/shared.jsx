@@ -66,8 +66,8 @@ function Reveal({ children, delay = 0, as = 'div', className = '', style, ...res
   return (
     <Tag
       ref={ref}
-      className={`reveal ${className}`}
-      style={{ animationDelay: `${delay}ms`, transitionDelay: `${delay}ms`, ...style }}
+      className={className}
+      style={style}
       {...rest}>
       
       {children}
@@ -83,7 +83,7 @@ function Section({ children, bg = 'paper', id, pad, style }) {
     paper: { background: 'var(--bd-paper)', color: 'var(--text-1)' },
     ink: { background: 'var(--bg-dark)', color: '#FFFFFF' }
   };
-  const vpad = pad != null ? pad : isMobile ? 104 : 168;
+  const vpad = pad != null ? pad : isMobile ? 88 : 128;
   return (
     <section id={id} style={{ padding: `${vpad}px 0`, ...palettes[bg], ...style }}>
       {children}
@@ -311,7 +311,7 @@ function Kicker({ label, light = false, mono = true, lineWidth = 22, style }) {
         fontFamily: mono ? 'var(--font-mono)' : 'var(--font-sans)',
         fontWeight: mono ? 500 : 600,
         letterSpacing: mono ? '0.26em' : '0.16em',
-        textTransform: 'uppercase', color: txt, whiteSpace: 'nowrap', fontSize: "12px"
+        textTransform: 'uppercase', color: txt, whiteSpace: 'nowrap', fontSize: "11px"
       }}>{label}</span>
     </span>);
 

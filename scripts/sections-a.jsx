@@ -15,9 +15,6 @@ function Header() {
     return () => window.removeEventListener('scroll', onS);
   }, []);
 
-  const navItems = ['성과 사례', '프로세스', 'FAQ'];
-  const navIds = ['results', 'process', 'faq'];
-
   return (
     <header style={{
       position: 'sticky', top: 0, zIndex: 50,
@@ -155,17 +152,17 @@ function Hero() {
 
         <window.Reveal delay={120}>
           <h1 style={{
-            marginTop: 30,
-            fontSize: isMobile ? 'clamp(34px, 9vw, 50px)' : 'clamp(52px, 6.4vw, 72px)',
-            lineHeight: 1.28, letterSpacing: '-0.046em', maxWidth: 960
+            marginTop: 24,
+            fontSize: isMobile ? '30px' : '48px',
+            lineHeight: 1.46, letterSpacing: '-0.038em', maxWidth: 820
           }}>
-            <span style={{ fontWeight: 700, display: 'block' }}>우리가 하면</span>
+            <span style={{ fontWeight: 700, display: 'block', marginBottom: '0.1em' }}>우리가 하면</span>
             <span style={{ fontWeight: 900, display: 'block', whiteSpace: 'nowrap' }}>
               매출이{' '}
               <span style={{
                 background: '#F4D35E',
                 color: 'var(--bd-ink)',
-                padding: '0.02em 0.18em',
+                padding: '0.06em 0.18em',
                 borderRadius: 7,
                 WebkitBoxDecorationBreak: 'clone',
                 boxDecorationBreak: 'clone'
@@ -186,9 +183,9 @@ function Hero() {
         </window.Reveal>
       </div>
       {/* sub-copy + scroll arrow — bob together */}
-      <window.Reveal delay={340} style={{ position: 'absolute', left: '50%', bottom: isMobile ? 36 : 44, transform: 'translateX(-50%)', zIndex: 3 }}>
+      <window.Reveal delay={340} style={{ position: 'absolute', left: '50%', bottom: isMobile ? 40 : 52, transform: 'translateX(-50%)', zIndex: 3 }}>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10, animation: 'bd-scrollbob 1.8s var(--ease-in-out) infinite' }}>
-          <p style={{ ...{ margin: 0, letterSpacing: '-0.01em', whiteSpace: 'nowrap', textAlign: 'center', fontWeight: "600", color: "rgba(255, 255, 255, 0.898)" }, fontSize: isMobile ? '17px' : '19px' }}>이렇게 자신하는 이유가 뭘까요?
+          <p style={{ ...{ margin: 0, letterSpacing: '-0.01em', whiteSpace: 'nowrap', textAlign: 'center', fontWeight: "600", color: "rgba(255, 255, 255, 0.898)" }, fontSize: isMobile ? '15px' : '16px' }}>이렇게 자신하는 이유가 뭘까요?
 
           </p>
           <button className="hero-scroll-bare" aria-label="다음 섹션으로 이동"
@@ -206,14 +203,14 @@ function Hero() {
 function StatStrip() {
   const isMobile = window.useIsMobile();
   const { Container, Reveal } = window;
-  const stats = [['2.4x', '문의 전환율']];
+  const stats = [['500+', '누적 숏폼'], ['1억+', '총 조회수'], ['2.4x', '평균 상담 전환']];
   const renderN = (n) => {
     const m = n.match(/^(.*?)([+x])$/);
     if (!m) return n;
     return <>{m[1]}<span style={{ fontSize: '0.52em', fontWeight: 600, verticalAlign: 'middle' }}>{m[2]}</span></>;
   };
   return (
-    <section id="stats" style={{ background: 'var(--bg-dark)', borderTop: '1px solid rgba(255,255,255,0.06)', padding: isMobile ? '32px 0' : '44px 0' }}>
+    <section id="stats" style={{ background: '#02040B', borderTop: '1px solid rgba(255,255,255,0.06)', padding: isMobile ? '32px 0' : '44px 0' }}>
       <Container>
         <Reveal>
           <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'stretch' }}>
@@ -225,7 +222,7 @@ function StatStrip() {
             }}>
                 <div style={{
                 fontFamily: 'var(--font-mono)', fontWeight: 600, color: 'rgba(255,255,255,0.92)',
-                fontSize: isMobile ? 'clamp(22px, 6vw, 28px)' : 'clamp(28px, 2.8vw, 36px)',
+                fontSize: isMobile ? '25px' : '34px',
                 lineHeight: 1, letterSpacing: '-0.03em'
               }}>{renderN(n)}</div>
                 <div style={{
@@ -252,7 +249,7 @@ function Problem() {
   '뭘 올려야할지 모르겠어요..'];
 
   return (
-    <Section bg="white" id="problem" pad={isMobile ? 76 : 112} style={{ position: 'relative', overflow: 'hidden' }}>
+    <Section bg="white" id="problem" pad={isMobile ? 88 : 128} style={{ position: 'relative', overflow: 'hidden' }}>
       <window.GridBg opacity={0.7} gap={60} />
       <Container style={{ position: 'relative', zIndex: 1 }}>
         <div style={{ textAlign: 'center' }}>
@@ -264,7 +261,7 @@ function Problem() {
           <Reveal delay={80}>
             <h2 style={{
               marginTop: 14, fontWeight: 600,
-              letterSpacing: '-0.025em', color: 'var(--text-2)', lineHeight: 1.4, fontSize: "21px"
+              letterSpacing: '-0.02em', color: 'var(--text-2)', lineHeight: 1.5, fontSize: isMobile ? '17px' : '19px'
             }}>혹시 이런 고민이 있으신가요?
 
             </h2>
@@ -272,14 +269,14 @@ function Problem() {
 
           <Reveal delay={160}>
             <div style={{
-              marginTop: isMobile ? 30 : 44, minHeight: isMobile ? 104 : 132,
+              marginTop: isMobile ? 36 : 48, minHeight: isMobile ? 112 : 144,
               display: 'flex', alignItems: 'center',
               justifyContent: 'center'
             }}>
               <div style={{
                 display: 'flex', alignItems: 'flex-start', gap: isMobile ? 8 : 16,
                 fontWeight: 700, letterSpacing: '-0.04em', color: 'var(--blue-500)',
-                fontSize: 'clamp(24px, 3.6vw, 38px)', lineHeight: 1.22,
+                fontSize: isMobile ? '27px' : '40px', lineHeight: 1.25,
                 textAlign: 'left', wordBreak: 'keep-all'
               }}>
                 <span style={{ color: 'var(--border)', fontWeight: 600 }}>[</span>
@@ -287,15 +284,6 @@ function Problem() {
                 <span style={{ color: 'var(--border)', fontWeight: 600 }}>]</span>
               </div>
             </div>
-          </Reveal>
-
-          <Reveal delay={220}>
-            <p style={{
-              marginTop: isMobile ? 32 : 44,
-              color: 'var(--text-2)', fontWeight: 500, lineHeight: 1.55, fontSize: "16px"
-            }}>
-              이 중 하나라도 해당된다면,<br />잘 찾아오셨습니다.
-            </p>
           </Reveal>
         </div>
       </Container>

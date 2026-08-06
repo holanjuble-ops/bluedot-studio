@@ -319,7 +319,7 @@ function SiteFooter() {
           {/* 서비스 소개 */}
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', textAlign: 'left', gap: 12 }}>
             <p style={{ margin: 0, marginBottom: 4, fontSize: 13.5, fontWeight: 700, letterSpacing: '-0.005em', color: 'rgba(255,255,255,0.92)' }}>서비스 소개</p>
-            {[{ label: '전문직 마케팅', href: 'pro.html' }, { label: '사업자 마케팅', href: 'business.html' }].map((l) =>
+            {[{ label: '전문직 마케팅', href: 'pro.html' }].map((l) =>
             <a key={l.href} href={(inCol ? '../' : '') + l.href} style={{
               fontSize: 14, fontWeight: 500, color: 'rgba(255,255,255,0.7)', textDecoration: 'none',
               letterSpacing: '-0.005em', transition: 'color 0.14s'

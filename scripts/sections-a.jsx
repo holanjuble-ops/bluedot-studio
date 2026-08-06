@@ -194,7 +194,7 @@ function Hero() {
           </p>
           <button className="hero-scroll-bare" aria-label="다음 섹션으로 이동"
           style={{ animation: 'none' }}
-          onClick={() => window.scrollToId('stats')}>
+          onClick={() => window.scrollToId('problem')}>
             <window.Icon name="chevron-down" size={20} color="currentColor" />
           </button>
         </div>
@@ -207,7 +207,7 @@ function Hero() {
 function StatStrip() {
   const isMobile = window.useIsMobile();
   const { Container, Reveal } = window;
-  const stats = [['1억+', '누적 조회수'], ['10만+', '누적 팔로워'], ['2.4x', '문의 전환율']];
+  const stats = [['2.4x', '문의 전환율']];
   const renderN = (n) => {
     const m = n.match(/^(.*?)([+x])$/);
     if (!m) return n;

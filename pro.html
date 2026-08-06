@@ -193,10 +193,7 @@
   .no-bar::-webkit-scrollbar { display: none; }
   .no-bar { -ms-overflow-style: none; scrollbar-width: none; }
 
-  #root-loading {
-    min-height: 100vh; display: flex; align-items: center; justify-content: center;
-    color: var(--bd-gray-400); font-size: 14px; letter-spacing: 0.04em;
-  }
+  #root-loading { min-height: 100vh; background: #0A0E1A; }
 
   /* keep the nav logo on one line once Pretendard loads */
   header > div > a:first-child { flex: none; }
@@ -229,7 +226,7 @@ src="https://www.facebook.com/tr?id=4465431577063174&ev=PageView&noscript=1"
     <text x="600" y="640" fill="#FFFFFF" font-family="-apple-system, system-ui, sans-serif" font-size="46" font-weight="700" letter-spacing="-1" text-anchor="middle">bluedot studio</text>
   </svg>
 </template>
-<div id="root"><div id="root-loading">bluedot studio · 로딩 중</div></div>
+<div id="root"><div id="root-loading"></div></div>
 
 <!-- React + Babel (pinned) -->
 <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
@@ -252,5 +249,6 @@ src="https://www.facebook.com/tr?id=4465431577063174&ev=PageView&noscript=1"
 <script type="text/babel" src="scripts/sections-c.jsx"></script>
 <script type="text/babel" src="scripts/sections-d.jsx"></script>
 <script type="text/babel" src="scripts/app.jsx"></script>
+<script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>

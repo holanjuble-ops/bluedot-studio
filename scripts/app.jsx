@@ -27,7 +27,6 @@ function App() {
       <Header />
       <main>
         <Hero />
-        <StatStrip />
         <Problem />
         <Bridge />
         <Results />

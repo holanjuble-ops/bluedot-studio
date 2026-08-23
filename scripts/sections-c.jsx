@@ -319,7 +319,7 @@ function SiteFooter() {
             <p style={{ margin: 0, marginBottom: 4, fontSize: 13.5, fontWeight: 700, letterSpacing: '-0.005em', color: 'rgba(255,255,255,0.92)' }}>사업자 정보</p>
             <span style={{ fontSize: 12.5, color: 'rgba(255,255,255,0.5)', fontWeight: 500, letterSpacing: '-0.005em' }}>상호명: 블루닷스튜디오</span>
             <span style={{ fontSize: 12.5, color: 'rgba(255,255,255,0.5)', fontWeight: 500, letterSpacing: '-0.005em' }}>사업자등록번호: 601-38-81089</span>
-            <span style={{ fontSize: 12.5, color: 'rgba(255,255,255,0.5)', fontWeight: 500, letterSpacing: '-0.005em' }}>주소: 경기도 성남시 단대동 100</span>
+            <span style={{ fontSize: 12.5, color: 'rgba(255,255,255,0.5)', fontWeight: 500, letterSpacing: '-0.005em' }}>주소: 서울특별시 송파구 법원로 114 엠스테이트 B동 1014호</span>
           </div>
         </div>
 

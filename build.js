@@ -7,6 +7,15 @@ const fs   = require('fs');
 const path = require('path');
 const babel = require('@babel/core');
 
+const GA_MEASUREMENT_ID = 'G-3F7KXYZ11T';
+const GA_TAG = `<script async src="https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', '${GA_MEASUREMENT_ID}');
+</script>`;
+
 const JSX_FILES = [
   'scripts/shared.jsx',
   'scripts/sections-a.jsx',
@@ -46,6 +55,9 @@ console.log('\n[2/2] HTML 패치 중...');
 for (const htmlPath of HTML_FILES) {
   if (!fs.existsSync(htmlPath)) { console.warn('  ⚠ 없음:', htmlPath); continue; }
   let html = fs.readFileSync(htmlPath, 'utf8');
+  if (!html.includes(`gtag/js?id=${GA_MEASUREMENT_ID}`)) {
+    html = html.replace('<head>', `<head>\n${GA_TAG}`);
+  }
   html = html.replace(/<script[^>]+unpkg\.com\/@babel\/standalone[^>]*><\/script>\s*/g, '');
   html = html.replace(/type="text\/babel"\s+src="([^"]+)\.jsx"/g, 'src="$1.js"');
   html = html.replace(/src="([^"]+)\.jsx"\s+type="text\/babel"/g, 'src="$1.js"');

@@ -187,6 +187,12 @@ function FinalCta() {
       });
       const json = await res.json().catch(() => ({}));
       if (res.ok) {
+        if (typeof window.gtag === 'function') {
+          window.gtag('event', 'generate_lead', {
+            form_name: 'free_consultation',
+            method: 'website_form'
+          });
+        }
         setDone(true);
       } else {
         const detail = (json.errors || []).map((e) => e.message).join(' / ') || `오류 ${res.status}`;

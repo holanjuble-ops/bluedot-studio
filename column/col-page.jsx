@@ -9,7 +9,10 @@
 const ARTICLE_PATHS = {
   1: 'shortform-marketing-needed.html',
   2: 'reels-million-views.html',
-  3: 'shortform-inquiry-conversion.html'
+  3: 'shortform-inquiry-conversion.html',
+  4: 'shortform-marketing-fit-guide.html',
+  5: 'reels-views-guide.html',
+  6: 'shortform-inquiry-guide.html'
 };
 
 const STARTER_PAGE = [
@@ -55,7 +58,7 @@ function ColumnPage() {
   const { COLS } = window.ColShared;
   const isMobile = window.useIsMobile();
   const [activeCat, setActiveCat] = React.useState('전체');
-  const FILTER_CATS = ['전체', '시작 가이드', '대표 사례'];
+  const FILTER_CATS = ['전체', '시작 가이드', '대표 사례', 'SEO·GEO 가이드'];
   const filteredCols = (activeCat === '전체' ? COLS : COLS.filter(c => c.cat === activeCat || c.type === activeCat)).slice().reverse();
 
   return (

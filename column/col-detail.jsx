@@ -11,7 +11,10 @@
 const ARTICLE_PATHS = {
   1: 'shortform-marketing-needed.html',
   2: 'reels-million-views.html',
-  3: 'shortform-inquiry-conversion.html'
+  3: 'shortform-inquiry-conversion.html',
+  4: 'shortform-marketing-fit-guide.html',
+  5: 'reels-views-guide.html',
+  6: 'shortform-inquiry-guide.html'
 };
 const _urlId = Number(new URLSearchParams(location.search).get('id'));
 const CUR_ID = Number(window.__COLUMN_ARTICLE_ID__) || _urlId || 1;
@@ -210,6 +213,13 @@ function ColumnDetail() {
         </a>
       );
     }
+    if (b.t === 'reference') return (
+      <aside style={{ margin: `${isMobile ? 32 : 42}px 0 0`, padding: isMobile ? '18px 18px' : '20px 24px', background: 'var(--bd-blue-50)', border: '1px solid #DDE3FF', borderRadius: 'var(--r-md)' }}>
+        <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: '0.14em', color: 'var(--bd-blue)', fontWeight: 700 }}>SOURCE COLUMN</div>
+        <p style={{ margin: '8px 0 0', fontSize: isMobile ? 14.5 : 15.5, lineHeight: 1.65, color: 'var(--bd-gray-700)' }}>{b.text}</p>
+        <a href={b.href} className="link-ul" style={{ display: 'inline-flex', marginTop: 12, fontSize: 14, fontWeight: 700, color: 'var(--bd-blue)', textDecoration: 'none' }}>원문 칼럼 읽기 →</a>
+      </aside>
+    );
     if (b.t === 'cta') return (
       <div style={{ margin: `${isMobile ? 36 : 44}px 0 0`, display: 'flex' }}>
         <a href="../pro.html#cta" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, height: 46, padding: '0 22px', borderRadius: 999, background: 'var(--bd-blue)', color: '#fff', fontSize: 14.5, fontWeight: 600, letterSpacing: '-0.01em', textDecoration: 'none' }}>

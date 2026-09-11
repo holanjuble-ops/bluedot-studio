@@ -55,4 +55,9 @@ for (const htmlPath of HTML_FILES) {
   console.log('  ✓', htmlPath);
 }
 
+// 홈의 실제 HTML은 pro.html에서 관리한다. 빌드 시 같은 결과물을 index.html에도
+// 생성해 /가 대표 URL로 직접 응답하게 한다.
+fs.copyFileSync('pro.html', 'index.html');
+console.log('  ✓ pro.html → index.html (대표 URL용)');
+
 console.log('\n✅ 빌드 완료!\n');

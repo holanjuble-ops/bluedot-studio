@@ -4,6 +4,11 @@
   "installCommand": "npm install",
   "redirects": [
     {
+      "source": "/pro.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
       "source": "/column/%EC%B9%BC%EB%9F%BC-%EC%83%81%EC%84%B8.html",
       "destination": "/column/column-detail.html",
       "permanent": true

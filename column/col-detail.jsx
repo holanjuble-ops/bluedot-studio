@@ -8,9 +8,13 @@
    본문 데이터는 articles.jsx(window.ARTICLES)에서 ?id 로 조회합니다.
    글 작성/수정은 articles.jsx 에서만 하면 됩니다. (스타일은 자동)
    ============================================================ */
+const ARTICLE_PATHS = {
+  1: 'shortform-marketing-needed.html',
+  2: 'reels-million-views.html',
+  3: 'shortform-inquiry-conversion.html'
+};
 const _urlId = Number(new URLSearchParams(location.search).get('id'));
-if (_urlId) localStorage.setItem('bd_col_last_id', _urlId);
-const CUR_ID = _urlId || Number(localStorage.getItem('bd_col_last_id')) || 1;
+const CUR_ID = Number(window.__COLUMN_ARTICLE_ID__) || _urlId || 1;
 const ARTICLE = (window.ARTICLES && (window.ARTICLES[CUR_ID] || window.ARTICLES[1])) || { title: '', deck: '', blocks: [] };
 
 /* 본문 끝 추천 글 3편 (목록 데이터에서 — 현재 글 제외) */
@@ -195,7 +199,7 @@ function ColumnDetail() {
     if (b.t === 'next') {
       const nx = (window.ARTICLES && window.ARTICLES[b.id]) || {};
       return (
-        <a href={`column-detail.html?id=${b.id}`} className="col-next-cta link-ul" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16, margin: `${isMobile ? 44 : 60}px 0 0`, padding: isMobile ? '18px 20px' : '22px 26px', background: '#fff', border: '1px solid var(--bd-line)', borderRadius: 'var(--r-md)', textDecoration: 'none', position: 'relative', overflow: 'hidden' }}>
+        <a href={ARTICLE_PATHS[b.id]} className="col-next-cta link-ul" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16, margin: `${isMobile ? 44 : 60}px 0 0`, padding: isMobile ? '18px 20px' : '22px 26px', background: '#fff', border: '1px solid var(--bd-line)', borderRadius: 'var(--r-md)', textDecoration: 'none', position: 'relative', overflow: 'hidden' }}>
           <div style={{ minWidth: 0, position: 'relative', zIndex: 1 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 7, fontFamily: 'var(--font-mono)', fontSize: 11.5, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'var(--bd-blue)', fontWeight: 600 }}>
               <span className="col-next-dot"></span>다음 편

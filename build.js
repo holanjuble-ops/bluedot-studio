@@ -5,6 +5,7 @@
 
 const fs   = require('fs');
 const path = require('path');
+const vm = require('vm');
 const babel = require('@babel/core');
 
 const GA_MEASUREMENT_ID = 'G-3F7KXYZ11T';
@@ -131,6 +132,111 @@ const ARTICLE_PAGES = [
   }
 ];
 
+const SEO_STATIC_STYLE = `<style data-seo-static-style>
+  .seo-static { max-width: 760px; margin: 0 auto; padding: 56px 24px 80px; color: #111827; background: #fff; font-family: system-ui, sans-serif; line-height: 1.75; }
+  .seo-static__nav { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 36px; font-size: 14px; }
+  .seo-static h1 { font-size: clamp(30px, 5vw, 48px); line-height: 1.22; margin: 0 0 18px; }
+  .seo-static h2 { font-size: 24px; line-height: 1.35; margin: 46px 0 14px; }
+  .seo-static h3 { font-size: 18px; margin: 22px 0 6px; }
+  .seo-static p, .seo-static li { margin: 0 0 14px; }
+  .seo-static ul { padding-left: 20px; }
+  .seo-static a { color: #1547ff; text-decoration: underline; }
+  .seo-static__meta { color: #667085; font-size: 14px; }
+  .seo-static__deck { font-size: 19px; color: #344054; }
+  .seo-static__card { border: 1px solid #e5e7eb; border-radius: 14px; padding: 20px; margin: 20px 0; }
+  .seo-static__cta { display: inline-block; margin-top: 24px; padding: 13px 20px; border-radius: 8px; background: #1547ff; color: #fff !important; font-weight: 700; text-decoration: none !important; }
+  .seo-static__list { list-style: none; padding: 0; }
+  .seo-static__list li { border: 1px solid #e5e7eb; border-radius: 14px; padding: 20px; margin: 14px 0; }
+</style>`;
+
+function escapeHtml(value = '') {
+  return String(value).replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
+}
+
+function formatInline(value = '') {
+  return escapeHtml(value)
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\[\[(.*?)\]\]/g, '<strong>$1</strong>')
+    .replace(/__(.*?)__/g, '<strong>$1</strong>')
+    .replace(/\n/g, '<br />');
+}
+
+function loadArticleContent() {
+  const sandbox = { window: {} };
+  vm.runInNewContext(fs.readFileSync('column/articles.js', 'utf8'), sandbox, { filename: 'column/articles.js' });
+  return sandbox.window.ARTICLES || {};
+}
+
+function articlePath(id) {
+  const page = ARTICLE_PAGES.find(item => item.id === Number(id));
+  return page ? page.filename : 'column.html';
+}
+
+function renderStaticBlock(block) {
+  if (block.t === 'h2') return `<h2>${formatInline(block.text)}</h2>`;
+  if (block.t === 'p') return `<p>${formatInline(block.text)}</p>`;
+  if (block.t === 'quote') return `<blockquote><p>${formatInline(block.text)}</p></blockquote>`;
+  if (block.t === 'footnote') return `<p class="seo-static__meta">${formatInline(block.text)}</p>`;
+  if (block.t === 'list' || block.t === 'pbox') return `<ul>${(block.items || []).map(item => `<li>${formatInline(typeof item === 'string' ? item : item.text || '')}</li>`).join('')}</ul>`;
+  if (block.t === 'cards') return `<section>${(block.items || []).map(item => `<div class="seo-static__card"><h3>${formatInline(item.title)}</h3><p>${formatInline(item.ex || '')}</p><p>${formatInline(item.desc || '')}</p></div>`).join('')}</section>`;
+  if (block.t === 'casecard') return `<section class="seo-static__card"><h2>${formatInline(block.client || '사례')}</h2><p>${formatInline(`${block.before?.join(' ') || ''} → ${block.after?.join(' ') || ''}`)}</p><p>${formatInline((block.chips || []).join(' · '))}</p></section>`;
+  if (block.t === 'platform') return `<h3>${formatInline(block.text)}</h3>`;
+  if (block.t === 'reference') return `<p><a href="${escapeHtml(block.href)}">${formatInline(block.text)}</a></p>`;
+  if (block.t === 'next') return `<p><a href="${articlePath(block.id)}">다음 글 읽기</a></p>`;
+  if (block.t === 'cta') return `<p><a class="seo-static__cta" href="/#contact">무료 상담 신청</a></p>`;
+  if (block.t === 'stat') return `<p><strong>${formatInline(block.value || block.text || '')}</strong></p>`;
+  return '';
+}
+
+function staticArticleMarkup(page, articles) {
+  const article = articles[page.id] || {};
+  const fallbackTitle = page.title.replace(/ \| BlueDot Studio/g, '').replace(/ \| 전문직 숏폼 마케팅/g, '');
+  return `<div id="root"><!-- SEO_STATIC_START -->
+  <main class="seo-static" data-seo-static="article">
+    <nav class="seo-static__nav" aria-label="칼럼 탐색"><a href="/">블루닷스튜디오</a><a href="column.html">칼럼 목록</a></nav>
+    <article>
+      <p class="seo-static__meta">${escapeHtml(article.cat || '칼럼')} · ${escapeHtml(article.date || page.datePublished)} · ${escapeHtml(article.author || '블루닷 에디터')}</p>
+      <h1>${formatInline(article.title || fallbackTitle)}</h1>
+      <p class="seo-static__deck">${formatInline(article.deck || page.description)}</p>
+      ${(article.blocks || []).map(renderStaticBlock).join('\n')}
+      <p><a href="column.html">모든 칼럼 보기</a></p>
+    </article>
+  </main>
+  <!-- SEO_STATIC_END --></div>`;
+}
+
+function staticListingMarkup() {
+  return `<div id="root"><!-- SEO_STATIC_START -->
+  <main class="seo-static" data-seo-static="listing">
+    <nav class="seo-static__nav" aria-label="사이트 탐색"><a href="/">블루닷스튜디오</a></nav>
+    <h1>전문직 숏폼 마케팅 칼럼</h1>
+    <p class="seo-static__deck">전문직을 위한 숏폼 마케팅 인사이트, 실제 사례, 조회수와 상담 전환 전략을 정리합니다.</p>
+    <ul class="seo-static__list">${ARTICLE_PAGES.map(page => `<li><h2><a href="${page.filename}">${escapeHtml(page.title.replace(/ \| BlueDot Studio/g, ''))}</a></h2><p>${escapeHtml(page.description)}</p></li>`).join('')}</ul>
+  </main>
+  <!-- SEO_STATIC_END --></div>`;
+}
+
+function staticHomeMarkup() {
+  return `<div id="root"><!-- SEO_STATIC_START -->
+  <main class="seo-static" data-seo-static="home">
+    <h1>전문직 숏폼 마케팅 | BlueDot Studio</h1>
+    <p class="seo-static__deck">병원·법률·세무 등 전문직을 위한 숏폼 마케팅 에이전시입니다. 기획부터 촬영·편집·업로드까지 상담 전환을 만드는 콘텐츠를 설계합니다.</p>
+    <nav aria-label="주요 콘텐츠"><h2>전문직 마케팅 칼럼</h2><ul>${ARTICLE_PAGES.map(page => `<li><a href="/column/${page.filename}">${escapeHtml(page.title.replace(/ \| BlueDot Studio/g, ''))}</a></li>`).join('')}</ul><p><a href="/column/column.html">모든 칼럼 보기</a></p></nav>
+  </main>
+  <!-- SEO_STATIC_END --></div>`;
+}
+
+function replaceRootWithStatic(html, markup) {
+  if (html.includes('<!-- SEO_STATIC_START -->')) {
+    return html.replace(/<div id="root">\s*<!--[\s\S]*?SEO_STATIC_END -->\s*<\/div>/, markup);
+  }
+  return html.replace('<div id="root"><div id="root-loading"></div></div>', markup);
+}
+
+function ensureStaticStyle(html) {
+  return html.includes('data-seo-static-style') ? html : html.replace('</head>', `${SEO_STATIC_STYLE}\n</head>`);
+}
+
 function articleSeo(page) {
   const url = `${SITE_URL}/column/${page.filename}`;
   const headline = page.title.replace(' | BlueDot Studio', '').replace(' | 전문직 숏폼 마케팅', '');
@@ -180,15 +286,28 @@ function articleSeo(page) {
 
 function generateStaticArticlePages() {
   const template = fs.readFileSync('column/column-detail.html', 'utf8');
+  const articles = loadArticleContent();
   for (const page of ARTICLE_PAGES) {
     let html = template
       .replace(/<title>[\s\S]*?<\/title>/, `<title>${page.title}</title>`)
       .replace('<meta name="robots" content="noindex, nofollow" />\n', '')
       .replace('</head>', `${articleSeo(page)}\n</head>`)
       .replace('<script src="articles.js"></script>', `<script>window.__COLUMN_ARTICLE_ID__ = ${page.id};</script>\n<script src="articles.js"></script>`);
+    html = ensureStaticStyle(replaceRootWithStatic(html, staticArticleMarkup(page, articles)));
     fs.writeFileSync(path.join('column', page.filename), html, 'utf8');
     console.log('  ✓', `column/${page.filename}`);
   }
+}
+
+function generateStaticDiscoveryPages() {
+  let columnHtml = fs.readFileSync('column/column.html', 'utf8');
+  columnHtml = ensureStaticStyle(replaceRootWithStatic(columnHtml, staticListingMarkup()));
+  fs.writeFileSync('column/column.html', columnHtml, 'utf8');
+
+  let homeHtml = fs.readFileSync('index.html', 'utf8');
+  homeHtml = ensureStaticStyle(replaceRootWithStatic(homeHtml, staticHomeMarkup()));
+  fs.writeFileSync('index.html', homeHtml, 'utf8');
+  console.log('  ✓ 정적 칼럼 목록·홈 내부 링크 생성');
 }
 
 const JSX_FILES = [
@@ -249,6 +368,7 @@ for (const htmlPath of HTML_FILES) {
 // 생성해 /가 대표 URL로 직접 응답하게 한다.
 fs.copyFileSync('pro.html', 'index.html');
 console.log('  ✓ pro.html → index.html (대표 URL용)');
+generateStaticDiscoveryPages();
 generateStaticArticlePages();
 
 console.log('\n✅ 빌드 완료!\n');
